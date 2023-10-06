@@ -35,6 +35,7 @@
 <style scoped>
     .green{
         background-color: #73C7A4;
+        justify-content: space-between;
     }
 
     .myfooter{
