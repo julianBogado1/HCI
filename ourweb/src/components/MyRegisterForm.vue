@@ -43,6 +43,7 @@
           placeholder="Enter your password"
           variant="outlined"
         ></v-text-field>
+        
 
         <br/>
       
@@ -56,9 +57,11 @@
           rounded="xl"
           color="#73C7A4"
           class="text-white"
+          @click="passwordMatch"
           >
               Crear Usuario
           </v-btn>
+          <p v-if="!passwordMatch">The passwords do not match.</p>
       </v-row>
 
       <br/>
@@ -119,26 +122,25 @@
         },
       ],
       passwordRules:[
-        value=>{
+        value => {
           if(value) return true
 
           return 'Campo obligatorio.'
         },
-        value=>{
-          if(value===this.passwordreg) return true
-
+        value => {
+          if (this.passwordMatch) return true
           return 'Las contraseñas deben coincidir.'
         }
       ]
   }),
 
 computed: {
-  passwordMatch(){return this.passwordreg === this.repeat_passwordreg;}
+  passwordMatch(value){return false;}
 },
 
 methods: {
   onSubmit () {
-    if (!this.form) return
+    if (!this.form) return 
     else if(!this.passwordMatch) return 'Las contraseñas deben coincidir.'
 
     this.loading = true
