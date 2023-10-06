@@ -1,12 +1,14 @@
 <template>
   <v-app>
     <v-main>
-      <HelloWorld />
-      <h1>holi</h1>
+      <MyLoginForm />
+      <MyFooter />      
     </v-main>
   </v-app>
 </template>
 
 <script setup>
-  import HelloWorld from '@/components/HelloWorld.vue'
+  import HelloWorld from './components/HelloWorld.vue';
+import MyFooter from './components/MyFooter.vue';
+  import MyLoginForm from './components/MyLoginForm.vue';
 </script>
