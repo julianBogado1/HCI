@@ -2,6 +2,7 @@
   <v-app>
     <v-main>
       <HelloWorld />
+      <h1>holi</h1>
     </v-main>
   </v-app>
 </template>
