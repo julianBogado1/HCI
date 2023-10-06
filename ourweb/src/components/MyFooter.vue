@@ -1,11 +1,9 @@
 <template>
-    <v-footer class="d-flex flex-column">
+    <v-footer class="myfooter d-flex flex-column">
       
-      <div class="myfooter d-flex w-100 align-center px-4">
-        <strong class="text-white">Contactenos</strong>
-  
-      
-      <div class="flex-column">
+      <div class="green d-flex w-100 align-center px-4">
+        <strong class="text-white">Contactenos</strong>   
+        <div class="flex-column">
         <v-btn
           v-for="icon in icons"
           :key="icon"
@@ -15,8 +13,8 @@
           size="small"
           color="white"
         ></v-btn>
-      </div>  
-    </div>
+        </div>  
+      </div>
       <div class="px-4 py-2 bg-black text-center w-100">
         {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
       </div>
@@ -35,8 +33,12 @@
 </script>
 
 <style scoped>
-    .myfooter{
+    .green{
         background-color: #73C7A4;
-        flex: 1;
+    }
+
+    .myfooter{
+        position: fixed; bottom: 0; left: 0; right: 0;
+        padding: 0;
     }
 </style>
