@@ -1,13 +1,14 @@
 <template>
   <v-app>
     <v-main>
-      <MyRegisterForm />
+      <MyHeader />
       <MyFooter />      
     </v-main>
   </v-app>
 </template>
 
 <script setup>
-  import MyRegisterForm from './components/MyRegisterForm.vue';
+import Try from './components/Try.vue'
+  import MyHeader from './components/MyHeader.vue'
   import MyFooter from './components/MyFooter.vue';
 </script>
