@@ -24,8 +24,6 @@
           label="Notas"
         ></v-text-field>
 
-        <BrazitosSelect/>
-
     </div>
 </template>
 
