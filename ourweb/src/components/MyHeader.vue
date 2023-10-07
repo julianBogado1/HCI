@@ -3,7 +3,7 @@
       
       <div class="cartel d-flex w-100 align-center">
         <img src="../assets/ourlogo.jpeg" class="left-image" />
-
+        
         <div class="mytext align-center">
             <p class="textHeader">Creatina</p>
             <p class="textHeader">La mejor plataforma para crear tus rutinas</p>
@@ -36,12 +36,15 @@
         flex-grow: 1;
         text-align: center;
         color: white;
+        position: absolute;
+        top: 37.5%;
+        left: 50%;
+        transform: translate(-50%,-50%);    /*esto hace que quede centrado a pesar de la imagen de la izq*/
     }
 
     .left-image {
     width: 80px;
-    height: 80px; 
-    margin-right: 10px;
+    height: 80px;
     }
 
     .textHeader{

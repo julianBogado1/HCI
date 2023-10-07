@@ -1,28 +1,39 @@
 <template>
-    <v-row>
-        <!--Left card-->
-        <v-col class="wrapper">
+    <!--Left card-->
+        <div class="wrapper">
             <MyFiltro/>
-        </v-col>
+        </div>
+    <div class="grid-container">
+        
 
-        <v-col class="content">
-            <MyRutina/>
-        </v-col>
-    </v-row>
+        <div></div>
+
+        <div class="content">
+            <MyNoRutinesMessage/>
+            <RutinasList/>
+        </div>
+    </div>
 </template>
 
 <script setup>
     import MyFiltro from './MyFiltro.vue';
-import MyRutina from './MyRutina.vue';
+import RutinasList from './RutinasList.vue';
+    import MyNoRutinesMessage from './messages/MyNoRutinesMessage.vue';
 </script>
 
 <style scoped>
-    .v-row {
-        display: flex;
+    .v-rows {
+        display: grid;
         margin-left: 40px;
         margin-right: 40px;
-
     }
+
+    .grid-container {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            grid-gap: 10px;
+            width: 100%; /* Optional: Set the width of the grid container */
+        }
 
     .content {
         flex-grow: 1;
@@ -31,5 +42,7 @@ import MyRutina from './MyRutina.vue';
 
     .wrapper {
         max-width: min-content;
+        position: fixed;
+        z-index: 99;
     }
 </style>

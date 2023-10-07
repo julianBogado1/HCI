@@ -8,7 +8,7 @@
             <MyBrazoCheck/>
         </div>
         <div>
-            <p class="field-text">Grupo Muscular</p>
+            <p class="field-text">Zona Muscular</p>
         </div>
     </div>
 </template>
@@ -22,6 +22,7 @@
         background-color: #E6F6EF;
         border-radius: 15px;
         margin: 10px;
+        margin-left: 15px;
         padding-left: 10px;
         padding-right: 10px;
         padding-top: 5px;
