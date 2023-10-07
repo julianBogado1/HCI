@@ -9,10 +9,13 @@
             <p class="textHeader">La mejor plataforma para crear tus rutinas</p>
         </div>
       </div>
+
+      <MyNavBar/>
     </v-footer>
   </template>
 
-<script>
+<script setup>
+    import MyNavBar from './MyNavBar.vue'
 </script>
 
 <style scoped>
