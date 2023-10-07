@@ -1,8 +1,8 @@
 <template>
     <div class="mess-cont">
         <div class="mess">
-            <p class="mess-text">¿Quiere empezar a crear sus propios entrenamientos?</p>
-            <p class="mess-text link-text">Registrese aquí</p>
+            <p class="mess-text">Oops! no se encontraron rutinas, puede crear una</p>
+            <p class="mess-text link-text">aquí</p>
         </div>
     </div>
 </template>
