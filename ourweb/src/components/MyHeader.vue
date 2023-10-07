@@ -43,4 +43,8 @@
     height: 80px; 
     margin-right: 10px;
     }
+
+    .textHeader{
+        font-size: x-large;
+    }
 </style>
