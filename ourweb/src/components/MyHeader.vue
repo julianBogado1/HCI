@@ -29,6 +29,7 @@
     .myheader{
         position: fixed; top: 0; left: 0; right: 0;
         padding: 0;
+        z-index: 100; /*esto hace que siempre quee encima del contenido cuando scrolleas*/
     }
 
     .mytext{
