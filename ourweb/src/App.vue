@@ -2,7 +2,7 @@
   <v-app>
     <v-main style="padding-top: 110px; padding-bottom: 74px;">
       <MyHeader />
-      <MyRegistrarseMessage/>
+      <MyMainSubheader/>
       <MyRutina/>
       <MyRegisterForm/>
       <MyFooter />      
@@ -13,7 +13,7 @@
 <script setup>
   import MyHeader from './components/MyHeader.vue'
   import MyFooter from './components/MyFooter.vue'
-  import MyRegistrarseMessage from './components/messages/MyRegistrarseMessage.vue'
 import MyRutina from './components/MyRutina.vue';
 import MyRegisterForm from './components/MyRegisterForm.vue';
+import MyMainSubheader from './components/MyMainSubheader.vue';
 </script>

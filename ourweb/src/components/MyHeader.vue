@@ -38,10 +38,6 @@
         color: white;
     }
 
-    .textHeader{
-        font-size: x-large;
-    }
-
     .left-image {
     width: 80px;
     height: 80px; 
