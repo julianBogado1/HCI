@@ -1,6 +1,6 @@
 <template>
     <div class="subheader">
-        <MySubheaderRutinasExplorar/>
+        <MySubheaderRutinasExplorar class="subheader-elment"/>
     </div>
 </template>
 
@@ -12,5 +12,10 @@ import MySubheaderRutinasExplorar from './MySubheaderRutinasExplorar.vue';
     .subheader{
         margin-top: 10px;
         margin-bottom: 5px;
+    }
+
+    .subheader-element{
+        position: fixed;
+        z-index: 99;
     }
 </style>

@@ -24,15 +24,15 @@ import RutinasList from './RutinasList.vue';
 <style scoped>
     .v-rows {
         display: grid;
-        margin-left: 40px;
-        margin-right: 40px;
+        margin-left: 10%;
+        margin-right: 10%;
     }
 
     .grid-container {
             display: grid;
             grid-template-columns: 260px 1fr;
             grid-gap: 10px;
-            width: 100%; /* Optional: Set the width of the grid container */
+            width: 100%;
         }
 
     .content {

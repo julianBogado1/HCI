@@ -13,7 +13,7 @@
     }
 
     .mySubheaderDiv{
-        margin-left: 40px;
-        margin-right: 40px;
+        margin-left: 5%;
+        margin-right: 5%;
     }
 </style>

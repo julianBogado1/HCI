@@ -1,5 +1,5 @@
 <template>
-    <v-card class="mx-auto px-6 py-8" max-width="650">
+    <v-card class="mx-auto px-6 py-8" width="60%" >
       <v-form
         v-model="form"
         @submit.prevent="onSubmit"
