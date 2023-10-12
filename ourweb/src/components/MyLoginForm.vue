@@ -47,7 +47,7 @@
 
       <v-row class="myrow">
         <div class="der-text text-right">
-          <text class="mytext text-right">Registrarse</text>
+          <router-link to="/register" class="mytext text-right">Registrarse</router-link>
         </div>
         <v-divider
               class="mx-3"

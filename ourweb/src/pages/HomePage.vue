@@ -1,10 +1,12 @@
 <template>
+  <div class="home">
     <v-main style="padding-top: 110px; padding-bottom: 74px;">
       <MyHeader />
       <MyMainSubheader/>
       <MyBody/>
       <MyFooter />      
     </v-main>
+  </div>
 </template>
 
 <script setup>

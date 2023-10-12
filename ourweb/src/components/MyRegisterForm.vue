@@ -74,7 +74,7 @@
         <v-divider class="mydiv"></v-divider>
         <div>
           <text>Ya tiene cuenta? </text>
-          <text class="mytext text-right">Ingresar</text>
+          <router-link to="/login" class="mytext text-right">Ingresar</router-link>
         </div>
       </div>
       </v-row>
