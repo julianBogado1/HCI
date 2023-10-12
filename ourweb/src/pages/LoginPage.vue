@@ -20,7 +20,7 @@
         gap: 10px;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        min-height: 80vh;
     }
 
     .log-image{

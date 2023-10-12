@@ -6,6 +6,7 @@
       >
         <v-text-field
           v-model="usernamelog"
+          class="space-below"
           :readonly="loading"
           :rules="reqRules"
           clearable
@@ -15,6 +16,7 @@
 
         <v-text-field
           v-model="passwordlog"
+          class="space-below"
           :readonly="loading"
           :rules="reqRules"
           clearable
@@ -128,5 +130,8 @@
 
   .v-field{
       background-color: #E6F6EF;
+  }
+  .space-below{
+    margin-bottom: 20px;
   }
 </style>

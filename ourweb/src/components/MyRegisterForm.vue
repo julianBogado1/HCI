@@ -1,14 +1,14 @@
 <template>
-    <v-card class="mx-auto px-6 py-8" max-width="650">
+    <v-card class="mx-auto px-6 py-8" width="60%">
       <v-form
         v-model="form"
         @submit.prevent="onSubmit"
       >
         <v-text-field
           v-model="usernamereg"
+          class="space-below"
           :readonly="loading"
           :rules="nameRules"
-          class="mb-2"
           clearable
           label="Nombre de usuario"
           variant="outlined"
@@ -16,9 +16,9 @@
 
         <v-text-field
           v-model="emailreg"
+          class="space-below"
           :readonly="loading"
           :rules="emailRules"
-          class="mb-2"
           clearable
           label="Email"
           variant="outlined"
@@ -26,8 +26,9 @@
 
         <v-text-field
           v-model="passwordreg"
+          class="space-below"
           :readonly="loading"
-          :rules="reqRules"
+          :rules="passwordRules"
           clearable
           label="Contraseña"
           placeholder="Enter your password"
@@ -36,8 +37,9 @@
 
         <v-text-field
           v-model="repeat_passwordreg"
+          class="space-below"
           :readonly="loading"
-          :rules="passwordRules"
+          :rules="[...passwordRules, passwordsMatchRule]"
           clearable
           label="Repetir contraseña"
           placeholder="Enter your password"
@@ -57,11 +59,11 @@
           rounded="xl"
           color="#73C7A4"
           class="text-white"
-          @click="passwordMatch"
+          @click="passwordsMatchRule"
           >
               Crear Usuario
           </v-btn>
-          <p v-if="!passwordMatch">The passwords do not match!.</p>
+          <p v-if="!passwordsMatchRule">The passwords do not match!.</p>
       </v-row>
 
       <br/>
@@ -122,41 +124,35 @@
         },
       ],
       passwordRules:[
-        value => {
-          if(value) return true
-
-          return 'Campo obligatorio.'
-        },
-        value => {
-          if (passwordMatch) return true
-          return 'Las contraseñas deben coincidir.'
-        }
-      ]
+        v => !!v || 'Campo obligatorio',
+        v => (v && v.length >= 8) || 'la contraseña debe tener al menos 8 caracteres.',
+      ],
   }),
-
-computed: {
-  passwordMatch(value){
-    return pass1===pw2
-  }
-},
-
-methods: {
-  onSubmit () {
-    if (!this.form) return 
-    else if(!this.passwordMatch) return 'Las contraseñas deben coincidir.'
-
-    this.loading = true
-
-    setTimeout(() => (this.loading = false), 2000)
+  computed: {
+    passwordsMatchRule() {
+      return this.passwordreg === this.repeat_passwordreg || 'Las contraseñas deben coincidir.';
+    },
   },
-  required (v) {
-    return !!v || 'Campo obligatorio'
+  watch: {
+    passwordreg() {
+      this.repeat_passwordreg = '';
+    },
   },
-},
+  methods: {
+    onSubmit () {
+      if (!this.form) return 
+      else if(!this.passwordsMatchRule) return 'Las contraseñas deben coincidir.'
+
+      this.loading = true
+
+      setTimeout(() => (this.loading = false), 2000)
+    },
+    required (v) {
+      return !!v || 'Campo obligatorio'
+    },
+  },
 
 }
-
-
 </script>
 
 <style scoped>
@@ -182,6 +178,9 @@ methods: {
   align-items: center;
   margin:0;
   padding: 0;
+}
+.space-below{
+  margin-bottom: 20px;
 }
 
 </style>

@@ -20,10 +20,11 @@
         gap: 10px;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        min-height: 80vh;
     }
 
     .log-image{
-        width: 25%;
+        width: 15%;
+        height: auto;
     }
 </style>
