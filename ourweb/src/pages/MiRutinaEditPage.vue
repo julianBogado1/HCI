@@ -1,10 +1,12 @@
 <template>
+  <div class="editroutine">
     <v-main style="padding-top: 110px; padding-bottom: 74px;">
       <MyHeader />
       <MyMainSubheader/>
       <MyRutinaEditForm/>
       <MyFooter />      
     </v-main>
+  </div>
 </template>
 
 <script setup>

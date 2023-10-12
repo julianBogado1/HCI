@@ -1,4 +1,5 @@
 <template>
+    <div class="register">
     <v-main style="padding-bottom: 74px;">
         <div class="centeredCompo">
             <img src="../assets/ourlogo.jpeg" class="log-image" />
@@ -6,6 +7,7 @@
         </div>
         <MyFooter />
     </v-main>
+    </div>
 </template>
 
 <script setup>
