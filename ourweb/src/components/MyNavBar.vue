@@ -5,7 +5,7 @@
             <v-btn to="/login" class="darkgreen text-white" size="small" rounded="0" elevation="0">Buscar  Rutina</v-btn>
             <v-btn to="/register" class="darkgreen text-white" size="small" rounded="0" elevation="0">Buscar Ejercicio</v-btn>
         </div>
-        <v-btn to="/profile-edit" class="darkgreen text-white" size="small" rounded="0" elevation="0">Mi Cuenta</v-btn>
+        <v-btn to="/profile/:id" class="darkgreen text-white" size="small" rounded="0" elevation="0">Mi Cuenta</v-btn>
       </div>
     
 </template>

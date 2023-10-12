@@ -16,6 +16,7 @@
                 <MyPerfilDataDisplay/>
                 <v-row justify="end" class="botoness">
                     <v-btn
+                    to="/profile-edit"
                     elevation="0"
                     size="large"
                     density="compact"
