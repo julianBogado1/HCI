@@ -1,11 +1,12 @@
 <template>
     <div class="subheader">
-        <MySubheaderRutina/>
+        <MySubheaderPerfil/>
     </div>
 </template>
 
 <script setup>
-import MySubheaderRutina from './MySubheaderRutina.vue';
+import MySubheaderPerfil from './subheaders/MySubheaderPerfil.vue';
+
 
 </script>
 <style scoped>

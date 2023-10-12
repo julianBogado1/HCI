@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <MiRutinaEditPage/>
+    <PerfilPage/>
   </v-app>
 </template>
 
@@ -9,4 +9,5 @@
 import HomePage from './pages/HomePage.vue'
   import LoginPage from './pages/LoginPage.vue'
   import RegisterPage from './pages/RegisterPage.vue'
+  import PerfilPage from './pages/PerfilPage.vue'
 </script>
