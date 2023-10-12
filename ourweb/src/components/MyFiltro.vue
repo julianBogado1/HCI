@@ -21,12 +21,12 @@
     .filter-card{
         background-color: #E6F6EF;
         border-radius: 15px;
-        margin: 10px;
-        margin-left: 15px;
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-top: 5px;
-        padding-bottom: 5px;
+        margin: 5%;
+        margin-left: 10%;
+        padding-left: 5%;
+        padding-right: 5%;
+        padding-top: 3%;
+        padding-bottom: 3%;
         width: 240px;
     }
 

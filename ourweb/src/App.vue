@@ -1,10 +1,12 @@
 <template>
   <v-app>
-    <HomePage/>
+    <MiRutinaEditPage/>
   </v-app>
 </template>
 
 <script setup>
-  import HomePage from './pages/HomePage.vue'
+  import MiRutinaEditPage from './pages/MiRutinaEditPage.vue';
+import HomePage from './pages/HomePage.vue'
   import LoginPage from './pages/LoginPage.vue'
+  import RegisterPage from './pages/RegisterPage.vue'
 </script>

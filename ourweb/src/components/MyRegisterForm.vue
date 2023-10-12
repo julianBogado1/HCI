@@ -61,7 +61,7 @@
           >
               Crear Usuario
           </v-btn>
-          <p v-if="!passwordMatch">The passwords do not match.</p>
+          <p v-if="!passwordMatch">The passwords do not match!.</p>
       </v-row>
 
       <br/>
@@ -128,14 +128,16 @@
           return 'Campo obligatorio.'
         },
         value => {
-          if (this.passwordMatch) return true
+          if (passwordMatch) return true
           return 'Las contraseñas deben coincidir.'
         }
       ]
   }),
 
 computed: {
-  passwordMatch(value){return false;}
+  passwordMatch(value){
+    return pass1===pw2
+  }
 },
 
 methods: {

@@ -8,7 +8,7 @@
 <style scoped>
     .mySubheaderText{
         color: #000000;
-        margin-left: 20px;
+        margin-left: 1%;
         font-weight: 400;
     }
 
