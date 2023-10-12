@@ -1,120 +1,87 @@
 <template>
-    <div class="mycontainer">
-         <v-text-field
-          v-model="username_perfil"
-          :readonly="loading"
-          :rules="reqRules"
-          clearable
-          label="Nombre de usuario"
-        ></v-text-field>
-
-        <v-text-field
-          v-model="email_perfil"
-          :readonly="loading"
-          :rules="reqRules"
-          clearable
-          label="Email"
-        ></v-text-field>
-
-        <v-text-field
-          v-model="name_perfil"
-          :readonly="loading"
-          :rules="fieldRules"
-          clearable
-          label="Nombre"
-        ></v-text-field>
-
-        <v-text-field
-          v-model="password_perfil"
-          :readonly="loading"
-          :rules="fieldRules"
-          clearable
-          label="Nombre"
-        ></v-text-field>
-
-        <v-text-field
-          v-model="repeat_password_perfil"
-          :readonly="reqRules"
-          :rules="reqRules"
-          clearable
-          label="Nombre"
-        ></v-text-field>
-
-        <v-btn
-          size="large"
-          type="submit"
-          variant="elevated"
-          rounded="xl"
-          color="#73C7A4"
-          class="text-white"
-          >
-              Editar Perfil
-          </v-btn>
-
-          <v-btn
-          size="large"
-          type="submit"
-          variant="elevated"
-          rounded="xl"
-          color="#73C7A4"
-          class="text-white"
-          >
-              Cerrar Sesión
-          </v-btn>
-
-    </div>
+  <div class="myPerfilDiv">
+      <div class="myrow">
+          <div class="miCuenta">
+              <h2 class="mySubheaderText">Mi Cuenta</h2>
+              <div class="avatar-image">
+                  <MyPlaceholderAvatar/>
+              </div>
+          </div>
+          <div class="datosUser">
+              <div class="dataText">
+                  <p></p>
+                  <v-divider vertical :thickness="2" class="border-opacity-50"></v-divider>
+                  <p class="muSubheaderText2">Datos de usuario</p>
+              </div>
+              <MyPerfilDataDisplayEdit/>
+          </div>
+      </div>
+  </div>
 </template>
 
-<script>
-
-  export default {
-    data: () => ({
-        form: false,
-        rutinaname: null,
-        rutinadesc: null,
-        rutinanotes: null,
-        rutinaintensidad: null,
-        loading: false,
-        reqRules: [
-            value => {
-                if (value)
-                    return true;
-                return 'Campo obligatorio.';
-            },
-        ],
-        fieldRules: [
-            value => {
-                if (value?.length <= 60 || value == null)
-                    return true;
-                return 'Debe ser menor a 60 caracteres.';
-            },
-        ],
-    }),
-    methods: {
-        onSubmit() {
-            if (!this.form)
-                return;
-            this.loading = true;
-            setTimeout(() => (this.loading = false), 2000);
-        },
-        required(v) {
-            return !!v || 'Field is required';
-        },
-    },
-}
-
-
+<script setup>
+  import MyPerfilDataDisplayEdit from '../components/MyPerfilDataDisplayEdit.vue'
+  import MyPlaceholderAvatar from '../components/MyPlaceholderAvatar.vue'
 </script>
-
 <style scoped>
-  .v-field{
-      background-color: #E6F6EF;
+  .miCuenta{
+      margin-right: 5%;
+      width: 160px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+  }
+  .avatar-image{
+      display: flex;
+      margin: 1%;
+      justify-content: center;
+  }
+  .mySubheaderText{
+      color: #000000;
+      margin-left: 1%;
+      font-weight: 400;
+      margin-right: 10%;
+      margin-bottom: 1%;
   }
 
-  .mycontainer{
-    margin-top: 40px;
-    margin-bottom: 40px;
-    margin-left: 80px;
-    margin-right: 80px;
+  .myPerfilDiv{
+      margin-left: 5%;
+      margin-right: 5%;
+      margin-top: 1%;
+  }
+
+  .myrow{
+      display: flex;
+      flex-direction: row;
+      justify-content: left;
+      align-items: flex-start;
+  }
+
+  .mySubheaderText2{
+      color: #49454F;
+      margin-right: 50px;
+      font-weight: 200;
+      font-size: x-large;
+  }
+
+  .dataText{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: 1%;
+      gap: 10px;
+  }
+
+  .datosUser{
+      display: flex;
+      flex-direction: column;
+      min-width: 300px;
+      width: fit-content;
+      flex-grow: 1;
+  }
+
+  .botoness{
+      margin: 1%;
+      gap: 10px;
   }
 </style>

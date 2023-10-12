@@ -27,6 +27,7 @@
         flex-direction: column;
         margin: 1%;
         gap: 10px;
+        margin-bottom: 5%;
     }
 
     .cuentaField{

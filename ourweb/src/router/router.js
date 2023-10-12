@@ -28,6 +28,11 @@ const router = createRouter({
         path: '/profile',
         name: 'profile',
         component: () => import("@/pages/PerfilPage.vue"),
+      },
+      {
+        path: '/profile-edit',
+        name: 'profile-edit',
+        component: () => import("@/pages/PerfilEditPage.vue"),
       }
     ]
 })

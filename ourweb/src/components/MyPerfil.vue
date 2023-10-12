@@ -78,6 +78,7 @@
         display: flex;
         flex-direction: row;
         justify-content: left;
+        align-items: flex-start;
     }
 
     .mySubheaderText2{
@@ -92,6 +93,7 @@
         flex-direction: row;
         align-items: center;
         margin-bottom: 1%;
+        gap: 10px;
     }
 
     .datosUser{
