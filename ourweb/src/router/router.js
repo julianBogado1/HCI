@@ -23,6 +23,11 @@ const router = createRouter({
         path: '/editroutine',
         name: 'editroutine',
         component: () => import("@/pages/MiRutinaEditPage.vue"),
+      },
+      {
+        path: '/profile',
+        name: 'profile',
+        component: () => import("@/pages/PerfilPage.vue"),
       }
     ]
 })

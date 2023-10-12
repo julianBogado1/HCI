@@ -16,5 +16,5 @@
   import HomePage from './pages/HomePage.vue'
   import LoginPage from './pages/LoginPage.vue'
   import RegisterPage from './pages/RegisterPage.vue'
-  import NavigationBar from './components/MyHeader.vue'
+  import PerfilPage from './pages/PerfilPage.vue'
 </script>
