@@ -63,7 +63,7 @@
           >
               Crear Usuario
           </v-btn>
-          <p v-if="!passwordsMatchRule">The passwords do not match!.</p>
+          
       </v-row>
 
       <br/>
