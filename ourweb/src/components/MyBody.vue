@@ -9,7 +9,6 @@
         <div></div>
 
         <div class="content">
-            <MyNoRutinesMessage/>
             <RutinasList/>
         </div>
     </div>

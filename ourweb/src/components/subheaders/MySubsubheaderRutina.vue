@@ -27,5 +27,5 @@
 </style>
 
 <script setup>
-    import MyEditDelete from './MyEditDelete.vue';
+    import MyEditDelete from '../MyEditDelete.vue';
 </script>

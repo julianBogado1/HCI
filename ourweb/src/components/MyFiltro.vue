@@ -1,14 +1,11 @@
 <template>
     <div class="filter-card">
         <div>
-            <p class="field-text">Search</p>
+            <p class="field-text title-text">Filtros:</p>
         </div>
         <div>
             <p class="field-text">Dificultad</p>
             <MyBrazoCheck/>
-        </div>
-        <div>
-            <p class="field-text">Zona Muscular</p>
         </div>
     </div>
 </template>
@@ -34,5 +31,9 @@
         font-weight: bold;
         font-size: medium;
         color: #000000;
+    }
+
+    .title-text{
+        margin-bottom: 1%;
     }
 </style>

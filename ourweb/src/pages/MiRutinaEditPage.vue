@@ -2,7 +2,9 @@
   <div class="editroutine">
     <v-main style="padding-top: 110px; padding-bottom: 74px;">
       <MyHeader />
-      <MyMainSubheader/>
+      <div class="subheader">
+        <MySubheaderRutina/>
+      </div>
       <MyRutinaEditForm/>
       <MyFooter />      
     </v-main>
@@ -10,7 +12,21 @@
 </template>
 
 <script setup>
-  import MyHeader from '../components/MyHeader.vue'
-  import MyMainSubheader from '../components/MyMainSubheader.vue'
+  import MySubheaderRutina from '@/components/subheaders/MySubheaderRutina.vue';
+import MyHeader from '../components/MyHeader.vue'
   import MyRutinaEditForm from '../components/MyRutinaEditForm.vue'
 </script>
+
+<style scoped>
+    .subheader{
+        position: sticky;
+        top: 110px;
+        z-index: 999;
+
+        background-color: #FFFFFF;
+    }
+
+    .edit-routine{
+      background-color: #FFFFFF;
+    }
+</style>
