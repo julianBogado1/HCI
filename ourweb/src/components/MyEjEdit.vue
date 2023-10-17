@@ -1,0 +1,82 @@
+<template>
+    <div class="fieldContainer dflex w-100">
+        <v-form
+        v-model="form"
+        @submit.prevent="onSubmit"
+      >
+        <v-text-field
+          v-model="name"
+          class="space-below"
+          :readonly="loading"
+          :rules="reqRules"
+          label="Nombre"
+          variant="outlined"
+          clearable
+        ></v-text-field>
+
+        <v-text-field
+          v-model="description"
+          class="space-below"
+          :readonly="loading"
+          :rules="reqRules"
+          clearable
+          label="Descripción"
+          placeholder=""
+          variant="outlined"
+        ></v-text-field>
+
+        <v-text-field
+          v-model="steps"
+          class="space-below"
+          clearable
+          label="Pasos a seguir"
+          placeholder="Enter your password"
+          variant="outlined"
+        ></v-text-field>
+
+      </v-form>
+      <v-row>
+        <div class="intensidad">
+            <p>hi</p>
+        </div>
+    </v-row>
+
+      <v-row justify="end">
+          <v-btn
+          size="large"
+          type="submit"
+          variant="elevated"
+          density="compact"
+          rounded="xl"
+          color="#73C7A4"
+          class="text-white"
+          >
+              Guardar Cambios
+          </v-btn>
+      </v-row>
+    </div>
+</template>
+
+<script setup>
+</script>
+
+<style scoped>
+
+    .intensidad{
+        flex-grow: 1;
+        margin: 1%;
+        border: 2px solid rgba(0, 0, 0, 0.12);
+        border-radius: 4px; 
+    }
+    .fieldContainer{
+        display: flex;
+        flex-direction: column;
+        margin: 1%;
+        gap: 10px;
+        margin-bottom: 5%;
+    }
+
+    .space-below{
+    margin-bottom: 20px;
+  }
+</style>

@@ -1,21 +1,23 @@
 <template>
-    <div class="editroutine">
+    <div class="edit-ej">
       <v-main style="padding-top: 110px; padding-bottom: 74px;">
         <MyHeader />
         <div class="subheader">
           <MySubheaderMisEjs/>
         </div>
-        <MisEjsInfo/>
-        <MyFooter />      
+        <div class="editcontent">
+          <MyEjEdit/>
+        </div>
+        <MyFooter/>      
       </v-main>
     </div>
   </template>
   
   <script setup>
   import MySubheaderMisEjs from '@/components/subheaders/MySubheaderMisEjs.vue';
-import MyHeader from '../components/MyHeader.vue'
-import MisEjsInfo from '../components/MisEjsInfo.vue';
+import MyHeader from '../components/MyHeader.vue';
 import MyFooter from '@/components/MyFooter.vue';
+import MyEjEdit from '@/components/MyEjEdit.vue';
   </script>
   
   <style scoped>
@@ -27,7 +29,14 @@ import MyFooter from '@/components/MyFooter.vue';
           background-color: #FFFFFF;
       }
   
-      .edit-routine{
+      .edit-ej{
         background-color: #FFFFFF;
+      }
+
+      .editcontent{
+        display: flex;
+        align-items: center;
+        margin-left: 5%;
+        margin-right: 5%;
       }
   </style>
