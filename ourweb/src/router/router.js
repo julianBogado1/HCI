@@ -22,7 +22,7 @@ const router = createRouter({
       {
         path: '/routine-edit',
         name: 'routine-edit',
-        component: () => import("@/pages/MyEjEditPage.vue"),
+        component: () => import("@/pages/MisEjsPage.vue"),
       },
       {
         path: '/profile/:id',
