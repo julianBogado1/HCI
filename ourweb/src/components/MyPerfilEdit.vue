@@ -4,7 +4,12 @@
           <div class="miCuenta">
               <h2 class="mySubheaderText">Mi Cuenta</h2>
               <div class="avatar-image">
+                <div class="avatar-elem">
                   <MyPlaceholderAvatar/>
+                </div>
+                  <div class="avatar-elem">
+                  <MyEditDelete/>
+                  </div>
               </div>
           </div>
           <div class="datosUser">
@@ -22,8 +27,14 @@
 <script setup>
   import MyPerfilDataDisplayEdit from '../components/MyPerfilDataDisplayEdit.vue'
   import MyPlaceholderAvatar from '../components/MyPlaceholderAvatar.vue'
+import MyEditDelete from './MyEditDelete.vue';
 </script>
 <style scoped>
+    .avatar-elem{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
   .miCuenta{
       margin-right: 5%;
       width: 160px;
@@ -33,6 +44,7 @@
   }
   .avatar-image{
       display: flex;
+      flex-direction: column;
       margin: 1%;
       justify-content: center;
   }

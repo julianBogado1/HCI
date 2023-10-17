@@ -11,7 +11,8 @@
           :rules="reqRules"
           label="Nombre de usuario"
           variant="outlined"
-        >GiovanniLaMosca1994</v-text-field>
+          clearable
+        ></v-text-field>
 
         <v-text-field
           v-model="email"
@@ -22,7 +23,7 @@
           label="E-mail"
           placeholder="Enter your password"
           variant="outlined"
-        >quisieraserunamosca@gmail.com</v-text-field>
+        ></v-text-field>
 
         <v-text-field
           v-model="name"
@@ -31,7 +32,7 @@
           label="Nombre"
           placeholder="Enter your password"
           variant="outlined"
-        >Giovanni Vazquez</v-text-field>
+        ></v-text-field>
 
         <v-text-field
           v-model="passwordlog"

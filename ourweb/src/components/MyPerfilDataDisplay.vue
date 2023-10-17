@@ -53,7 +53,7 @@
 
     .fieldData{
         color: #000000;
-        font-weight: bold;
+        font-weight: 400;
         font-size: x-large;
     }
 </style>
