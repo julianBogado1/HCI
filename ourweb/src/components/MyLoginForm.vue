@@ -37,6 +37,7 @@
           rounded="xl"
           color="#73C7A4"
           class="text-white"
+          @click="addUser"
           >
               Iniciar Sesión
           </v-btn>
@@ -71,12 +72,12 @@
     loading: false,
 
     reqRules:[
-  value => {
+      value => {
         if (value) return true
 
         return 'Campo obligatorio.'
       },
-  ],
+    ],
   }),
 
   methods: {
@@ -90,6 +91,19 @@
     required (v) {
       return !!v || 'Field is required'
     },
+    
+    async getData(){
+      let response = await fetch('http://localhost:8080/api/users/1');
+      if(!response.ok){
+        throw Error(response.statusText);
+      }
+      const data = response.json();
+      console.log(data)
+      return data; //se procesa la respuesta en formato json
+    },
+
+
+    
   },
 
 }

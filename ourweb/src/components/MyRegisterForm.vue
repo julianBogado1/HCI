@@ -9,6 +9,7 @@
           class="space-below"
           :readonly="loading"
           :rules="nameRules"
+          :error-messages="usernameError"
           clearable
           label="Nombre de usuario"
           variant="outlined"
@@ -59,7 +60,7 @@
           rounded="xl"
           color="#73C7A4"
           class="text-white"
-          @click="passwordsMatchRule"
+          @click="passwordsMatchRule(usernamereg, emailreg)"
           >
               Crear Usuario
           </v-btn>
@@ -139,19 +140,76 @@
     },
   },
   methods: {
-    onSubmit () {
+    async onSubmit () {
       if (!this.form) return 
       else if(!this.passwordsMatchRule) return 'Las contraseñas deben coincidir.'
 
       this.loading = true
+      if(await this.checkUsername()) {
+          // If checkUsername returns true, proceed with form submission
+          // ...
 
+          this.loading=false;
+        }
       setTimeout(() => (this.loading = false), 2000)
     },
     required (v) {
       return !!v || 'Campo obligatorio'
     },
   },
+  async addUser(){
+      let user = {
+        "username": "johndoe4",          //UNIQUE
+        "password": "1234567890",
+        "firstName": "John",
+        "lastName": "Doe",
+        "gender": "male",
+        "birthdate": 984007600000,
+        "email": "johndoe4@email.com",   //UNIQUE
+        "phone": "98295822",
+        "avatarUrl": "https://flic.kr/p/3ntH2u",
+        "metadata": null
+      }
+      
+      var init = {
+        method: 'POST',
+        headers: {
+          'Content-Type' : 'application/json; charset=utf-8'
+        },
+        body: JSON.stringify(user)
+      };
+      try{
+        let response = await fetch('http://localhost:8080/api/users', init);
+        if(!response.ok){
+          console.log(`HTTP error! status: ${response.status}`);
+        }
+        else{
+          console.log('EXITAZO: '+ response);
+        }
+      }catch(error){
+        console.log('Unexpected error: \n' + error.message);
+      }
+      
+    },
 
+    async checkUsername(){
+      const response = await addUser(this.username);
+
+      if(!response.ok){
+        //err_msg = response.json().details;  //mensaje de error
+        err_msg = "UNIQUE constraint failed: User.username"       //HARDCODEADO PARA TESTEAR INTERACCION
+        if (err_msg.includes("User.email")) {
+          this.usernameError = 'El email ingresado ya existe.';
+        } else if (err_msg.includes("User.username")) {
+          this.emailError = 'El nombre de usuario ingresado ya existe.';
+        } else {
+          this.usernameError = '';
+          this.emailError = '';
+          return true;
+        }
+      }
+    },
+  
 }
 </script>
 
