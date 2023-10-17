@@ -115,33 +115,7 @@ export default {
         gap: 10px;
         margin-bottom: 5%;
     }
-
-    .cuentaField{
-        display: flex;
-        flex-direction: column;
-    }
-
-    .fieldName{
-        color: #49454F;
-        font-weight: 400;
-        font-size: small;
-    }
-
-    .fieldColor{
-        background-color: #E6F6EF;
-        border-radius: 15px;
-        padding-left: 1%;
-        padding-right: 1%;
-        padding-top: 1%;
-        padding-bottom: 1%;
-        height: fit-content;
-    }
-
-    .fieldData{
-        color: #000000;
-        font-weight: bold;
-        font-size: x-large;
-    }
+    
 
     .space-below{
     margin-bottom: 20px;

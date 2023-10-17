@@ -10,6 +10,11 @@ const router = createRouter({
         component: HomePage
       },
       {
+        path: '/ejs',
+        name: 'ejs',
+        component: () => import("@/pages/HomeEjsPage.vue"),
+      },
+      {
         path: '/login',
         name: 'login',
         component: () => import("@/pages/LoginPage.vue"),
@@ -22,7 +27,7 @@ const router = createRouter({
       {
         path: '/routine-edit',
         name: 'routine-edit',
-        component: () => import("@/pages/MisEjsPage.vue"),
+        component: () => import("@/pages/MiRutinaEditPage.vue"),
       },
       {
         path: '/profile/:id',
@@ -33,6 +38,31 @@ const router = createRouter({
         path: '/profile-edit',
         name: 'profile-edit',
         component: () => import("@/pages/PerfilEditPage.vue"),
+      },
+      {
+        path: '/mis-ejs',
+        name: 'mis-ejs',
+        component: () => import("@/pages/MisEjsPage.vue"),
+      },
+      {
+        path: '/mis-rutinas',
+        name: 'mis-rutinas',
+        component: () => import("@/pages/MisRutinasPage.vue"),
+      },
+      {
+        path: '/mi-ej-edit',
+        name: 'mi-ej-edit',
+        component: () => import("@/pages/MyEjEditPage.vue"),
+      },
+      {
+        path: '/mi-ej-view',
+        name: 'mi-ej-view',
+        component: () => import("@/pages/MyEjView.vue"),
+      },
+      {
+        path: '/mi-rutina-view',
+        name: 'mi-rutina-view',
+        component: () => import("@/pages/MyRutinaView.vue"),
       }
     ]
 })

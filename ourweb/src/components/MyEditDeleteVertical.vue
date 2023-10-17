@@ -27,7 +27,9 @@ export default {
 <style scoped>
   .content{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 3px;
   }
 </style>

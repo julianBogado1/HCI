@@ -68,7 +68,7 @@
 
 </script>
 
-<style>
+<style scoped>
   .v-field{
       background-color: #E6F6EF;
   }

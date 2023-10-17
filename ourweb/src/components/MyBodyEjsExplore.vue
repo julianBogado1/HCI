@@ -1,13 +1,11 @@
 <template>
     <div class="content">
-        <MyNoEjsMessage/>
-        <MisEjsList/>
+        <EjsList/>
     </div>
 </template>
 
 <script setup>
-    import MisEjsList from './MisEjsList.vue';
-import MyNoEjsMessage from './messages/MyNoEjsMessage.vue';
+import EjsList from './EjsList.vue';
 </script>
 
 <style scoped>

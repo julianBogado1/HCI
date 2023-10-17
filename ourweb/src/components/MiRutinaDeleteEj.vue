@@ -2,16 +2,27 @@
     <div class="rutina-card dflex w-100">
         <div class="info-card">
             <div class="name-text">
-                <p>Ejercicio 1</p>
+                <p>Rutina 1</p>
             </div>
             <div class="desc-text">
-                <p>El curl de biceps es un ejercicio...</p>
+                <p>Descripción: rutina buenarda</p>
             </div>
         </div>
+        <div class="detail-card">
+            <div class="dif-card">
+            <Brazitos1/>
+        </div>
+            <div class="edit-card">
+                <MyEditDeleteVertical/>
+            </div>
+        </div>
+        
     </div>
 </template>
 
 <script setup>
+    import MyEditDeleteVertical from './MyEditDeleteVertical.vue';
+import Brazitos1 from './brazitos/Brazitos1.vue';
 </script>
 
 <style scoped>
@@ -37,6 +48,21 @@
         width: 90px;
         height: 90px;
         display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .detail-card{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .edit-card{
+        background-color: #938F99;
+        width: 45px;
+        height: 90px;
+        display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
     }

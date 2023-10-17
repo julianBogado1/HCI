@@ -8,10 +8,19 @@
                 <p>El curl de biceps es un ejercicio...</p>
             </div>
         </div>
+        <div class="detail-card">
+        <div class="edit-card">
+            <MyEditDeleteVertical/>
+        </div>
+        </div>
+        
     </div>
 </template>
 
 <script setup>
+import MyEditDelete from './MyEditDelete.vue';
+import MyEditDeleteVertical from './MyEditDeleteVertical.vue';
+
 </script>
 
 <style scoped>
@@ -37,6 +46,21 @@
         width: 90px;
         height: 90px;
         display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .detail-card{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .edit-card{
+        background-color: #938F99;
+        width: 45px;
+        height: 90px;
+        display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
     }
