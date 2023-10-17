@@ -34,12 +34,11 @@
           variant="outlined"
         ></v-text-field>
 
+        <div class="intensidad space-below">
+                <MyBrazoCheck/>
+            </div>
       </v-form>
-      <v-row>
-        <div class="intensidad">
-            <p>hi</p>
-        </div>
-    </v-row>
+      
 
       <v-row justify="end">
           <v-btn
@@ -58,15 +57,16 @@
 </template>
 
 <script setup>
+    import MyBrazoCheck from './brazitos/MyBrazoCheck.vue';
 </script>
 
 <style scoped>
 
     .intensidad{
         flex-grow: 1;
-        margin: 1%;
-        border: 2px solid rgba(0, 0, 0, 0.12);
-        border-radius: 4px; 
+        padding: 1%;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        border-radius: 5px; 
     }
     .fieldContainer{
         display: flex;
