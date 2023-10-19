@@ -1,20 +1,22 @@
 <template>
-    <div class="mi-rutina-edit">
+    <div class="edit-ej">
       <v-main style="padding-top: 110px; padding-bottom: 74px;">
         <MyHeader />
         <div class="subheader">
           <MySUbheaderMisEjsView/>
         </div>
-        <MisEjsInfo/>
-        <MyFooter />      
+        <div class="editcontent">
+          <MyEjCrear/>
+        </div>
+        <MyFooter/>      
       </v-main>
     </div>
   </template>
   
   <script setup>
- import MyHeader from '../components/MyHeader.vue'
-import MisEjsInfo from '../components/MisEjsInfo.vue';
+ import MyHeader from '../components/MyHeader.vue';
 import MyFooter from '@/components/MyFooter.vue';
+import MyEjCrear from '@/components/MyEjCrear.vue';
 import MySUbheaderMisEjsView from '@/components/subheaders/MySUbheaderMisEjsView.vue';
   </script>
   
@@ -27,7 +29,14 @@ import MySUbheaderMisEjsView from '@/components/subheaders/MySUbheaderMisEjsView
           background-color: #FFFFFF;
       }
   
-      .mi-rutina-edit{
+      .edit-ej{
         background-color: #FFFFFF;
+      }
+
+      .editcontent{
+        display: flex;
+        align-items: center;
+        margin-left: 5%;
+        margin-right: 5%;
       }
   </style>

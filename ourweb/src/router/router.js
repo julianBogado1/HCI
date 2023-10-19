@@ -63,6 +63,11 @@ const router = createRouter({
         path: '/mi-rutina-view',
         name: 'mi-rutina-view',
         component: () => import("@/pages/MyRutinaView.vue"),
+      },
+      {
+        path: '/create-ej',
+        name: 'create-ej',
+        component: () => import("@/pages/MyEjCrearPage.vue"),
       }
     ]
 })

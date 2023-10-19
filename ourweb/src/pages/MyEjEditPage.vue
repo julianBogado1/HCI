@@ -3,7 +3,7 @@
       <v-main style="padding-top: 110px; padding-bottom: 74px;">
         <MyHeader />
         <div class="subheader">
-          <MySubheaderMisEjs/>
+          <MySUbheaderMisEjsView/>
         </div>
         <div class="editcontent">
           <MyEjEdit/>
@@ -14,10 +14,10 @@
   </template>
   
   <script setup>
-  import MySubheaderMisEjs from '@/components/subheaders/MySubheaderMisEjs.vue';
-import MyHeader from '../components/MyHeader.vue';
+ import MyHeader from '../components/MyHeader.vue';
 import MyFooter from '@/components/MyFooter.vue';
 import MyEjEdit from '@/components/MyEjEdit.vue';
+import MySUbheaderMisEjsView from '@/components/subheaders/MySUbheaderMisEjsView.vue';
   </script>
   
   <style scoped>
