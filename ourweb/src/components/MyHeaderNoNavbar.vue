@@ -18,7 +18,7 @@
 <style scoped>
     .cartel{
         background-color: #73C7A4;
-        height: 80px;
+        height: 75px;
         display: flex;
         align-items: center;
     }
