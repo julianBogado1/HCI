@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto px-6 py-8" width="60%">
+  <v-card class="mx-auto px-6 py-8 mycard" width="60%">
     <v-form
       v-model="form"
       @submit.prevent="onSubmit"
@@ -49,7 +49,11 @@
       
 
       <br/>
-    
+    <div class="button-with-mssg">
+      <div v-if="errorMessage" class="text-error space-below">
+        {{ errorMessage }}
+    </div>
+
     <v-row justify="center space-below">
         <v-btn
         :disabled="!form"
@@ -64,14 +68,9 @@
         >
             Crear Usuario
         </v-btn>
-    </v-row>
-
-    <div v-if="errorMessage" class="text-error">
-        {{ errorMessage }}
+    </v-row>   
     </div>
-
-    <br/>
-    <br/>
+    
 
     <v-row class="myrow">
         <div class="mycontainer">
@@ -233,6 +232,11 @@ methods: {
 
 <style scoped>
 
+.button-with-mssg{
+  display: flex;
+  flex-direction: column;
+}
+
 .text-error {
   color: red;
   display: flex;
@@ -268,6 +272,10 @@ padding: 0;
 }
 .space-below{
 margin-bottom: 20px;
+}
+
+.mycard{
+  margin-bottom: 1%;
 }
 
 </style>

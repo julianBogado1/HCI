@@ -1,5 +1,5 @@
 <template>
-    <v-card class="mx-auto px-6 py-8" width="60%" >
+    <v-card class="mx-auto px-6 py-8 mycard" width="60%" >
       <v-form
         v-model="form"
         @submit.prevent="onSubmit"
@@ -151,4 +151,8 @@
   .space-below{
     margin-bottom: 20px;
   }
+
+  .mycard{
+  margin-bottom: 1%;
+}
 </style>

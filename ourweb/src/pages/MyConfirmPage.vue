@@ -3,7 +3,7 @@
     <v-main style="padding-bottom: 74px;">
         <div class="centeredCompo">
             <img src="../assets/ourlogo.jpeg" class="log-image" />
-            <v-card class="mx-auto px-6 py-8" width="60%" >
+            <v-card class="mx-auto px-6 py-8 mycard" width="60%" >
                 <div class="myDiv space-below xlarg-text">
                     <p>Registro exitoso!</p>
                 </div>
@@ -36,6 +36,10 @@
 </script>
 
 <style scoped>
+
+.mycard{
+  margin-bottom: 1%;
+}
 .izq-text{
   flex: 1; /*mismo espacio*/
   display: flex;
