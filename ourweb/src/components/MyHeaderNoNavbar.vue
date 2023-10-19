@@ -4,7 +4,7 @@
       <div class="cartel d-flex w-100 align-center">
         <router-link to="/"><img src="../assets/ourlogo.jpeg" class="left-image" /></router-link>
         
-        <div class="mytext align-center">
+        <div class="mytext align-center space-up">
             <p class="textHeader">Creatina</p>
             <p class="textHeader">La mejor plataforma para crear tus rutinas</p>
         </div>
@@ -46,5 +46,9 @@
 
     .textHeader{
         font-size: x-large;
+    }
+
+    .space-up{
+        margin-top: 1%;
     }
 </style>
