@@ -2,7 +2,7 @@
     <v-footer class="myheader d-flex flex-column">
       
       <div class="cartel d-flex w-100 align-center">
-        <img src="../assets/ourlogo.jpeg" class="left-image" />
+        <router-link to="/"><img src="../assets/ourlogo.jpeg" class="left-image" /></router-link>
         
         <div class="mytext align-center">
             <p class="textHeader">Creatina</p>

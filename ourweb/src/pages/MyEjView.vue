@@ -1,5 +1,5 @@
 <template>
-    <div class="editroutine">
+    <div class="mi-rutina-edit">
       <v-main style="padding-top: 110px; padding-bottom: 74px;">
         <MyHeader />
         <div class="subheader">
@@ -27,7 +27,7 @@ import MyFooter from '@/components/MyFooter.vue';
           background-color: #FFFFFF;
       }
   
-      .edit-routine{
+      .mi-rutina-edit{
         background-color: #FFFFFF;
       }
   </style>
