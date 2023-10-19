@@ -1,10 +1,7 @@
-const apiUrl = 'https://localhost:8080';
-import { v4 as uuidv4 } from 'uuid';
+const apiUrl = 'http://localhost:8080';
 
-
-export const createExercise = async (name, description, steps, difficulty) => {
+export const createExercise = async (name, description, steps) => {
   try {
-    id = uuidv4()
     const response = await fetch(`${apiUrl}/exercises`, {
       method: 'POST',
       headers: {
@@ -14,7 +11,6 @@ export const createExercise = async (name, description, steps, difficulty) => {
         name: name,
         detail: description,
         steps: steps,
-        difficulty: difficulty,
         type: "exercise",
         metadata: null
       }
@@ -26,7 +22,7 @@ export const createExercise = async (name, description, steps, difficulty) => {
   }
 };
 
-export const editExercise = async (name, description, steps, difficulty) => {
+export const editExercise = async (name, description, steps) => {
     try {
         const response = await fetch(`${apiUrl}/exercises/` + id, {
             method: 'PUT',
@@ -37,7 +33,6 @@ export const editExercise = async (name, description, steps, difficulty) => {
             name: name,
             detail: description,
             steps: steps,
-            difficulty: difficulty,
             type: "exercise",
             metadata: null
             }

@@ -25,8 +25,8 @@ const router = createRouter({
         component: () => import("@/pages/RegisterPage.vue"),
       },
       {
-        path: '/routine-edit',
-        name: 'routine-edit',
+        path: '/mi-rutina-edit',
+        name: 'mi-rutina-edit',
         component: () => import("@/pages/MiRutinaEditPage.vue"),
       },
       {
@@ -55,24 +55,19 @@ const router = createRouter({
         component: () => import("@/pages/MyEjEditPage.vue"),
       },
       {
-        path: '/mi-ej-view',
+        path: '/mi-ej-create',
+        name: 'mi-ej-create',
+        component: () => import("@/pages/MyEjCrearPage.vue"),
+      },
+      {
+        path: '/mi-ej-view/:id',
         name: 'mi-ej-view',
         component: () => import("@/pages/MyEjView.vue"),
       },
       {
-        path: '/mi-rutina-view',
+        path: '/mi-rutina-view/:id',
         name: 'mi-rutina-view',
         component: () => import("@/pages/MyRutinaView.vue"),
-      },
-      {
-        path: '/create-ej',
-        name: 'create-ej',
-        component: () => import("@/pages/MyEjCrearPage.vue"),
-      },
-      {
-        path: '/confirm-email',
-        name: 'confirm-email',
-        component: () => import("@/pages/MyConfirmPage.vue"),
       }
     ]
 })

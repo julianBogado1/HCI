@@ -42,6 +42,7 @@
 
       <v-row justify="end">
           <v-btn
+          :loading="loading"
           size="large"
           type="submit"
           variant="elevated"
@@ -49,6 +50,7 @@
           rounded="xl"
           color="#73C7A4"
           class="text-white"
+          @click="onSubmit"
           >
               Crear Ejercicio
           </v-btn>
@@ -59,11 +61,29 @@
 <script>
   import MyBrazoCheck from './brazitos/MyBrazoCheck.vue';
   import { createExercise } from '@/api/api.js'
+  import { fetchExercises } from '@/api/api.js'
 
-  async onSubmit() {
-    createExercise(this.name, this.description, this.steps)
-  }
-  
+  export default {
+  data: () => ({
+    name: '',
+    description: '',
+    steps: '',
+    form: null,
+    loading: false,
+    reqRules: [], 
+  }),
+  methods: {
+    async onSubmit () {
+      console.log("ARRANCA O NO ARRANCA")
+      this.loading = true
+      const response = await createExercise(this.name, this.description, this.steps);
+      this.name = '';
+      this.description = '';
+      this.steps = '';
+      console.log(fetchExercises())
+    },
+  },
+};
 </script>
 
 <style scoped>
