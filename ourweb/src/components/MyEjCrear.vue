@@ -46,7 +46,7 @@
           color="#73C7A4"
           class="text-white"
           >
-              Guardar Cambios
+              Crear Ejercicio
           </v-btn>
       </v-row>
     </div>
