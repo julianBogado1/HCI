@@ -6,7 +6,7 @@
           <MySUbheaderMisEjsView/>
         </div>
         <div class="editcontent">
-          <MyEjEdit/>
+          <MyEjCrear/>
         </div>
         <MyFooter/>      
       </v-main>
@@ -16,7 +16,7 @@
   <script setup>
  import MyHeader from '../components/MyHeader.vue';
 import MyFooter from '@/components/MyFooter.vue';
-import MyEjEdit from '@/components/MyEjEdit.vue';
+import MyEjCrear from '@/components/MyEjCrear.vue';
 import MySUbheaderMisEjsView from '@/components/subheaders/MySUbheaderMisEjsView.vue';
   </script>
   

@@ -5,14 +5,6 @@
                 <svg-icon type="mdi" :path="path" size="50"></svg-icon>
                 <h2 class="mySubheaderText">Mis Ejercicios</h2>
             </div>
-            <router-link to="/create-ej" class="create">
-            <div class="myDiv">
-                <svg-icon type="mdi" :path="path2"></svg-icon>
-                <div >
-                    <p>Crear nuevo</p>
-                </div>
-            </div>
-           </router-link>
         </div>
         <v-divider :thickness="2" class="border-opacity-50"></v-divider>
     </div>
@@ -20,7 +12,7 @@
 
 <script>
     import SvgIcon from '@jamescoyle/vue-icon';
-    import { mdiDumbbell  , mdiPlus} from '@mdi/js';
+    import { mdiDumbbell } from '@mdi/js';
 
     export default {
     name: "my-component",
@@ -30,7 +22,6 @@
     data() {
         return {
         path: mdiDumbbell,
-        path2: mdiPlus,
         }
     }
     }
@@ -38,14 +29,6 @@
 
 <style scoped>
 
-    .create{
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        white-space: nowrap;
-        color: #000000;
-        font-size: large;
-    }
     .mySubheaderText{
         color: #000000;
         margin-left: 20px;
