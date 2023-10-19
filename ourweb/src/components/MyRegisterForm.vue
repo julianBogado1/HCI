@@ -60,11 +60,18 @@
         rounded="xl"
         color="#73C7A4"
         class="text-white"
-        @click="checkUniqueness(usernamereg, passwordreg, emailreg)"
+        @click="onSubmit"
         >
             Crear Usuario
         </v-btn>
-        
+        <v-snackbar
+        v-model="snackbar"
+        :color="snackbarColor"
+        :timeout="5000"
+        >
+        {{ snackbarText }}
+        <v-btn text @click="snackbar = false">Close</v-btn>
+      </v-snackbar>
     </v-row>
 
     <br/>
@@ -85,6 +92,8 @@
 </template>
 
 <script>
+import { mdiConsoleNetworkOutline } from '@mdi/js'
+
 export default {
 data: () => ({
   form: false,
@@ -93,6 +102,9 @@ data: () => ({
   passwordreg: '',
   repeat_passwordreg: '',
   loading: false,
+  snackbar: false,
+  snackbarColor: '',
+  snackbarText: '',
   reqRules:[
   value => {
         if (value) return true
@@ -145,12 +157,14 @@ methods: {
       else if(!this.passwordsMatchRule) return 'Las contraseñas deben coincidir.'
 
       this.loading = true
-      if(await this.checkUniqueness(this.usernamereg, this.passwordreg, this.emailreg)) {
-          // If checkUsername returns true, proceed with form submission
-          // ...
-
+      console.log("EMPIEZA EL AWAIT MAGICO")
+      let response = await this.checkUniqueness(this.usernamereg, this.passwordreg, this.emailreg);
+      console.log("TERMINA EL AWAIT MAGICO")
+      if(response) {
+          console.log("ADENTRO DE IF RESPONSE")
           this.loading=false;
-        }
+      }
+      console.log("SET TIMEOUT INCOMING")
       setTimeout(() => (this.loading = false), 2000)
     },
     required (v) {
@@ -158,17 +172,14 @@ methods: {
     },
 
     async addUser(username, password, email){
-      const doubleQuotedusername = username.replace(/'/g, '"');
-      const doubleQuotedpassword= password.replace(/'/g, '"');
-      const doubleQuotedemail = email.replace(/'/g, '"');
       let user = {
-        "username": doubleQuotedusername,          //UNIQUE
-        "password": doubleQuotedpassword,
+        "username": username,   //UNIQUE
+        "password": password,
         "firstName": "John",
         "lastName": "Doe",
         "gender": "male",
         "birthdate": 284007600000,
-        "email": doubleQuotedemail,   //UNIQUE
+        "email": email,   //UNIQUE
         "phone": "98295822",
         "avatarUrl": "",
         "metadata": null
@@ -185,30 +196,44 @@ methods: {
         let response = await fetch('http://localhost:8080/api/users', init);
         if(!response.ok){
           console.log(`HTTP error! status: ${response.status}`);
+        
+          let details = await response.json();
+          console.log(details);
+          if(details.details[0].includes("User.email")){
+            //this.usernameError = 'El email ingresado ya existe.';
+            this.snackbarColor = 'error';
+            this.snackbarText = 'El email ingresado ya existe.';
+            this.snackbar = true;
+          }
+          else if(details.details[0].includes("User.username")){
+            //this.emailError = 'El nombre de usuario ingresado ya existe.';
+            this.snackbarColor = 'error';
+            this.snackbarText = 'El nombre de usuario ingresado ya existe.';
+            this.snackbar = true;
+          }
+          return false;
         }
         else{
           console.log('EXITAZO: ', await response.json());
+          return response;
         }
       }catch(error){
         console.log('Unexpected error: \n' + error.message);
+        this.snackbarColor = 'error';
+        this.snackbarText = 'An error occurred: ' + error.message;
+        this.snackbar = true;
       }
       
     },
 
     async checkUniqueness(username, password, email){
       const response = await this.addUser(username, password, email);
-      //err_msg = response.json().details;  //mensaje de error
-      err_msg = "UNIQUE constraint failed: User.username"       //HARDCODEADO PARA TESTEAR INTERACCION
-      if (err_msg.includes("User.email")) {
-        this.usernameError = 'El email ingresado ya existe.';
-      } else if (err_msg.includes("User.username")) {
-        this.emailError = 'El nombre de usuario ingresado ya existe.';
-      } else {
-        this.usernameError = '';
-        this.emailError = '';
-        return true;
+      if(response===false){
+        return false;
       }
-      
+      else {
+        return true;
+      }      
     },
   },
 }
