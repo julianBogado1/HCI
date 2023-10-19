@@ -53,11 +53,6 @@
 </template>
 
 <script setup>
-<<<<<<< HEAD
-    import MyBrazoCheck from './brazitos/MyBrazoCheck.vue';
-    import { createExercise } from '././api/api.js'
-=======
->>>>>>> 67aa284420fa5215c31174f667b23c000092ca3c
 </script>
 
 <style scoped>

@@ -68,6 +68,11 @@ const router = createRouter({
         path: '/create-ej',
         name: 'create-ej',
         component: () => import("@/pages/MyEjCrearPage.vue"),
+      },
+      {
+        path: '/confirm-email',
+        name: 'confirm-email',
+        component: () => import("@/pages/MyConfirmPage.vue"),
       }
     ]
 })
