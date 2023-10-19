@@ -74,13 +74,12 @@
   }),
   methods: {
     async onSubmit () {
-      console.log("ARRANCA O NO ARRANCA")
-      this.loading = true
+      //this.loading = true
       const response = await createExercise(this.name, this.description, this.steps);
       this.name = '';
       this.description = '';
       this.steps = '';
-      console.log(fetchExercises())
+      //console.log(fetchExercises())
     },
   },
 };
