@@ -48,7 +48,7 @@
 
       <v-row class="myrow">
         <div class="der-text text-right">
-          <router-link to="/register" class="mytext text-right">Registrarse</router-link>
+          <router-link to="/register" class="mytext text-right linkDiv">Registrarse</router-link>
         </div>
         <v-divider
               class="mx-3"
@@ -112,6 +112,9 @@
 </script>
 
 <style scoped>
+.linkDiv{
+    text-decoration: none;
+}
 .izq-text{
   flex: 1; /*mismo espacio*/
   display: flex;
