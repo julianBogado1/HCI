@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto px-6 py-8" width="60%">
+  <v-card class="mx-auto px-6 py-8 mycard" width="60%">
     <v-form
       v-model="form"
       @submit.prevent="onSubmit"
@@ -49,8 +49,12 @@
       
 
       <br/>
-    
-    <v-row justify="center">
+    <div class="button-with-mssg">
+      <div v-if="errorMessage" class="text-error space-below">
+        {{ errorMessage }}
+    </div>
+
+    <v-row justify="center space-below">
         <v-btn
         :disabled="!form"
         :loading="loading"
@@ -64,25 +68,16 @@
         >
             Crear Usuario
         </v-btn>
-        <v-snackbar
-        v-model="snackbar"
-        :color="snackbarColor"
-        :timeout="5000"
-        >
-        {{ snackbarText }}
-        <v-btn text @click="snackbar = false">Close</v-btn>
-      </v-snackbar>
-    </v-row>
-
-    <br/>
-    <br/>
+    </v-row>   
+    </div>
+    
 
     <v-row class="myrow">
         <div class="mycontainer">
       <v-divider class="mydiv"></v-divider>
       <div>
         <text>Ya tiene cuenta? </text>
-        <router-link to="/login" class="mytext text-right">Ingresar</router-link>
+        <router-link to="/login" class="mytext text-right linkDiv">Ingresar</router-link>
       </div>
     </div>
     </v-row>
@@ -102,9 +97,7 @@ data: () => ({
   passwordreg: '',
   repeat_passwordreg: '',
   loading: false,
-  snackbar: false,
-  snackbarColor: '',
-  snackbarText: '',
+  errorMessage: '',
   reqRules:[
   value => {
         if (value) return true
@@ -156,13 +149,17 @@ methods: {
       if (!this.form) return 
       else if(!this.passwordsMatchRule) return 'Las contraseñas deben coincidir.'
 
-      this.loading = true
+      this.loading = true;
+      this.errorMessage = '';
       console.log("EMPIEZA EL AWAIT MAGICO")
       let response = await this.checkUniqueness(this.usernamereg, this.passwordreg, this.emailreg);
       console.log("TERMINA EL AWAIT MAGICO")
       if(response) {
           console.log("ADENTRO DE IF RESPONSE")
           this.loading=false;
+      }else{
+        this.errorMessage = 'Hubo un error al crear el usuario. Por favor, inténtalo de nuevo.';
+        this.loading = false;
       }
       console.log("SET TIMEOUT INCOMING")
       setTimeout(() => (this.loading = false), 2000)
@@ -201,15 +198,11 @@ methods: {
           console.log(details);
           if(details.details[0].includes("User.email")){
             //this.usernameError = 'El email ingresado ya existe.';
-            this.snackbarColor = 'error';
-            this.snackbarText = 'El email ingresado ya existe.';
-            this.snackbar = true;
+            this.errorMessage = 'Este email ya fue registrado';
           }
           else if(details.details[0].includes("User.username")){
             //this.emailError = 'El nombre de usuario ingresado ya existe.';
-            this.snackbarColor = 'error';
-            this.snackbarText = 'El nombre de usuario ingresado ya existe.';
-            this.snackbar = true;
+            this.errorMessage = 'Este nombre de usuario ya fue registrado';
           }
           return false;
         }
@@ -219,9 +212,7 @@ methods: {
         }
       }catch(error){
         console.log('Unexpected error: \n' + error.message);
-        this.snackbarColor = 'error';
-        this.snackbarText = 'An error occurred: ' + error.message;
-        this.snackbar = true;
+        this.errorMessage = 'Ocurrio un error: '+ error.message;
       }
       
     },
@@ -241,6 +232,18 @@ methods: {
 
 <style scoped>
 
+.button-with-mssg{
+  display: flex;
+  flex-direction: column;
+}
+
+.text-error {
+  color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .myrow{
 display: flex;
 align-items: center;
@@ -249,6 +252,10 @@ justify-content: center;
 
 .mytext{
 color: #73C7A4;
+}
+
+.linkDiv{
+    text-decoration: none;
 }
 
 .v-field{
@@ -265,6 +272,10 @@ padding: 0;
 }
 .space-below{
 margin-bottom: 20px;
+}
+
+.mycard{
+  margin-bottom: 1%;
 }
 
 </style>
