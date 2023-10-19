@@ -33,10 +33,6 @@
           placeholder="Enter your password"
           variant="outlined"
         ></v-text-field>
-
-        <div class="intensidad space-below">
-                <MyBrazoCheck/>
-            </div>
       </v-form>
       
 
@@ -57,7 +53,6 @@
 </template>
 
 <script setup>
-    import MyBrazoCheck from './brazitos/MyBrazoCheck.vue';
 </script>
 
 <style scoped>
