@@ -33,6 +33,10 @@
           placeholder="Enter your password"
           variant="outlined"
         ></v-text-field>
+
+        <div class="intensidad space-below">
+                <MyBrazoCheck/>
+            </div>
       </v-form>
       
 
@@ -52,12 +56,14 @@
     </div>
 </template>
 
-<script setup>
-<<<<<<< HEAD
-    import MyBrazoCheck from './brazitos/MyBrazoCheck.vue';
-    import { createExercise } from '././api/api.js'
-=======
->>>>>>> 67aa284420fa5215c31174f667b23c000092ca3c
+<script>
+  import MyBrazoCheck from './brazitos/MyBrazoCheck.vue';
+  import { createExercise } from '@/api/api.js'
+
+  async onSubmit() {
+    createExercise(this.name, this.description, this.steps)
+  }
+  
 </script>
 
 <style scoped>
