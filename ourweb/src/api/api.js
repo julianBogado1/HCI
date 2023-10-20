@@ -8,17 +8,40 @@ const requestOptions = {
   },
 };
 
+const requestOptionsNoHeader ={
+  headers: {
+    'Content-Type': 'application/json',
+  },
+}
+
 const apiFetch = async (url, options) => {
   try {
     const response = await fetch(url, options);
     if (!response.ok) {
       throw new Error(`Request failed with status: ${response.status}`);
     }
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      throw new Error('Response is not JSON');
+    }
+    console.log(response);
     return response.json();
   } catch (error) {
     throw error;
   }
 };
+
+const apiFetchEmptyBody = async (url, options) => {
+  try {
+    const response = await fetch(url, options);
+    //no retorna response.json() porque la response es vacia
+    //solo interesa el response.ok
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
 
 export const createExercise = async (name, description) => {
   const url = `${apiUrl}/exercises`;
@@ -72,28 +95,53 @@ export const fetchExercise = async (id) => {
 };
 
 
-export const verifyUser = async (email, verification_code) => {
-  try {
-    let myBody = {
-      'email': email,
-      "code": verification_code,
-    };
-    var init = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(myBody)
-    };
-    const response = await fetch(`${apiUrl}/users/verify_email`, init);
 
-    console.log(response);
-    if(response.ok){      
-      return await response.json();
-    }else{
-      throw new Error('Server response not OK :(')
+export const verifyUser = async (email, verification_code) => {
+  const url = `${apiUrl}/users/verify_email`;
+  const body = JSON.stringify({
+    'email': email,
+    "code": verification_code,
+  })
+  const options = { 
+    ...requestOptionsNoHeader,
+    method: 'POST',
+    body,
+  };
+  return await apiFetchEmptyBody(url, options);
+};
+
+
+export const addUser = async (username, password, email)=>{
+  let user = {
+    "username": username,   //UNIQUE
+    "password": password,
+    "firstName": "John",
+    "lastName": "Doe",
+    "gender": "male",
+    "birthdate": 284007600000,
+    "email": email,   //UNIQUE
+    "phone": "98295822",
+    "avatarUrl": "",
+    "metadata": null
+  }
+
+  var init = {
+    method: 'POST',
+    headers: {
+      'Content-Type' : 'application/json; charset=utf-8'
+    },
+    body: JSON.stringify(user)
+  };
+  try{
+    let response = await fetch('http://localhost:8080/api/users', init);
+    if(!response.ok){
+      console.log(`HTTP error! status: ${response.status}`);
+      return response;
     }
-  } catch (error) {
-    throw error;
+    else{
+      return response;
+    }
+  }catch(error){
+    console.log('Unexpected error: \n' + error.message);  //no mostramos los errores internos al usuario
   }
 };
