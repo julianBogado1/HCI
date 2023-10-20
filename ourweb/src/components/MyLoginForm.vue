@@ -27,22 +27,26 @@
 
         <br/>
       
-      <v-row justify="center">
-          <v-btn
-          :disabled="!form"
-          :loading="loading"
-          size="large"
-          type="submit"
-          variant="elevated"
-          rounded="xl"
-          color="#73C7A4"
-          class="text-white"
-          @click="addUser"
-          >
-              Iniciar Sesión
-          </v-btn>
-      </v-row>
 
+      <div class="button-with-mssg">
+        <div v-if="errorMessage" class="text-error space-below">
+          {{ errorMessage }}
+        </div>
+        <v-row justify="center">
+            <v-btn
+            :disabled="!form"
+            :loading="loading"
+            size="large"
+            type="submit"
+            variant="elevated"
+            rounded="xl"
+            color="#73C7A4"
+            class="text-white"
+            >
+                Iniciar Sesión
+            </v-btn>
+      </v-row>
+      </div>
       <br/>
       <br/>
 
@@ -64,13 +68,14 @@
 </template>
 
 <script>
+import { loginUser } from '@/api/api.js'
   export default {
   data: () => ({
     form: false,
     usernamelog: null,
     passwordlog: null,
     loading: false,
-
+    errorMessage:'',
     reqRules:[
       value => {
         if (value) return true
@@ -81,28 +86,35 @@
   }),
 
   methods: {
-    onSubmit () {
+    async onSubmit () {
       if (!this.form) return
 
       this.loading = true
+      try{
+        let response = await loginUser(this.usernamelog, this.passwordlog); 
+        if(response.ok){
+          let token = await response.json();
+          console.log(token.token);
+          localStorage.AUTHTOKEN = token.token;
+        }else{
+          if(response.status===401){
+            this.errorMessage='Credenciales inválidas. Vuelva a intentarlo.'
+          }
+          else{throw new Error(`Request failed with status: ${response.status}`);};
+        }        
+        this.loading = false;
+      }
+      catch(error){
+        this.errorMessage='Ha ocurrido un error al iniciar sesión.'
+        console.log(`Unexpected error: ${error.message}`);
+        this.loading = false;
+      }
 
       setTimeout(() => (this.loading = false), 2000)
     },
     required (v) {
       return !!v || 'Field is required'
     },
-    
-    async getData(){
-      let response = await fetch('http://localhost:8080/api/users/1');
-      if(!response.ok){
-        throw Error(response.statusText);
-      }
-      const data = response.json();
-      console.log(data)
-      return data; //se procesa la respuesta en formato json
-    },
-
-
     
   },
 

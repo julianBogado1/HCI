@@ -1,5 +1,5 @@
 const apiUrl = 'http://localhost:8080/api';
-const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTY5Nzc0NDk5MTIzNCwiZXhwIjoxNjk3NzQ3NTgzMjM0fQ.GttfYIt3kq9aLEWPzlXB5JP_04MDQSvTLyVhmLzZoLk';
+const authToken = localStorage.AUTHTOKEN;
 
 const requestOptions = {
   headers: {
@@ -109,6 +109,22 @@ export const verifyUser = async (email, verification_code) => {
   };
   return await apiFetchEmptyBody(url, options);
 };
+
+
+export const loginUser = async (username, password) => {
+  const url = `${apiUrl}/users/login`;
+  const body = JSON.stringify({
+    "username" : username,
+    "password" : password,
+  });
+  const options = {
+    ...requestOptionsNoHeader,
+    method: 'POST',
+    body,
+  };
+  return apiFetchEmptyBody(url, options);
+};
+
 
 
 export const addUser = async (username, password, email)=>{
