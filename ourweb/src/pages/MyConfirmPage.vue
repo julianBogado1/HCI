@@ -10,40 +10,42 @@
                 <div class="myDiv space-below larg-text">
                     <p>Recuerde revisar su correo electrónico para validar su cuenta</p>
                 </div>
-                <v-row class="myrow">
+
+                    <v-row class="myrow">
                     <v-text-field
                     v-model="confirmation_code"
                     clearable
                     label="Inserte el código de verificación"
                     placeholder="Enter your password"
                     variant="outlined"
-                ></v-text-field>
-                <v-btn
-                :loading="loading"
-                size="large"
-                variant="elevated"
-                density="compact"
-                rounded="xl"
-                color="#73C7A4"
-                class="text-white"
-                @click="verifyUserWrapper"
-                >
-                    Verificar
-                </v-btn>
-               
+                    ></v-text-field>
                 </v-row>
-                <v-row>
-                    <div class="button-with-mssg">
-                        <div v-if="errorMessage" class="text-error space-below">
+                <div class="button-with-mssg">
+                    <div class="message space-below">
+                        <div v-if="errorMessage" class="text-error">
                           {{ errorMessage }}
                       </div>
-                    </div>
-                    <div class="button-with-mssg">
-                        <div v-if="successMessage" class="text-success space-below">
+                        <div v-if="successMessage" class="text-success">
                           {{ successMessage }}
                       </div>
                     </div>
+                </div>
+                <v-row justify="center" class="space-below">
+                    <v-btn
+                    :loading="loading"
+                    size="large"
+                    variant="elevated"
+                    density="compact"
+                    rounded="xl"
+                    color="#73C7A4"
+                    class="text-white"
+                    @click="verifyUserWrapper"
+                    >
+                        Verificar
+                    </v-btn>
                 </v-row>
+                    
+                
                 <v-row class="myrow">
                     <div class="der-text">
                     <router-link to="/register" class="mytext linkDiv">Volver a la página principal</router-link>
@@ -101,7 +103,10 @@ export default {
 </script>
 
 <style scoped>
-
+.button-with-mssg{
+  display: flex;
+  flex-direction: column;
+}
 .mycard{
   margin-bottom: 1%;
 }
@@ -179,4 +184,10 @@ color: #73C7A4;
     align-items: center;
     justify-content: center;
   }
+  .message{/*reservamos espacio para el mensaje */
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>
