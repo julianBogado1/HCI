@@ -47,11 +47,13 @@
       ></v-text-field>
       
 
-      <br/>
     <div class="button-with-mssg">
-      <div v-if="errorMessage" class="text-error space-below">
-        {{ errorMessage }}
-    </div>
+      <div class="message space-below">
+        <div v-if="errorMessage" class="text-error">
+                {{ errorMessage }}
+            </div>
+      </div>
+      
 
     <v-row justify="center" class="space-below">
         <v-btn
@@ -227,6 +229,13 @@ margin-bottom: 20px;
 
 .mycard{
   margin-bottom: 1%;
+}
+
+.message{/*reservamos espacio para el mensaje */
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 </style>

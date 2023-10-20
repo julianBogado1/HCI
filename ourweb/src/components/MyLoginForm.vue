@@ -29,8 +29,10 @@
       
 
       <div class="button-with-mssg">
-        <div v-if="errorMessage" class="text-error space-below">
-          {{ errorMessage }}
+        <div class="message space-below">
+            <div v-if="errorMessage" class="text-error">
+            {{ errorMessage }}
+          </div>
         </div>
         <v-row justify="center">
             <v-btn
@@ -166,5 +168,24 @@ import { loginUser } from '@/api/api.js'
 
   .mycard{
   margin-bottom: 1%;
+}
+
+.button-with-mssg{
+  display: flex;
+  flex-direction: column;
+}
+
+.text-error {
+  color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message{/*reservamos espacio para el mensaje */
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
