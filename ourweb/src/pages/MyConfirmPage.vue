@@ -79,32 +79,22 @@ export default {
         this.loading = true;
         this.errorMessage = '';
         this.successMessage = '';
-        console.log(`VARIABLE LOCAL: ${localStorage.lastRegisteredEmail}`);
-        console.log(`codigo: ${this.confirmation_code}`)
         try{
             let response = await verifyUser(localStorage.lastRegisteredEmail, this.confirmation_code);
-            console.log(response);
-            if(response){
-                if(!response.ok){
-                    let details = await response.json();
-                    console.log(details);
-                    this.errorMessage='Error de verificacion. Inténtelo nuevamente.'
-                }
-                if(response.ok){
-                    this.successMessage='Verificación realizada exitosamente.'
-                }
-                this.loading=false;
+            if(!response.ok){
+                this.errorMessage='Error de verificacion. Inténtelo nuevamente.'
             }
+            else if(response.ok){
+                this.successMessage='Verificación realizada exitosamente.'
+            }
+            this.loading=false;
         }catch(error){
             console.log('Unexpected error: \n' + error.message)
             this.errorMessage='Error de verificacion. Inténtelo nuevamente.'
             this.loading=false;
         }
-        
         setTimeout(() => (this.loading = false), 2000);
         }
-        
-    
     },
 };
 

@@ -86,7 +86,7 @@
 
 <script>
 import { mdiConsoleNetworkOutline } from '@mdi/js'
-
+import {addUser} from '@/api/api.js';
 export default {
 data: () => ({
   form: false,
@@ -155,11 +155,10 @@ methods: {
 
       this.loading = true;
       this.errorMessage = '';
-      let response = await this.addUser(this.usernamereg, this.passwordreg, this.emailreg);
+      let response = await addUser(this.usernamereg, this.passwordreg, this.emailreg);
       if(response){
         if(!response.ok){
           let details = await response.json();
-          console.log(details);
             if(details.details[0].includes("User.email")){
               this.errorMessage = 'El email ingresado ya se encuentra registrado';
             }
@@ -172,47 +171,12 @@ methods: {
       setTimeout(() => (this.loading = false), 2000)
 
       localStorage.lastRegisteredEmail = this.emailreg; //GUARDAMOS EMAIL LOCALMENTE
-      console.log(`VARIABLE LOCAL GUARDADA COMO: ${localStorage.lastRegisteredEmail}`);
     },
     required (v) {
       return !!v || 'Campo obligatorio'
     },
 
-    async addUser(username, password, email){
-      let user = {
-        "username": username,   //UNIQUE
-        "password": password,
-        "firstName": "John",
-        "lastName": "Doe",
-        "gender": "male",
-        "birthdate": 284007600000,
-        "email": email,   //UNIQUE
-        "phone": "98295822",
-        "avatarUrl": "",
-        "metadata": null
-      }
-
-      var init = {
-        method: 'POST',
-        headers: {
-          'Content-Type' : 'application/json; charset=utf-8'
-        },
-        body: JSON.stringify(user)
-      };
-      try{
-        let response = await fetch('http://localhost:8080/api/users', init);
-        if(!response.ok){
-          console.log(`HTTP error! status: ${response.status}`);
-          return response;
-        }
-        else{
-          console.log('OK: ', await response.json());
-          return response;
-        }
-      }catch(error){
-        console.log('Unexpected error: \n' + error.message);  //no mostramos los errores internos al usuario
-      }
-    },
+    
   },
 }
 </script>
