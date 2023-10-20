@@ -1,74 +1,72 @@
 const apiUrl = 'http://localhost:8080/api';
 const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTY5Nzc0NDk5MTIzNCwiZXhwIjoxNjk3NzQ3NTgzMjM0fQ.GttfYIt3kq9aLEWPzlXB5JP_04MDQSvTLyVhmLzZoLk';
 
-export const createExercise = async (name, description) => {
-  try {
-    const response = await fetch(`${apiUrl}/exercises`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${authToken}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: name,
-        detail: description,
-        type: "exercise",
-        metadata: null
-      })
-    });
-
-    // Check if the response status code indicates success (2xx range)
-    if (response.ok) {
-      // If the response is a success, parse it as JSON
-      return response.json();
-    } else {
-      // If the response is not successful, handle the error accordingly
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-  } catch (error) {
-    // Handle network errors or other exceptions
-    throw error;
-  }
+const requestOptions = {
+  headers: {
+    Authorization: `Bearer ${authToken}`,
+    'Content-Type': 'application/json',
+  },
 };
 
-export const editExercise = async (name, description) => {
-    
-    try {
-        const response = await fetch(`${apiUrl}/exercises` + id, {
-            method: 'PUT',
-            headers: {
-                'Authorization': `Bearer ${authToken}`,
-                'Content-Type': 'application/json',
-            },
-            body: {
-            "name": name,
-            "detail": description,
-            "type": "exercise",
-            "metadata": null
-            }
-        });
-        return response.json();
-    } catch (error) {
-      throw error;
-    }
-}
-
-export const fetchExercises = async () => {
+const apiFetch = async (url, options) => {
   try {
-    const response = await fetch(`${apiUrl}/exercises`);
-
+    const response = await fetch(url, options);
+    if (!response.ok) {
+      throw new Error(`Request failed with status: ${response.status}`);
+    }
     return response.json();
   } catch (error) {
     throw error;
   }
 };
 
-export const fetchExercise = async (id) => {
-    try {
-      const response = await fetch(`${apiUrl}/exercises` + id);
-  
-      return response.json();
-    } catch (error) {
-      throw error;
-    }
+export const createExercise = async (name, description) => {
+  const url = `${apiUrl}/exercises`;
+  const body = JSON.stringify({
+    name,
+    detail: description,
+    type: 'exercise',
+    metadata: null,
+  });
+
+  const options = {
+    ...requestOptions,
+    method: 'POST',
+    body,
   };
+
+  console.log(options)
+  return apiFetch(url, options);
+};
+
+export const editExercise = async (id, name, description) => {
+  const url = `${apiUrl}/exercises/${id}`;
+  const body = JSON.stringify({
+    name,
+    detail: description,
+    type: 'exercise',
+    metadata: null,
+  });
+
+  const options = {
+    ...requestOptions,
+    method: 'PUT',
+    body,
+  };
+
+  return apiFetch(url, options);
+};
+
+export const fetchExercises = async () => {
+  const url = `${apiUrl}/exercises`;
+  const options = { ...requestOptions };
+
+  return apiFetch(url, options);
+};
+
+export const fetchExercise = async (id) => {
+  const url = `${apiUrl}/exercises/${id}`;
+  const options = { ...requestOptions };
+
+  return apiFetch(url, options);
+};
