@@ -73,6 +73,10 @@ const router = createRouter({
         path: '/confirm-email',
         name: 'confirm-email',
         component: () => import("@/pages/MyConfirmPage.vue"),
+      },{
+        path: '/:catchAll(.*)', //cualquier otro caso que no este por encima
+        name: 'not-found',
+        component: () => import("@/pages/My404Page.vue"),
       }
     ]
 })

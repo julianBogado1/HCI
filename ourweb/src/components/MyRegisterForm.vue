@@ -9,7 +9,6 @@
         class="space-below"
         :readonly="loading"
         :rules="nameRules"
-        :error-messages="usernameError"
         clearable
         label="Nombre de usuario"
         variant="outlined"
@@ -54,7 +53,7 @@
         {{ errorMessage }}
     </div>
 
-    <v-row justify="center space-below">
+    <v-row justify="center" class="space-below">
         <v-btn
         :disabled="!form"
         :loading="loading"
@@ -64,7 +63,6 @@
         rounded="xl"
         color="#73C7A4"
         class="text-white"
-        @click="onSubmit"
         >
             Crear Usuario
         </v-btn>
@@ -143,6 +141,12 @@ watch: {
   passwordreg() {
     this.repeat_passwordreg = '';
   },
+  emailreg(){
+    this.errorMessage='';
+  },
+  usernamereg(){
+    this.errorMessage='';
+  }
 },
 methods: {
     async onSubmit () {
@@ -151,18 +155,24 @@ methods: {
 
       this.loading = true;
       this.errorMessage = '';
-      console.log("EMPIEZA EL AWAIT MAGICO")
-      let response = await this.checkUniqueness(this.usernamereg, this.passwordreg, this.emailreg);
-      console.log("TERMINA EL AWAIT MAGICO")
-      if(response) {
-          console.log("ADENTRO DE IF RESPONSE")
-          this.loading=false;
-      }else{
-        this.errorMessage = 'Hubo un error al crear el usuario. Por favor, inténtalo de nuevo.';
-        this.loading = false;
+      let response = await this.addUser(this.usernamereg, this.passwordreg, this.emailreg);
+      if(response){
+        if(!response.ok){
+          let details = await response.json();
+          console.log(details);
+            if(details.details[0].includes("User.email")){
+              this.errorMessage = 'El email ingresado ya se encuentra registrado';
+            }
+            else if(details.details[0].includes("User.username")){
+              this.errorMessage = 'El nombre de usuario ya se encuentra registrado';
+          }
+        }
+        this.loading=false;
       }
-      console.log("SET TIMEOUT INCOMING")
       setTimeout(() => (this.loading = false), 2000)
+
+      localStorage.lastRegisteredEmail = this.emailreg; //GUARDAMOS EMAIL LOCALMENTE
+      console.log(`VARIABLE LOCAL GUARDADA COMO: ${localStorage.lastRegisteredEmail}`);
     },
     required (v) {
       return !!v || 'Campo obligatorio'
@@ -193,38 +203,15 @@ methods: {
         let response = await fetch('http://localhost:8080/api/users', init);
         if(!response.ok){
           console.log(`HTTP error! status: ${response.status}`);
-        
-          let details = await response.json();
-          console.log(details);
-          if(details.details[0].includes("User.email")){
-            //this.usernameError = 'El email ingresado ya existe.';
-            this.errorMessage = 'Este email ya fue registrado';
-          }
-          else if(details.details[0].includes("User.username")){
-            //this.emailError = 'El nombre de usuario ingresado ya existe.';
-            this.errorMessage = 'Este nombre de usuario ya fue registrado';
-          }
-          return false;
+          return response;
         }
         else{
-          console.log('EXITAZO: ', await response.json());
+          console.log('OK: ', await response.json());
           return response;
         }
       }catch(error){
-        console.log('Unexpected error: \n' + error.message);
-        this.errorMessage = 'Ocurrio un error: '+ error.message;
+        console.log('Unexpected error: \n' + error.message);  //no mostramos los errores internos al usuario
       }
-      
-    },
-
-    async checkUniqueness(username, password, email){
-      const response = await this.addUser(username, password, email);
-      if(response===false){
-        return false;
-      }
-      else {
-        return true;
-      }      
     },
   },
 }

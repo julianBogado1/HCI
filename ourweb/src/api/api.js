@@ -35,7 +35,7 @@ export const createExercise = async (name, description) => {
     body,
   };
 
-  console.log(options)
+
   return apiFetch(url, options);
 };
 
@@ -69,4 +69,31 @@ export const fetchExercise = async (id) => {
   const options = { ...requestOptions };
 
   return apiFetch(url, options);
+};
+
+
+export const verifyUser = async (email, verification_code) => {
+  try {
+    let myBody = {
+      'email': email,
+      "code": verification_code,
+    };
+    var init = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(myBody)
+    };
+    const response = await fetch(`${apiUrl}/users/verify_email`, init);
+
+    console.log(response);
+    if(response.ok){      
+      return await response.json();
+    }else{
+      throw new Error('Server response not OK :(')
+    }
+  } catch (error) {
+    throw error;
+  }
 };
