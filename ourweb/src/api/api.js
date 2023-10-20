@@ -72,3 +72,24 @@ export const fetchExercise = async (id) => {
       throw error;
     }
   };
+
+
+  export const verifyUser = async (email, verification_code) => {
+    try {
+      let myBody = {
+        'email': `${email}`,
+        "code": `${verification_code}`
+      };
+      var init = {
+        method: 'POST',
+        headers: {
+          'Content-Type' : 'application/json; charset=utf-8'
+        },
+        body: JSON.stringify(myBody)
+      };
+      const response = await fetch(`${apiUrl}/users/verify_email`, init);
+      return response.json();
+    } catch (error) {
+      throw error;
+    }
+  };

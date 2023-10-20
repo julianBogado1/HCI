@@ -11,6 +11,40 @@
                     <p>Recuerde revisar su correo electrónico para validar su cuenta</p>
                 </div>
                 <v-row class="myrow">
+                    <v-text-field
+                    v-model="confirmation_code"
+                    clearable
+                    label="Inserte el código de verificación"
+                    placeholder="Enter your password"
+                    variant="outlined"
+                ></v-text-field>
+                <v-btn
+                :loading="loading"
+                size="large"
+                variant="elevated"
+                density="compact"
+                rounded="xl"
+                color="#73C7A4"
+                class="text-white"
+                @click="verifyUserWrapper"
+                >
+                    Verificar
+                </v-btn>
+               
+                </v-row>
+                <v-row>
+                    <div class="button-with-mssg">
+                        <div v-if="errorMessage" class="text-error space-below">
+                          {{ errorMessage }}
+                      </div>
+                    </div>
+                    <div class="button-with-mssg">
+                        <div v-if="successMessage" class="text-success space-below">
+                          {{ successMessage }}
+                      </div>
+                    </div>
+                </v-row>
+                <v-row class="myrow">
                     <div class="der-text">
                     <router-link to="/register" class="mytext linkDiv">Volver a la página principal</router-link>
                     </div>
@@ -23,16 +57,53 @@
                     </div>  
                 </v-row>
             </v-card>
-            
-            
         </div>
         <MyFooter />
     </v-main>
     </div>
 </template>
 
-<script setup>
-    import MyFooter from '../components/MyFooter'
+<script>
+import MyFooter from '../components/MyFooter'
+import { verifyUser } from '@/api/api.js';
+
+export default {
+  data: () => ({
+    loading: false,
+    errorMessage: '',
+    successMessage: '',
+  }),
+  methods: {
+    async verifyUserWrapper () {
+        this.loading = true;
+        this.errorMessage = '';
+        this.successMessage = '';
+        try{
+            let response = await verifyUser(localStorage.lastRegisteredEmail, this.confirmation_code);
+            if(response){
+                if(!response.ok){
+                    let details = await response.json();
+                    console.log(details);
+                    this.errorMessage='Error de verificacion. Inténtelo nuevamente.'
+                }
+                if(response.ok){
+                    this.successMessage='Verificación realizada exitosamente.'
+                }
+                this.loading=false;
+            }
+        }catch(error){
+            console.log('Unexpected error: \n' + error.message)
+            this.errorMessage='Error de verificacion. Inténtelo nuevamente.'
+            this.loading=false;
+        }
+        
+        setTimeout(() => (this.loading = false), 2000);
+        }
+        
+    
+    },
+};
+
 </script>
 
 <style scoped>
@@ -101,5 +172,17 @@ color: #73C7A4;
 
     .space-below{
     margin-bottom: 20px;
+  }
+  .text-error {
+    color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .text-success {
+    color: green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 </style>
