@@ -61,7 +61,6 @@
 <script>
   import MyBrazoCheck from './brazitos/MyBrazoCheck.vue';
   import { createExercise } from '@/api/api.js'
-  import { fetchExercises } from '@/api/api.js'
 
   export default {
   data: () => ({
@@ -73,13 +72,19 @@
     reqRules: [], 
   }),
   methods: {
-    async onSubmit () {
-      //this.loading = true
-      const response = await createExercise(this.name, this.description, this.steps);
-      this.name = '';
-      this.description = '';
-      this.steps = '';
-      //console.log(fetchExercises())
+    async onSubmit() {
+      try {
+        // Fetch exercises and create the new exercise
+        const response = await createExercise(this.name, this.description, this.steps);
+
+        // Reset input fields
+        this.name = '';
+        this.description = '';
+        this.steps = '';
+      } catch (error) {
+        // Handle errors here
+        console.error('Error:', error);
+      }
     },
   },
 };
