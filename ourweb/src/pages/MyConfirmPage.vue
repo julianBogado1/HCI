@@ -64,6 +64,7 @@
 </template>
 
 <script>
+import { mdiContentSaveCogOutline } from '@mdi/js';
 import MyFooter from '../components/MyFooter'
 import { verifyUser } from '@/api/api.js';
 
@@ -78,8 +79,11 @@ export default {
         this.loading = true;
         this.errorMessage = '';
         this.successMessage = '';
+        console.log(`VARIABLE LOCAL: ${localStorage.lastRegisteredEmail}`);
+        console.log(`codigo: ${this.confirmation_code}`)
         try{
             let response = await verifyUser(localStorage.lastRegisteredEmail, this.confirmation_code);
+            console.log(response);
             if(response){
                 if(!response.ok){
                     let details = await response.json();

@@ -172,6 +172,7 @@ methods: {
       setTimeout(() => (this.loading = false), 2000)
 
       localStorage.lastRegisteredEmail = this.emailreg; //GUARDAMOS EMAIL LOCALMENTE
+      console.log(`VARIABLE LOCAL GUARDADA COMO: ${localStorage.lastRegisteredEmail}`);
     },
     required (v) {
       return !!v || 'Campo obligatorio'
