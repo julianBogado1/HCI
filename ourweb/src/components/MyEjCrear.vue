@@ -25,15 +25,6 @@
           variant="outlined"
         ></v-text-field>
 
-        <v-text-field
-          v-model="steps"
-          class="space-below"
-          clearable
-          label="Pasos a seguir"
-          placeholder="Enter your password"
-          variant="outlined"
-        ></v-text-field>
-
         <div class="intensidad space-below">
                 <MyBrazoCheck/>
             </div>
