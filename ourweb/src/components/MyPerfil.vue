@@ -97,6 +97,7 @@ export default {
         display: flex;
         margin: 1%;
         justify-content: center;
+      height: 100px;
     }
     .mySubheaderText{
         color: #000000;

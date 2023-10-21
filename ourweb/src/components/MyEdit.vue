@@ -10,25 +10,7 @@
       placeholder="Enter your password"
       variant="outlined"
     ></v-text-field>
-    <div class="button-with-mssg">
-      <div class="message space-below">
-        <div v-if="errorMessage" class="text-error">
-          {{ errorMessage }}
-        </div>
-      </div>
-    </div>
-    <v-btn
-      size="large"
-      type="submit"
-      variant="elevated"
-      density="compact"
-      rounded="xl"
-      color="#73C7A4"
-      class="text-white"
-      @click="onSubmit"
-    >
-      Guardar Cambios
-    </v-btn>
+    
   </v-row>
 </template>
 

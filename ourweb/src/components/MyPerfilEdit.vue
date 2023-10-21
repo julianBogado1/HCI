@@ -48,6 +48,7 @@ import MyEdit from './MyEdit.vue';
       flex-direction: column;
       margin: 1%;
       justify-content: center;
+      height: 100px;
   }
   .mySubheaderText{
       color: #000000;
