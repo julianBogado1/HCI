@@ -8,18 +8,16 @@
                     <img v-if="avatar" :src="avatar" alt="User Avatar">
                     <svg-icon type="mdi" :path="path" size="120" v-else/>
                 </div>
-                  <div class="avatar-elem">
-                    <v-row justify="end">
+                  <div>
+                    <v-row>
                     <v-text-field
                     v-model="avatarUrl_edit"
                     class="space-below"
                     :readonly="loading"
-                    :rules="reqRules"
                     label="Inserte Url de la imagen"
                     placeholder="Enter your password"
                     variant="outlined"
                     ></v-text-field>
-                    
                 </v-row>
                   </div>
               </div>
@@ -89,7 +87,6 @@
  import SvgIcon from '@jamescoyle/vue-icon';
   import { mdiAccountCircle } from '@mdi/js';
  import {editUser} from '@/api/api.js';
- import { editAvatarUrl } from '@/api/api.js';
 export default {
     name: "my-component",
     components: {
@@ -99,13 +96,14 @@ export default {
     form: false,
     nombre_edit: '',
     apellido_edit: '',  //valores default --> si no se llama a la funcion con parametros, quedan vacios
+    avatarUrl_edit: '',
     loading: false,
     path: mdiAccountCircle,
     reqRules:[
   value => {
-        if (value) return true
+        if (value.length<=15) return true
 
-        return 'Campo obligatorio.'
+        return `El campo no puede tener mas de 15 catacteres.`
       },
   ],
   }),
@@ -116,16 +114,17 @@ export default {
       console.log("EMPIEZA AWAIT MAGICO");
       this.loading = true
       try{
-          let response = await editUser(this.nombre_edit, this.apellido_edit);
-          console.log(response);
-          if(!response.ok){throw new Error(`Request failed with status: ${response.status}`);}
-          else if(response.ok){
-              console.log(`Edited user: \n new Name: ${this.nombre_edit}\n new LastName: ${this.apellido_edit}`);
-          }
-          this.loading = false
+        let response = await editUser(this.nombre_edit, this.apellido_edit, this.avatarUrl_edit);
+        console.log(response);
+        if(!response.ok){throw new Error(`Request failed with status: ${response.status}`);}
+        else if(response.ok){
+            console.log(`Edited user: \n new Name: ${this.nombre_edit}\n new LastName: ${this.apellido_edit} \n new avatarUrl: ${this.avatarUrl_edit}`);
+            localStorage.AVATARURL = this.avatarUrl_edit;
+        }
+        this.loading = false
       }catch(error){
-          console.log(error);
-          this.loading = false
+        console.log(error);
+        this.loading = false
       }
       setTimeout(() => (this.loading = false), 2000)
       this.errorMessage = '';
