@@ -74,6 +74,8 @@
 
 <script>
 import { loginUser } from '@/api/api.js'
+import { fetchMultiple } from '@/api/api.js'
+import { createInitialRoutines } from '@/api/initUser.js'
 import router from '@/router/router.js'
 
   export default {
@@ -106,6 +108,10 @@ import router from '@/router/router.js'
           console.log(token.token);
           localStorage.AUTHTOKEN = token.token;
           this.errorMessage='';
+          let response_r = await fetchMultiple('users/current/routines', 10)
+          if(response_r['totalCount'] === 0) {
+            createInitialRoutines();
+          }
         }else{
           console.log(response);
           if(response.status===401){

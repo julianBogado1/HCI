@@ -60,6 +60,23 @@ export const deleteSingle = async(type, id) => {
   return await apiFetchEmptyBody(url, options)
 };
 
+export const addExerciseToCycle = async(cycle_id, exercise_id, order, duration, repetitions) => {
+  const url = `${apiUrl}/cycles/${cycle_id}/exercises/${exercise_id}`;
+  const body = JSON.stringify({
+    order: order,
+    duration: duration,
+    repetitions: repetitions,
+  });
+
+  const options = {
+    ...requestOptions,
+    method: 'POST',
+    body,
+  };
+
+  return await apiFetch(url, options);
+}
+
 export const createExercise = async (name, description) => {
   const url = `${apiUrl}/exercises`;
   const body = JSON.stringify({
@@ -105,6 +122,8 @@ export const createRoutine = async (name, detail, type, order, repetitions) => {
     type: type,
     order: order,
     repetitions: repetitions,
+    difficulty: "rookie",
+    isPublic: false,
     metadata: null
   });
 
@@ -138,11 +157,14 @@ export const editRoutine = async (id, name, detail, type, order, repetitions) =>
   return await apiFetch(url, options);
 };
 
-export const createCycle = async (routine_id, name, detail) => {
+export const createCycle = async (routine_id, name, detail, type, order, repetitions) => {
   const url = `${apiUrl}/routines/${routine_id}/cycles`;
   const body = JSON.stringify({
     name: name,
     detail: detail,
+    type: type,
+    order: order,
+    repetitions: repetitions,
   });
 
   const options = {
