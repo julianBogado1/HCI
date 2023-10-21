@@ -71,6 +71,8 @@
 
 <script>
 import { loginUser } from '@/api/api.js'
+import router from '@/router/router.js'
+
   export default {
   data: () => ({
     form: false,
@@ -105,6 +107,7 @@ import { loginUser } from '@/api/api.js'
           else{throw new Error(`Request failed with status: ${response.status}`);};
         }        
         this.loading = false;
+        router.push("/")
       }
       catch(error){
         this.errorMessage='Ha ocurrido un error al iniciar sesión.'

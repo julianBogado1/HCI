@@ -69,6 +69,7 @@
 import { mdiContentSaveCogOutline } from '@mdi/js';
 import MyFooter from '../components/MyFooter'
 import { verifyUser } from '@/api/api.js';
+import router from '@/router/router';
 
 export default {
   data: () => ({
@@ -89,6 +90,7 @@ export default {
             else if(response.ok){
                 this.successMessage='Verificación realizada exitosamente.'
             }
+            router.push("/login")
             this.loading=false;
         }catch(error){
             console.log('Unexpected error: \n' + error.message)

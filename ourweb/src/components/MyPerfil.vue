@@ -79,6 +79,7 @@ export default {
         catch(error){
             console.log(error);
         }
+        router.push("/")
         this.loading=false;
     }
   }

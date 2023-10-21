@@ -89,6 +89,8 @@
 <script>
 import { mdiConsoleNetworkOutline } from '@mdi/js'
 import {addUser} from '@/api/api.js';
+import router from '@/router/router.js'
+
 export default {
 data: () => ({
   form: false,
@@ -169,6 +171,7 @@ methods: {
           }
         }
         this.loading=false;
+        router.push("/confirm-email")
       }
       setTimeout(() => (this.loading = false), 2000)
 
