@@ -274,9 +274,9 @@ export const addUser = async (username, password, email)=>{
 export const editUser = async (name, lastname, avatarUrl)=>{
   const url = `${apiUrl}/users/current`;
   const body = JSON.stringify({
-    "name": name,
+    "firstname": name,
     "lastname": lastname,
-    "avatarUrl":avatarUrl
+    "avatarUrl": avatarUrl
   });
 
   const options = {

@@ -100,14 +100,15 @@ export default {
     nombre_edit: '',
     apellido_edit: '',  //valores default --> si no se llama a la funcion con parametros, quedan vacios
     avatarUrl_edit: '',
+    avatar: localStorage.AVATARURL, 
     loading: false,
     path: mdiAccountCircle,
     reqRules:[
-  value => {
-        if (value.length<=15) return true
+    value => {
+            if (value.length<=15) return true
 
-        return `El campo no puede tener mas de 15 catacteres.`
-      },
+            return `El campo no puede tener mas de 15 catacteres.`
+        },
   ],
   }),
 
