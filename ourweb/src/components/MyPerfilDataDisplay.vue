@@ -3,23 +3,46 @@
         <div class="cuentaField dflex w-100">
             <p class="fieldName">Nombre de usuario</p>
             <div class="fieldColor dflex w-100">
-                <p class="fieldData">GiovanniLaMosca1994</p>
+                <p class="fieldData">{{ username }}</p>
             </div>
         </div>
         <div class="cuentaField dflex w-100">
             <p class="fieldName">E-mail</p>
             <div class="fieldColor dflex w-100">
-                <p class="fieldData">quisieraserunamosca@gmail.com</p>
+                <p class="fieldData">{{ email }}</p>
             </div>
         </div>
         <div class="cuentaField dflex w-100">
             <p class="fieldName">Nombre</p>
             <div class="fieldColor dflex w-100">
-                <p class="fieldData">Giovanni Vazquez</p>
+                <p class="fieldData">{{ name }}</p>
             </div>
         </div>
     </div>
 </template>
+
+<script>
+import {getUser} from '@/api/api.js';
+export default{
+    data() {
+    return {
+      username: '',
+      email: '',
+      name: '',
+    };
+  },
+  async mounted() {
+    let response = await getUser();
+    console.log(response);
+    localStorage.AVATARURL = response.avatarUrl; // The image is saved locally
+
+    this.username = response.username;
+    this.email = response.email;
+    this.name = response.firstName + ' ' + response.lastName;
+  },
+};
+</script>
+
 
 <style scoped>
     .fieldContainer{

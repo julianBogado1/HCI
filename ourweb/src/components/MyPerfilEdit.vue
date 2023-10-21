@@ -8,7 +8,7 @@
                   <MyPlaceholderAvatar/>
                 </div>
                   <div class="avatar-elem">
-                  <MyEditDelete/>
+                  <MyEdit/>
                   </div>
               </div>
           </div>
@@ -28,6 +28,7 @@
   import MyPerfilDataDisplayEdit from '../components/MyPerfilDataDisplayEdit.vue'
   import MyPlaceholderAvatar from '../components/MyPlaceholderAvatar.vue'
 import MyEditDelete from './MyEditDelete.vue';
+import MyEdit from './MyEdit.vue';
 </script>
 <style scoped>
     .avatar-elem{

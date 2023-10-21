@@ -4,8 +4,9 @@
             <div class="miCuenta">
                 <h2 class="mySubheaderText">Mi Cuenta</h2>
                 <div class="avatar-image">
-                    <MyPlaceholderAvatar/>
-                </div>
+                    <img v-if="avatar" :src="avatar" alt="User Avatar">
+                    <MyPlaceholderAvatar v-else/>
+                  </div>
             </div>
             <div class="datosUser">
                 <div class="dataText">
@@ -28,6 +29,7 @@
                     Editar Perfil
                 </v-btn>
                 <v-btn
+                    :loading="loading"
                     elevation="0"
                     size="large"
                     density="compact"
@@ -35,6 +37,7 @@
                     rounded="xl"
                     color="#73C7A4"
                     class="text-white"
+                    @click="logOutUser"
                 >
                     Cerrar Sesión
                 </v-btn>
@@ -44,9 +47,43 @@
     </div>
 </template>
 
-<script setup>
-    import MyPerfilDataDisplay from '../components/MyPerfilDataDisplay.vue'
-    import MyPlaceholderAvatar from '../components/MyPlaceholderAvatar.vue'
+<script>
+import MyPerfilDataDisplay from '../components/MyPerfilDataDisplay.vue'
+import MyPlaceholderAvatar from '../components/MyPlaceholderAvatar.vue'
+import { logOut } from '@/api/api.js';
+
+export default {
+  components: {
+    MyPerfilDataDisplay,
+    MyPlaceholderAvatar
+  },
+  data() {
+    return {
+        loading: false,
+        avatar: localStorage.AVATARURL, // This should hold the URL of the avatar image
+    };
+  },
+  methods:{
+    async logOutUser(){
+        this.loading=true;
+        try{
+            let response = await logOut();
+            if(!response.ok){
+                console.log(response);   
+            }
+            else{
+                console.log("Successful LogOut");
+                localStorage.clear();
+            }
+        }
+        catch(error){
+            console.log(error);
+        }
+        this.loading=false;
+    }
+  }
+};
+
 </script>
 <style scoped>
     .miCuenta{
