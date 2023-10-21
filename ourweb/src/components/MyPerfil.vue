@@ -94,10 +94,10 @@ export default {
         justify-content: center;
     }
     .avatar-image{
-        display: flex;
         margin: 1%;
         justify-content: center;
-      height: 100px;
+        width: 100px;
+        height: 100px;
     }
     .mySubheaderText{
         color: #000000;
