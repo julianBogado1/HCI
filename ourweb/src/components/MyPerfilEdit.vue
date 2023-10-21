@@ -158,6 +158,7 @@ export default {
       flex-direction: column;
       margin: 1%;
       justify-content: center;
+      align-items: center;
   }
   .avatar-image{
         width: 100px;

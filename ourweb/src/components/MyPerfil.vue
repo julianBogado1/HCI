@@ -94,6 +94,7 @@ export default {
         justify-content: center;
     }
     .avatar-image{
+        display: flex;
         margin: 1%;
         justify-content: center;
         width: 100px;
