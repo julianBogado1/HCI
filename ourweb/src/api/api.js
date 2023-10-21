@@ -32,14 +32,11 @@ const apiFetch = async (url, options) => {
 };
 
 const apiFetchEmptyBody = async (url, options) => {
-  try {
-    const response = await fetch(url, options);
-    //no retorna response.json() porque la response es vacia
-    //solo interesa el response.ok
-    return response;
-  } catch (error) {
-    throw error;
+  const response = await fetch(url, options);
+  if (!response.ok) {
+    throw new Error(`Request failed with status: ${response.status}`);
   }
+  return response;
 };
 
 
@@ -282,3 +279,44 @@ export const addUser = async (username, password, email)=>{
     console.log('Unexpected error: \n' + error.message);  //no mostramos los errores internos al usuario
   }
 };
+
+
+export const editAvatarUrl = async (avatarUrl)=>{
+  const url = `${apiUrl}/users/current`;
+  const body = JSON.stringify({
+    "avatarUrl" : avatarUrl
+  });
+
+  const options = {
+    ...requestOptions,
+    method: 'PUT',
+    body,
+  };
+  return await apiFetch(url, options);
+}
+
+
+export const editUser = async (name, lastname)=>{
+  const url = `${apiUrl}/users/current`;
+  const body = JSON.stringify({
+    "name": name,
+    "lastname": lastname
+  });
+
+  const options = {
+    ...requestOptions,
+    method: 'PUT',
+    body,
+  };
+  return await apiFetchEmptyBody(url, options);
+}
+
+export const getUser = async ()=>{
+  const url = `${apiUrl}/users/current`;
+  const options = {
+    ...requestOptions,
+    method: 'GET',
+  };
+  return await apiFetch(url, options);
+}
+

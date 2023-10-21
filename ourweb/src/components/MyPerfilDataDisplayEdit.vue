@@ -5,54 +5,23 @@
         @submit.prevent="onSubmit"
       >
         <v-text-field
-          v-model="usernamelog"
+          v-model="nombre_edit"
           class="space-below"
           :readonly="loading"
           :rules="reqRules"
-          label="Nombre de usuario"
-          variant="outlined"
-          clearable
-        ></v-text-field>
-
-        <v-text-field
-          v-model="email"
-          class="space-below"
-          :readonly="loading"
-          :rules="reqRules"
-          clearable
-          label="E-mail"
-          placeholder="Enter your password"
-          variant="outlined"
-        ></v-text-field>
-
-        <v-text-field
-          v-model="name"
-          class="space-below"
-          clearable
           label="Nombre"
-          placeholder="Enter your password"
           variant="outlined"
+          clearable
         ></v-text-field>
 
         <v-text-field
-          v-model="passwordlog"
+          v-model="apellido_edit"
           class="space-below"
           :readonly="loading"
           :rules="reqRules"
           clearable
-          label="Contraseña"
+          label="Apellido"
           placeholder="Enter your password"
-          variant="outlined"
-        ></v-text-field>
-
-        <v-text-field
-          v-model="passwordlogre"
-          class="space-below"
-          :readonly="loading"
-          :rules="reqRules"
-          clearable
-          label="Contraseña"
-          placeholder="Enter your password again"
           variant="outlined"
         ></v-text-field>
       
@@ -75,11 +44,13 @@
 </template>
 
 <script>
+import {editUser} from '@/api/api.js';
+
 export default {
   data: () => ({
     form: false,
-    usernamelog: null,
-    passwordlog: null,
+    nombre_edit: '',
+    apellido_edit: '',  //valores default --> si no se llama a la funcion con parametros, quedan vacios
     loading: false,
 
     reqRules:[
@@ -92,11 +63,22 @@ export default {
   }),
 
   methods: {
-    onSubmit () {
+    async onSubmit () {
       if (!this.form) return
-
+      console.log("EMPIEZA AWAIT MAGICO");
       this.loading = true
-
+      try{
+          let response = await editUser(this.nombre_edit, this.apellido_edit);
+          console.log(response);
+          if(!response.ok){throw new Error(`Request failed with status: ${response.status}`);}
+          else if(response.ok){
+              console.log(`Edited user: \n new Name: ${this.nombre_edit}\n new LastName: ${this.apellido_edit}`);
+          }
+          this.loading = false
+      }catch(error){
+          console.log(error);
+          this.loading = false
+      }
       setTimeout(() => (this.loading = false), 2000)
     },
     required (v) {

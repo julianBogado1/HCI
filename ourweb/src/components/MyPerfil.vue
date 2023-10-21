@@ -4,8 +4,9 @@
             <div class="miCuenta">
                 <h2 class="mySubheaderText">Mi Cuenta</h2>
                 <div class="avatar-image">
-                    <MyPlaceholderAvatar/>
-                </div>
+                    <img v-if="avatar" :src="avatar" alt="User Avatar">
+                    <MyPlaceholderAvatar v-else/>
+                  </div>
             </div>
             <div class="datosUser">
                 <div class="dataText">
@@ -44,9 +45,22 @@
     </div>
 </template>
 
-<script setup>
-    import MyPerfilDataDisplay from '../components/MyPerfilDataDisplay.vue'
-    import MyPlaceholderAvatar from '../components/MyPlaceholderAvatar.vue'
+<script>
+import MyPerfilDataDisplay from '../components/MyPerfilDataDisplay.vue'
+import MyPlaceholderAvatar from '../components/MyPlaceholderAvatar.vue'
+
+export default {
+  components: {
+    MyPerfilDataDisplay,
+    MyPlaceholderAvatar
+  },
+  data() {
+    return {
+      avatar: localStorage.AVATARURL, // This should hold the URL of the avatar image
+    };
+  },
+};
+
 </script>
 <style scoped>
     .miCuenta{
