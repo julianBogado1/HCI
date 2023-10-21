@@ -31,7 +31,11 @@ export default{
       name: '',
     };
   },
-  async mounted() {
+  created() {
+    this.setupData();
+  },
+  methods: {
+  async setupData() {
     let response = await getUser();
     console.log(response);
     localStorage.AVATARURL = response.avatarUrl; // The image is saved locally
@@ -39,7 +43,8 @@ export default{
     this.username = response.username;
     this.email = response.email;
     this.name = response.firstName + ' ' + response.lastName;
-  },
+    },
+},
 };
 </script>
 

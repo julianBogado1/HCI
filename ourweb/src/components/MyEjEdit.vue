@@ -50,6 +50,7 @@
 
 import { fetchSingle } from '@/api/api.js'
 import { editExercise } from '@/api/api.js'
+import router from '@/router/router.js'
 
 export default {
 data: () => ({
@@ -80,6 +81,7 @@ data: () => ({
     console.log("se apreto")
     try {
       const response = await editExercise(this.id, this.name, this.description)
+      router.push("/mis-ejs")
     }
     catch (error) {
         // Handle errors here
