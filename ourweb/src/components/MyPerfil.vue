@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import router from '@/router/router';
 import MyPerfilDataDisplay from '../components/MyPerfilDataDisplay.vue'
 import MyPlaceholderAvatar from '../components/MyPlaceholderAvatar.vue'
 import { logOut } from '@/api/api.js';
@@ -74,12 +75,12 @@ export default {
             else{
                 console.log("Successful LogOut");
                 localStorage.clear();
+                router.push('/')
             }
         }
         catch(error){
             console.log(error);
         }
-        router.push("/")
         this.loading=false;
     }
   }
@@ -98,8 +99,6 @@ export default {
         display: flex;
         margin: 1%;
         justify-content: center;
-        width: 100px;
-        height: 100px;
     }
     .mySubheaderText{
         color: #000000;

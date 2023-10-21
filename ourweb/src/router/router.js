@@ -30,9 +30,16 @@ const router = createRouter({
         component: () => import("@/pages/MiRutinaEditPage.vue"),
       },
       {
-        path: '/profile/:id',
+        path: '/profile',
         name: 'profile',
-        component: () => import("@/pages/PerfilPage.vue"),
+        component: () => import('@/pages/PerfilPage.vue'),
+        beforeEnter: (to, from, next) => {
+          if (localStorage.AUTHTOKEN) {
+            next();
+          } else {
+            next('/login');
+          }
+        },
       },
       {
         path: '/profile-edit',

@@ -8,10 +8,10 @@
             <v-btn to="/mis-ejs" class="darkgreen text-white" size="small" rounded="0" elevation="0">Mis Ejercicios</v-btn>
             <v-btn to="/mi-rutina-view" class="darkgreen text-white" size="small" rounded="0" elevation="0">Mi RutView</v-btn>
             <v-btn to="/mi-ej-view" class="darkgreen text-white" size="small" rounded="0" elevation="0">Mi EjView</v-btn>
-            <v-btn to="/mi-rutina-edit" class="darkgreen text-white" size="small" rounded="0" elevation="0">Mi RutEd</v-btn>
+            <v-btn to="/register" class="darkgreen text-white" size="small" rounded="0" elevation="0">Mi RutEd</v-btn>
             <v-btn to="/mi-ej-edit" class="darkgreen text-white" size="small" rounded="0" elevation="0">Mi EjEd</v-btn>
         </div>
-        <v-btn to="/profile/:id" class="darkgreen text-white" size="small" rounded="0" elevation="0">Mi Cuenta</v-btn>
+        <v-btn to="/profile" class="darkgreen text-white" size="small" rounded="0" elevation="0">Mi Cuenta</v-btn>
       </div>
     
 </template>
