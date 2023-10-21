@@ -320,3 +320,13 @@ export const getUser = async ()=>{
   return await apiFetch(url, options);
 }
 
+export const logOut = async ()=>{
+  const url = `${apiUrl}/users/logout`;
+  const options = {
+    ...requestOptions,
+    method: 'POST',
+  };
+  return await apiFetchEmptyBody(url, options);
+}
+
+

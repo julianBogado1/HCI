@@ -29,6 +29,7 @@
                     Editar Perfil
                 </v-btn>
                 <v-btn
+                    :loading="loading"
                     elevation="0"
                     size="large"
                     density="compact"
@@ -36,6 +37,7 @@
                     rounded="xl"
                     color="#73C7A4"
                     class="text-white"
+                    @click="logOutUser"
                 >
                     Cerrar Sesión
                 </v-btn>
@@ -48,6 +50,7 @@
 <script>
 import MyPerfilDataDisplay from '../components/MyPerfilDataDisplay.vue'
 import MyPlaceholderAvatar from '../components/MyPlaceholderAvatar.vue'
+import { logOut } from '@/api/api.js';
 
 export default {
   components: {
@@ -56,9 +59,29 @@ export default {
   },
   data() {
     return {
-      avatar: localStorage.AVATARURL, // This should hold the URL of the avatar image
+        loading: false,
+        avatar: localStorage.AVATARURL, // This should hold the URL of the avatar image
     };
   },
+  methods:{
+    async logOutUser(){
+        this.loading=true;
+        try{
+            let response = await logOut();
+            if(!response.ok){
+                console.log(response);   
+            }
+            else{
+                console.log("Successful LogOut");
+                localStorage.clear();
+            }
+        }
+        catch(error){
+            console.log(error);
+        }
+        this.loading=false;
+    }
+  }
 };
 
 </script>
