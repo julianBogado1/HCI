@@ -293,27 +293,12 @@ export const addUser = async (username, password, email)=>{
   }
 };
 
-
-export const editAvatarUrl = async (avatarUrl)=>{
+export const editUser = async (name, lastname, avatarUrl)=>{
   const url = `${apiUrl}/users/current`;
   const body = JSON.stringify({
-    "avatarUrl" : avatarUrl
-  });
-
-  const options = {
-    ...requestOptions,
-    method: 'PUT',
-    body,
-  };
-  return await apiFetch(url, options);
-}
-
-
-export const editUser = async (name, lastname)=>{
-  const url = `${apiUrl}/users/current`;
-  const body = JSON.stringify({
-    "name": name,
-    "lastname": lastname
+    "firstname": name,
+    "lastname": lastname,
+    "avatarUrl": avatarUrl
   });
 
   const options = {
