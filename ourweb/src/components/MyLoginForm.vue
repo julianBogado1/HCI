@@ -81,7 +81,7 @@ import { loginUser } from '@/api/api.js'
     passwordlog: null,
     loading: false,
     errorMessage:'',
-    show: true,
+    show: false,
     reqRules:[
       value => {
         if (value) return true
@@ -98,11 +98,14 @@ import { loginUser } from '@/api/api.js'
       this.loading = true
       try{
         let response = await loginUser(this.usernamelog, this.passwordlog); 
+        console.log(response);
         if(response.ok){
           let token = await response.json();
           console.log(token.token);
           localStorage.AUTHTOKEN = token.token;
+          this.errorMessage='';
         }else{
+          console.log(response);
           if(response.status===401){
             this.errorMessage='Credenciales inválidas. Vuelva a intentarlo.'
           }
@@ -115,7 +118,6 @@ import { loginUser } from '@/api/api.js'
         console.log(`Unexpected error: ${error.message}`);
         this.loading = false;
       }
-
       setTimeout(() => (this.loading = false), 2000)
     },
     required (v) {
