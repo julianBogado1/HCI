@@ -61,7 +61,7 @@ export default {
   data() {
     return {
         loading: false,
-        avatar: localStorage.AVATARURL, // This should hold the URL of the avatar image
+        avatar: sessionStorage.AVATARURL, // This should hold the URL of the avatar image
     };
   },
   methods:{
@@ -75,6 +75,7 @@ export default {
             else{
                 console.log("Successful LogOut");
                 localStorage.clear();
+                sessionStorage.clear();
                 router.push('/')
             }
         }

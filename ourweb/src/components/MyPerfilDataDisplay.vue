@@ -38,7 +38,10 @@ export default{
   async setupData() {
     let response = await getUser();
     console.log(response);
-    localStorage.AVATARURL = response.avatarUrl; // The image is saved locally
+    sessionStorage.AVATARURL = response.avatarUrl; // se guardan los datos de la sesion iniciada en ese momento
+    sessionStorage.FIRSTNAME = response.firstName;
+    sessionStorage.LASTNAME = response.lastName; 
+
 
     this.username = response.username;
     this.email = response.email;
