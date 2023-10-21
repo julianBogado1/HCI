@@ -24,6 +24,14 @@
           placeholder="Enter your password"
           variant="outlined"
         ></v-text-field>
+
+        <div class="button-with-mssg">
+      <div class="message space-below">
+        <div v-if="errorMessage" class="text-error">
+          {{ errorMessage }}
+        </div>
+      </div>
+    </div>
       
       <v-row justify="end">
           <v-btn
@@ -80,6 +88,9 @@ export default {
           this.loading = false
       }
       setTimeout(() => (this.loading = false), 2000)
+      this.errorMessage = '';
+      let response = await editAvatarUrl(this.avatarUrl_edit);
+      console.log(response);
     },
     required (v) {
       return !!v || 'Field is required'

@@ -33,6 +33,9 @@
         label="Contraseña"
         placeholder="Enter your password"
         variant="outlined"
+        :append-inner-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+          :type="show ? 'text' : 'password'"
+          @click:append-inner="show = !show"
       ></v-text-field>
 
       <v-text-field
@@ -44,6 +47,9 @@
         label="Repetir contraseña"
         placeholder="Enter your password"
         variant="outlined"
+        :append-inner-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+          :type="show ? 'text' : 'password'"
+          @click:append-inner="show = !show"
       ></v-text-field>
       
 
@@ -100,6 +106,7 @@ data: () => ({
   repeat_passwordreg: '',
   loading: false,
   errorMessage: '',
+  show: false,
   reqRules:[
   value => {
         if (value) return true
