@@ -24,15 +24,6 @@
           placeholder=""
           variant="outlined"
         ></v-text-field>
-
-        <v-text-field
-          v-model="steps"
-          class="space-below"
-          clearable
-          label="Pasos a seguir"
-          placeholder="Enter your password"
-          variant="outlined"
-        ></v-text-field>
       </v-form>
       
 
@@ -52,7 +43,32 @@
     </div>
 </template>
 
-<script setup>
+<script >
+
+import { fetchSingle } from '@/api/api.js'
+
+export default {
+data: () => ({
+  form: {}, // Your form data
+  id: null,
+  name: 'b', // Text for the name field
+  description: 'a',
+  loading: false,
+  reqRules: [], // Your validation rules
+  }),
+  created() {
+    this.id = this.$route.params.id;
+    const exercise = fetchSingle('exercises', id)
+    this.name = exercise['name']
+    this.description = exercise['description']
+  },
+  methods: {
+    onSubmit() {
+      // Handle form submission
+    },
+  },
+};
+
 </script>
 
 <style scoped>

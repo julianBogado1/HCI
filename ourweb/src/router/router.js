@@ -50,7 +50,7 @@ const router = createRouter({
         component: () => import("@/pages/MisRutinasPage.vue"),
       },
       {
-        path: '/mi-ej-edit',
+        path: '/mi-ej-edit/:id',
         name: 'mi-ej-edit',
         component: () => import("@/pages/MyEjEditPage.vue"),
       },
