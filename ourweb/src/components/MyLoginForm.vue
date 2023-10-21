@@ -23,6 +23,9 @@
           label="Contraseña"
           placeholder="Enter your password"
           variant="outlined"
+          :append-inner-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+          :type="show ? 'text' : 'password'"
+          @click:append-inner="show = !show"
         ></v-text-field>
 
         <br/>
@@ -78,6 +81,7 @@ import { loginUser } from '@/api/api.js'
     passwordlog: null,
     loading: false,
     errorMessage:'',
+    show: true,
     reqRules:[
       value => {
         if (value) return true
