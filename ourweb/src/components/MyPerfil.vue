@@ -3,8 +3,8 @@
         <div class="myrow">
             <div class="miCuenta">
                 <h2 class="mySubheaderText">Mi Cuenta</h2>
-                <div class="avatar-image">
-                    <img v-if="avatar" :src="avatar" alt="User Avatar">
+                <div >
+                    <img class="avatar-image" v-if="avatar" :src="avatar" alt="User Avatar">
                     <MyPlaceholderAvatar v-else/>
                   </div>
             </div>
@@ -99,6 +99,7 @@ export default {
         justify-content: center;
         width: 100px;
         height: 100px;
+        max-width: 100px;
     }
     .mySubheaderText{
         color: #000000;

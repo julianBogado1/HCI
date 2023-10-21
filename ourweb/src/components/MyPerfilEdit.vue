@@ -4,10 +4,13 @@
           <div class="miCuenta">
               <h2 class="mySubheaderText">Mi Cuenta</h2>
               <div class="avatar-container">
-                <div class="avatar-image avatar-elem space-below">
-                    <img v-if="avatar" :src="avatar" alt="User Avatar">
-                    <svg-icon type="mdi" :path="path" size="120" v-else/>
+                <div class="avatar-elem">
+                    <div class="avatar-image">
+                        <img class="avatar-image" v-if="avatar" :src="avatar" alt="User Avatar">
+                        <svg-icon type="mdi" :path="path" size="120" v-else/>
+                    </div>
                 </div>
+                
                   <div class="avatar-elem">
                     <v-row justify="end">
                     <v-text-field
@@ -144,6 +147,7 @@ export default {
         display: flex;
         flex-direction: row;
         justify-content: center;
+        align-items: center;
         margin: 2%;
     }
   .miCuenta{
@@ -158,11 +162,14 @@ export default {
       flex-direction: column;
       margin: 1%;
       justify-content: center;
-      align-items: center;
+      gap: 10px;
   }
   .avatar-image{
         width: 100px;
         height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
   }
   .mySubheaderText{
       color: #000000;
