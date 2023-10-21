@@ -42,7 +42,6 @@ const apiFetchEmptyBody = async (url, options) => {
   }
 };
 
-
 export const fetchSingle = async (type, id) => {
   const url = `${apiUrl}/${type}/${id}`;
   const options = { ...requestOptions };
@@ -64,7 +63,7 @@ export const deleteSingle = async(type, id) => {
     method: 'DELETE'
   };
 
-  return await apiFetch(url, options)
+  return await apiFetchEmptyBody(url, options)
 };
 
 export const createExercise = async (name, description) => {
@@ -86,11 +85,11 @@ export const createExercise = async (name, description) => {
   return await apiFetch(url, options);
 };
 
-export const editExercise = async (id, name, description) => {
+export const editExercise = async (id, name, detail) => {
   const url = `${apiUrl}/exercises/${id}`;
   const body = JSON.stringify({
     name,
-    detail: description,
+    detail: detail,
     type: 'exercise',
     metadata: null,
   });
@@ -103,7 +102,6 @@ export const editExercise = async (id, name, description) => {
 
   return await apiFetch(url, options);
 };
-
 
 export const createRoutine = async (name, detail, type, order, repetitions) => {
   const url = `${apiUrl}/routines`;
@@ -216,7 +214,6 @@ export const editCategory = async (id, name, detail) => {
   return await apiFetch(url, options);
 };
 
-
 export const verifyUser = async (email, verification_code) => {
   const url = `${apiUrl}/users/verify_email`;
   const body = JSON.stringify({
@@ -231,7 +228,6 @@ export const verifyUser = async (email, verification_code) => {
   return await apiFetchEmptyBody(url, options);
 };
 
-
 export const loginUser = async (username, password) => {
   const url = `${apiUrl}/users/login`;
   const body = JSON.stringify({
@@ -245,8 +241,6 @@ export const loginUser = async (username, password) => {
   };
   return apiFetchEmptyBody(url, options);
 };
-
-
 
 export const addUser = async (username, password, email)=>{
   let user = {

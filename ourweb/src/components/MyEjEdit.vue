@@ -12,6 +12,7 @@
           label="Nombre"
           variant="outlined"
           clearable
+          maxLength="50"
         ></v-text-field>
 
         <v-text-field
@@ -23,6 +24,7 @@
           label="Descripción"
           placeholder=""
           variant="outlined"
+          maxLength="150"
         ></v-text-field>
       </v-form>
       
@@ -36,6 +38,7 @@
           rounded="xl"
           color="#73C7A4"
           class="text-white"
+          @click="onSubmit"
           >
               Guardar Cambios
           </v-btn>
@@ -46,25 +49,42 @@
 <script >
 
 import { fetchSingle } from '@/api/api.js'
+import { editExercise } from '@/api/api.js'
 
 export default {
 data: () => ({
   form: {}, // Your form data
   id: null,
-  name: 'b', // Text for the name field
-  description: 'a',
+  name: null, // Text for the name field
+  description: null,
   loading: false,
   reqRules: [], // Your validation rules
   }),
   created() {
     this.id = this.$route.params.id;
-    const exercise = fetchSingle('exercises', id)
-    this.name = exercise['name']
-    this.description = exercise['description']
+    this.loadExercise();
   },
   methods: {
-    onSubmit() {
-      // Handle form submission
+  async loadExercise() {
+    try {
+      const exercise = await fetchSingle('exercises', this.id);
+      
+      this.name = exercise.name;
+      this.description = exercise.detail;
+    } catch (error) {
+      // Handle any errors that may occur during the fetch
+      console.error('Error fetching exercise:', error);
+    }
+  },
+  async onSubmit() {
+    console.log("se apreto")
+    try {
+      const response = await editExercise(this.id, this.name, this.description)
+    }
+    catch (error) {
+        // Handle errors here
+        console.error('Error:', error);
+      }
     },
   },
 };

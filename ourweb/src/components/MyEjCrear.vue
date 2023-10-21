@@ -12,6 +12,7 @@
           label="Nombre"
           variant="outlined"
           clearable
+          maxLength="50"
         ></v-text-field>
 
         <v-text-field
@@ -23,11 +24,8 @@
           label="Descripción"
           placeholder=""
           variant="outlined"
+          maxLength="150"
         ></v-text-field>
-
-        <div class="intensidad space-below">
-                <MyBrazoCheck/>
-            </div>
       </v-form>
       
 
@@ -50,8 +48,8 @@
 </template>
 
 <script>
-  import MyBrazoCheck from './brazitos/MyBrazoCheck.vue';
   import { createExercise } from '@/api/api.js'
+  import router from '@/router/router.js'
 
   export default {
   data: () => ({
@@ -72,6 +70,7 @@
         this.name = '';
         this.description = '';
         this.steps = '';
+        router.push("/mis-ejs")
       } catch (error) {
         // Handle errors here
         console.error('Error:', error);

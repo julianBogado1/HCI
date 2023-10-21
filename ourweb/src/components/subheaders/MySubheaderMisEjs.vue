@@ -5,7 +5,7 @@
                 <svg-icon type="mdi" :path="path" size="50"></svg-icon>
                 <h2 class="mySubheaderText">Mis Ejercicios</h2>
             </div>
-            <router-link to="/create-ej" class="create">
+            <router-link to="/mi-ej-create" class="create">
             <div class="myDiv">
                 <svg-icon type="mdi" :path="path2"></svg-icon>
                 <div >
