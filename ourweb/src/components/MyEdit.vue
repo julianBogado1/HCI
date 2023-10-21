@@ -5,7 +5,6 @@
       class="space-below"
       :readonly="loading"
       :rules="reqRules"
-      clearable
       label="Inserte Url de la imagen"
       placeholder="Enter your password"
       variant="outlined"
