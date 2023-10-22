@@ -23,7 +23,17 @@
                 />
               </div>
               <div class="button-container">
-                <button class="add-button" @click="addExercise(card)">Add Exercise</button>
+                <div class="add-exercise-button">
+                  <button class="add-button" @click="showAddExerciseDropdown = card.id">Add Exercise</button>
+                  <div class="dropdown" :style="{ top: showAddExerciseDropdown === card.id ? '100%' : '0' }" v-show="showAddExerciseDropdown === card.id">
+                    <ul>
+                      <li v-for="exercise in exercises" :key="exercise.id">
+                        <button @click="addExercise(card, exercise)">{{ exercise.name }}</button>
+                      </li>
+                    </ul>
+                    <button @click="showAddExerciseDropdown = null">Cancel</button>
+                  </div>
+                </div>
                 <button class="remove-button" @click="removeExercise(card, index)">Remove Exercise</button>
               </div>
             </div>
@@ -36,10 +46,12 @@
       </v-main>
     </div>
   </template>
+  
   <script>
   import MyHeader from '../components/MyHeader.vue'
   import MyFooter from '../components/MyFooter.vue'
   import MyExercisesBody from '@/components/MyExercisesBody.vue';
+  import { fetchMultiple } from '@/api/api';
   
   export default {
     components: {
@@ -49,60 +61,43 @@
     },
     data() {
       return {
-        cards: [
-          {
-            id: 1,
-            name: "hola",
-            detail: "hola",
-            repetitions: 1,
-            exercises: [
-              {
-                id: 1,
-                name: "hola2",
-                detail: "hola2",
-                duration: 30,
-                repetitions: 15,
-              },
-              {
-                id: 2,
-                name: "hola2",
-                detail: "hola2",
-                duration: 30,
-                repetitions: 15,
-              },
-            ],
-          },
-        ],
+        exercises: [],
+        cards: [],
+        showAddExerciseDropdown: null,
+        selectedCard: null,
       };
     },
+    created() {
+        this.populateExercises()
+    },
     methods: {
-    addCycle() {
+      async populateExercises() {
+        const response = await fetchMultiple('exercises', 50)
+        this.exercises = response['content']
+      },
+      addCycle() {
         this.cards.push({
-        name: "New Cycle",
-        detail: "Cycle Detail",
-        repetitions: 15,
-        exercises: [],
-      });
+          name: "New Cycle",
+          detail: "Cycle Detail",
+          repetitions: 15,
+          exercises: [],
+        });
+      },
+      addExercise(card, exercise) {
+        card.exercises.push(exercise);
+      },
+      removeExercise(card, index) {
+        if (card.exercises.length > 0) {
+          card.exercises.pop();
+        } else {
+          this.cards.splice(index, 1);
+        }
+      },
+      toggleAddExerciseDropdown(card) {
+        this.selectedCard = card.id; 
+      },
     },
-    addExercise(card) {
-      card.exercises.push({
-        id: card.exercises.length + 1,
-        name: "New Exercise",
-        detail: "Exercise Detail",
-        duration: 30,
-        repetitions: 15,
-      });
-    },
-    removeExercise(card, index) {
-      if (card.exercises.length > 0) {
-        card.exercises.pop();
-      } else {
-        this.cards.splice(index, 1)
-      }
-    },
-  },
-};
-  
+  };
   </script>
   
   <style>
@@ -124,6 +119,8 @@
     align-items: left;
     flex-direction: column;
     text-align: left;
+    min-height: 100px;
+    min-width: 1000px;
   }
   
   .cycle-header {
@@ -160,6 +157,7 @@
     display: flex;
     justify-content: flex-end;
     margin-top: 10px;
+    position: relative;
   }
   
   .add-button, .remove-button {
@@ -174,5 +172,33 @@
   .remove-button {
     background-color: #DC3545;
   }
+
+  .add-exercise-button {
+    position: relative;
+  }
+
+  .dropdown {
+    position: absolute;
+    top: 0; 
+    left: 0;
+    display: none; 
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .button-container:hover .dropdown,
+  .dropdown.show {
+    display: block;
+  }
+  .dropdown button {
+    display: block;
+    margin-bottom: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
 
   </style>
