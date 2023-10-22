@@ -72,6 +72,9 @@ import { verifyUser } from '@/api/api.js';
 import router from '@/router/router';
 
 export default {
+    components: {
+        MyFooter,
+    },
   data: () => ({
     loading: false,
     errorMessage: '',
