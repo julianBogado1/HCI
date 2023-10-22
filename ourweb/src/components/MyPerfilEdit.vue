@@ -56,12 +56,12 @@
                     variant="outlined"
                     ></v-text-field>
 
-                    <div class="button-with-mssg">
-                <div class="message space-below">
-                    <div v-if="errorMessage" class="text-error">
-                    {{ errorMessage }}
+                <div class="button-with-mssg">
+                    <div class="message space-below">
+                        <div v-if="errorMessage" class="text-error">
+                        {{ errorMessage }}
+                        </div>
                     </div>
-                </div>
                 </div>
                 
                 <v-row justify="end">
@@ -99,6 +99,7 @@ export default {
     form: false,
     nombrepreexistente: 'Nombre',
     apellidopreexistente: 'Apellido',
+    errorMessage: '',
     nombre_edit: sessionStorage.FIRSTNAME,
     apellido_edit: sessionStorage.LASTNAME,  //valores default --> si no se llama a la funcion con parametros, quedan vacios
     avatarUrl_edit: '',
@@ -116,6 +117,7 @@ export default {
 
   methods: {
     async onSubmit () {
+        this.errorMessage = '';
       if (!this.form) return
       this.loading = true
       try{
@@ -130,7 +132,9 @@ export default {
         }
         let response = await editUser(this.nombre_edit, this.apellido_edit, this.avatarUrl_edit);
         this.loading = false
+        this.errorMessage = '';
       }catch(error){
+        this.errorMessage = 'Ha ocurrido un error al registrar los cambios'
         console.log(error);
         this.loading = false
       }
@@ -164,8 +168,8 @@ export default {
       gap: 10px;
   }
   .avatar-image{
-        width: 100px;
-        height: 100px;
+        width: 200px;
+        height: 200px;
         display: flex;
         align-items: center;
         justify-content: center;
