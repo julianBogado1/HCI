@@ -56,7 +56,25 @@
             <v-divider :thickness="1" class="border-opacity-50"></v-divider>
             <div class="details-div">
               <p class="myText">{{ cycle.name }}</p>
+<<<<<<< HEAD
               <v-btn @click="cycle.showAddExerciseDropdown = !cycle.showAddExerciseDropdown">
+=======
+              
+            </div>
+            <div class="repeticiones">
+              <p class="myText">Repeticiones:</p>
+              <input
+                class="myInputBox"
+                type="number"
+                id="numericInput"
+                v-model="cycle.repetitions"
+                min="0"
+                max="100"
+              />
+            </div>
+            <div class="details-buttons">
+              <v-btn @click="showAddExerciseDropdown = !showAddExerciseDropdown">
+>>>>>>> 77b22e0cd0a03ebc380c03605c16b6ba1abdc58a
                 <div class="myDiv">
                   <svg-icon type="mdi" :path="path2"></svg-icon>
                   <div>
@@ -64,7 +82,22 @@
                   </div>
                 </div>
               </v-btn>
+<<<<<<< HEAD
               <v-menu v-model="cycle.showAddExerciseDropdown" offset-y>
+=======
+              <v-btn>
+                <div class="myDiv">
+                  <svg-icon type="mdi" :path="path2"></svg-icon>
+                  <div>
+                    <p>Eliminar Ultimo Ejercicio</p>
+                  </div>
+                </div>
+              </v-btn>
+              <v-menu
+                v-model="showAddExerciseDropdown"
+                offset-y
+              >
+>>>>>>> 77b22e0cd0a03ebc380c03605c16b6ba1abdc58a
                 <template v-slot:activator="{ on }">
                   <v-btn v-on="on" v-if="cycle.showAddExerciseDropdown">Cerrar</v-btn>
                 </template>
@@ -79,6 +112,7 @@
                 </v-list>
               </v-menu>
             </div>
+<<<<<<< HEAD
             <div class="repeticiones">
               <p class="myText">Repeticiones:</p>
               <input
@@ -90,6 +124,43 @@
                 max="100"
               />
             </div>
+=======
+            <div class="ej-list">
+              <div class="card">
+                <div class="info-card">
+                  <div class="name-text">
+                    <p>NombreEj</p>
+                  </div>
+                  <div class="desc-text">
+                    <p>DescripcionEj</p>
+                  </div>
+                </div>
+                <div class="edit-card">
+                  <div class="edit-elem">
+                  <p class="desc-text-white">Series:</p>
+                    <input
+                      class="myInputBox desc-text-white"
+                      type="number"
+                      id="numericInput"
+                      v-model="cycle.duration" 
+                      min="0"
+                      max="100"
+                    />
+                  </div>
+                  <div class="edit-elem ">
+                  <p class="desc-text-white">Duración (en seg):</p>
+                    <input
+                      class="myInputBox  desc-text-white"
+                      type="number"
+                      id="numericInput"
+                      v-model="cycle.duration" 
+                      min="0"
+                      max="100"
+                    />
+                  </div>
+                </div>
+              </div>
+>>>>>>> 77b22e0cd0a03ebc380c03605c16b6ba1abdc58a
 
             <div v-for="(exercise, eIndex) in cycle.exercises" :key="eIndex">
               <div class="ej-list">
@@ -103,7 +174,32 @@
                     </div>
                   </div>
                 </div>
+                <div class="edit-card">
+                  <div class="edit-elem">
+                  <p class="desc-text-white">Series:</p>
+                    <input
+                      class="myInputBox desc-text-white"
+                      type="number"
+                      id="numericInput"
+                      v-model="cycle.duration" 
+                      min="0"
+                      max="100"
+                    />
+                  </div>
+                  <div class="edit-elem ">
+                  <p class="desc-text-white">Duración (en seg):</p>
+                    <input
+                      class="myInputBox  desc-text-white"
+                      type="number"
+                      id="numericInput"
+                      v-model="cycle.duration" 
+                      min="0"
+                      max="100"
+                    />
+                  </div>
+                </div>
               </div>
+              
             </div>
           </div>
 
@@ -294,8 +390,8 @@
 
     .details-div{
         display: flex;
+        flex-direction: row;
         justify-content: space-between;
-        align-items: flex-start;
     }
     .myDiv{
         display: flex;
@@ -339,6 +435,7 @@
     }
 
     .card {
+<<<<<<< HEAD
       display: flex;
       align-items: center; 
       justify-content: space-between;
@@ -370,4 +467,70 @@
       margin-top: 1%;
       gap: 10px;
     }
+=======
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+    padding-left: 10px;
+    height: 90px;
+    background-color: #D9D9D9;
+  }
+  .info-card {
+    height: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+  
+  .name-text {
+    font-size: x-large;
+    color: #000000;
+    font-weight: 500;
+  }
+  
+  .desc-text {
+    font-size: large;
+    color: #000000;
+  }
+
+  .ej-list{
+    display: flex;
+    flex-direction: column;
+    margin-top: 1%;
+    gap: 10px;
+  }
+
+  .desc-text-white{
+    font-size: large;
+    color: white;
+  }
+
+  .edit-card{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    background-color: #938F99;
+    align-items: center;
+    padding: 1%;
+    gap: 15px;
+  }
+
+  .edit-elem{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .details-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+  }
+
+>>>>>>> 77b22e0cd0a03ebc380c03605c16b6ba1abdc58a
 </style>
