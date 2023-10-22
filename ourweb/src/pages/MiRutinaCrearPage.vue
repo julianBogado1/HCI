@@ -79,6 +79,7 @@
         cards: [],
         showAddExerciseDropdown: null,
         selectedCard: null,
+        totalCycles: 0,
       };
     },
     created() {
@@ -91,13 +92,14 @@
       },
       addCycle() {
         this.cards.push({
-          name: `New Cycle ${this.cards.length + 1}`,
+          name: `New Cycle ${this.totalCycles + 1}`,
           order: this.cards.length + 1,
           detail: "Cycle Detail",
           type: "exercise",
           repetitions: 1,
           exercises: [],
         });
+        this.totalCycles++
       },
       addExercise(card, exercise) {
         card.exercises.push({
@@ -122,9 +124,6 @@
         for(const card of this.cards) {
             response_c = await createCycle(response_r.id, card.name, card.detail, card.type, card.order, card.repetitions)
             var i = 1
-            console.log("HOLALALLAA")
-            console.log(card)
-            console.log(card.exercises)
             for(const ex of card.exercises) {
                 console.log(ex)
                 console.log(ex.id)
