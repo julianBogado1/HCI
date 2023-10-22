@@ -33,19 +33,30 @@ Posteriormente baje el brazo y repita el ejercicio</p>
         <div>
             <v-divider :thickness="1" class="border-opacity-50"></v-divider>
             <div class="details-div">
-            <p class="mySubheaderText2">Intensidad</p>
+            <p class="mySubheaderText2">Series</p>
         </div>
         </div>
-        
+
         <div class="details-info">
-            <Brazitos2/>
+            <p class="infoText">2</p>
         </div>
+
+        <div>
+            <v-divider :thickness="1" class="border-opacity-50"></v-divider>
+            <div class="details-div">
+            <p class="mySubheaderText2">Duración</p>
+        </div>
+        </div>
+
+        <div class="details-info">
+            <p class="infoText">50 segundos</p>
+        </div>
+
     </div>
 </template>
 
 <script setup>
 import MyEditDelete from '../components/MyEditDelete.vue';
-import Brazitos2 from './brazitos/Brazitos2.vue';
 
 
 </script>

@@ -168,8 +168,8 @@ export default {
       gap: 10px;
   }
   .avatar-image{
-        width: 100px;
-        height: 100px;
+        width: 200px;
+        height: 200px;
         display: flex;
         align-items: center;
         justify-content: center;
