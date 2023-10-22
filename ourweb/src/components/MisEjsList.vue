@@ -8,14 +8,7 @@
             </div>
             <div class="desc-text">
               <p>{{ item.detail }}</p>
-            </div>
-          </div>
-          <div class="detail-card">
-            <div class="edit-card">
-              <div class="content">
-                <router-link :to="'/mi-ej-edit/' + item.id" class="icon-link"><svg-icon type="mdi" :path="path1"></svg-icon></router-link>
-                <svg-icon type="mdi" class="clickable-icon" :path="path2" @click="() => deleteCurrent(item.id)"></svg-icon>
-              </div>
+              <router-link :to="'/mi-ej-view/' + item.id" class="linkDiv"><p>Click para más info</p></router-link>
             </div>
           </div>
         </div>
@@ -56,18 +49,6 @@
           console.error('Error fetching exercise:', error);
         }
       },
-      async deleteCurrent(id) {
-        try {
-            await deleteSingle('exercises', id);
-            const index = this.items.findIndex(item => item.id === id);
-
-            if (index !== -1) {
-            this.items.splice(index, 1);
-            }
-        } catch (error) {
-            console.error('Error deleting exercise:', error);
-        }
-       }
     },
   };
   </script>
@@ -89,51 +70,27 @@
   }
   
   .info-card {
-    flex: 1; 
-  }
-  
-  .detail-card {
-    display: flex;
-  }
-  
-  .edit-card {
-    background-color: #938F99;
-    width: 45px;
     height: 90px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-between;
   }
   
   .name-text {
     font-size: x-large;
     color: #000000;
+    font-weight: 500;
   }
   
   .desc-text {
     font-size: large;
     color: #000000;
   }
+
   
-  .content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 3px;
-  }
 
-  .icon-link {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .icon-link:focus {
-    outline: none;
-  }
-
-  .clickable-icon {
-    cursor: pointer;
-  }
+  .linkDiv{
+    color: #0D6138;
+}
   </style>
