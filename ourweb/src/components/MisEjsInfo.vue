@@ -2,7 +2,6 @@
     <div class="mySubheaderDiv">
         <div class="mySubheaderDivInfo">
             <h3 class="mySubheaderText">{{ name }}</h3>
-            <MyEditDelete/>
         </div>
 
         <div>

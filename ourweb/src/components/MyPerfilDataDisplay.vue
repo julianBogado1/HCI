@@ -24,6 +24,11 @@
 <script>
 import {getUser} from '@/api/api.js';
 export default{
+
+
+    async created(){
+        this.setupData();
+    },
     data() {
     return {
       username: '',
