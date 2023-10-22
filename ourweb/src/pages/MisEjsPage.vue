@@ -21,7 +21,7 @@ import MySubheaderMisEjs from '@/components/subheaders/MySubheaderMisEjs.vue';
   <style scoped>
       .subheader{
           position: sticky;
-          top: 110px;
+          top: 104px;
           z-index: 999;
   
           background-color: #FFFFFF;
