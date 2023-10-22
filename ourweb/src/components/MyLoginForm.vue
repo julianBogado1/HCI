@@ -98,7 +98,8 @@ import router from '@/router/router.js'
     async onSubmit () {
       if (!this.form) return
       localStorage.clear();
-      sessionStorage.clear(); //cleareamos variables que puedan estar guardadas de antes
+      sessionStorage.clear(); 
+      //cleareamos variables que puedan estar guardadas de antes
       //seguro las ibamos a sobreescribir
       this.loading = true
       try{

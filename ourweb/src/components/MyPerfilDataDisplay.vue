@@ -24,8 +24,6 @@
 <script>
 import {getUser} from '@/api/api.js';
 export default{
-
-
     async created(){
         this.setupData();
     },
@@ -43,13 +41,11 @@ export default{
     sessionStorage.AVATARURL = response.avatarUrl; // se guardan los datos de la sesion iniciada en ese momento
     sessionStorage.FIRSTNAME = response.firstName;
     sessionStorage.LASTNAME = response.lastName; 
-
-
     this.username = response.username;
     this.email = response.email;
     this.name = response.firstName + ' ' + response.lastName;
     },
-},
+    },
 };
 </script>
 
