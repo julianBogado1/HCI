@@ -2,6 +2,16 @@
     <div class="mySubheaderDiv">
         <div class="mySubheaderDivInfo">
             <h3 class="mySubheaderText">{{ name }}</h3>
+            <div class="content">
+                <div>
+                    <v-btn @click="editExercise" class="icon-button">
+                      <svg-icon type="mdi" :path="path1"></svg-icon>
+                    </v-btn>
+                    <v-btn @click="deleteExercise" class="icon-button">
+                      <svg-icon type="mdi" :path="path2"></svg-icon>
+                    </v-btn>
+                  </div>
+            </div>
         </div>
 
         <div>
@@ -18,19 +28,26 @@
 </template>
 
 <script >
-import MyEditDelete from '../components/MyEditDelete.vue';
+import SvgIcon from '@jamescoyle/vue-icon';
+import { mdiPencilOutline } from '@mdi/js';
+import { mdiTrashCanOutline } from '@mdi/js';
 import { fetchSingle } from '@/api/api.js'
 import { deleteSingle } from '@/api/api.js'
-import { editExercise } from '@/api/api.js'
 import router from '@/router/router.js'
 
 export default {
+  name: "my-component",
+  components: {
+    SvgIcon
+  },
 data: () => ({
   form: {},
   id: null,
   name: "Ejercicio",
   description: "Descripción del Ejercicio",
   reqRules: [],
+  path1: mdiPencilOutline,
+  path2: mdiTrashCanOutline,
   }),
   created() {
     this.id = this.$route.params.id;
@@ -47,6 +64,13 @@ data: () => ({
       console.error('Error fetching exercise:', error);
     }
   },
+  async editExercise() {
+    router.push(`/mi-ej-edit/${this.id}`)
+  },
+  async deleteExercise() {
+    await deleteSingle('exercises', this.id)
+    router.push("/mis-ejs")
+  }
   },
 };
 
@@ -95,4 +119,10 @@ data: () => ({
     .details-info{
         margin-left: 1%;
     }
+
+    .content{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 </style>

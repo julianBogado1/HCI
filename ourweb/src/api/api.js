@@ -114,16 +114,14 @@ export const editExercise = async (id, name, detail) => {
   return await apiFetch(url, options);
 };
 
-export const createRoutine = async (name, detail, type, order, repetitions) => {
+export const createRoutine = async (name, detail, isPublic, difficulty) => {
   const url = `${apiUrl}/routines`;
   const body = JSON.stringify({
     name: name,
     detail: detail,
-    type: type,
-    order: order,
     repetitions: repetitions,
-    difficulty: "rookie",
-    isPublic: false,
+    difficulty: difficulty,
+    isPublic: isPublic,
     metadata: null
   });
 
@@ -262,8 +260,8 @@ export const addUser = async (username, password, email)=>{
   let user = {
     "username": username,   //UNIQUE
     "password": password,
-    "firstName": "",
-    "lastName": "",
+    "firstName": "John",
+    "lastName": "Doe",
     "gender": "male",
     "birthdate": 284007600000,
     "email": email,   //UNIQUE
@@ -296,13 +294,9 @@ export const addUser = async (username, password, email)=>{
 export const editUser = async (name, lastname, avatarUrl)=>{
   const url = `${apiUrl}/users/current`;
   const body = JSON.stringify({
-    "firstName": name,
-    "lastName": lastname,
-    "gender": "male",
-    "birthdate": 284007600000,
-    "phone": "98295822",
-    "avatarUrl": avatarUrl,
-    "metadata": null
+    "firstname": name,
+    "lastname": lastname,
+    "avatarUrl": avatarUrl
   });
 
   const options = {
@@ -310,21 +304,7 @@ export const editUser = async (name, lastname, avatarUrl)=>{
     method: 'PUT',
     body,
   };
-
-  try{
-    let response = await apiFetchEmptyBody(url, options);
-    console.log(response);
-    if(!response.ok){throw new Error(`Request failed with status: ${response.status}`);}
-    else if(response.ok){
-        console.log(`Edited user: \n new Name: ${name}\n new LastName: ${lastname} \n new avatarUrl: ${avatarUrl}`);
-        sessionStorage.AVATARURL = avatarUrl;
-        sessionStorage.FIRSTNAME = name;
-        sessionStorage.LASTNAME = lastname;
-        return response;
-    }
-  }catch(error){
-    console.log(error);
-  }
+  return await apiFetchEmptyBody(url, options);
 }
 
 export const getUser = async ()=>{
@@ -344,5 +324,3 @@ export const logOut = async ()=>{
   };
   return await apiFetchEmptyBody(url, options);
 }
-
-
