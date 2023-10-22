@@ -131,6 +131,7 @@ export default {
             this.avatarUrl_edit = sessionStorage.AVATARURL;
         }
         let response = await editUser(this.nombre_edit, this.apellido_edit, this.avatarUrl_edit);
+        this.avatar = sessionStorage.AVATARURL;
         this.loading = false
         this.errorMessage = '';
       }catch(error){
@@ -142,7 +143,9 @@ export default {
       this.errorMessage = '';
     },
   },
-
+    updated() {
+    this.onSubmit();
+    },
 }
 </script>
 <style scoped>

@@ -299,7 +299,7 @@ export const createInitialRoutines = async() => {
   }
 
  const setupRoutine = async(routine, cycle1, cycle2, cycle3, exercise1, exercise2, exercise3, exercise4, exercise5, exercise6) => {
-    const response_r = await (routine.name, routine.detail, true, "rookie")
+    const response_r = await createRoutine(routine.name, routine.detail, true, "rookie")
 
     await setupCycle(response_r.id, cycle1, exercise1, exercise2, exercise3)
     await setupCycle(response_r.id, cycle2, null, null, null)

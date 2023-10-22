@@ -1,8 +1,7 @@
 <template>
     <div class="mySubheaderDiv">
         <div class="mySubheaderDivInfo">
-            <h3 class="mySubheaderText">Ejercicio 1</h3>
-            <MyEditDelete/>
+            <h3 class="mySubheaderText">{{ name }}</h3>
         </div>
 
         <div>
@@ -13,51 +12,43 @@
         </div>
         
         <div class="details-info">
-            <p class="infoText">El curl de biceps es un ejercicio diseñado para tonificar los biceps</p>
+            <p class="infoText">{{ description }}</p>
         </div>
-
-        <div>
-            <v-divider :thickness="1" class="border-opacity-50"></v-divider>
-            <div class="details-div">
-            <p class="mySubheaderText2">Pasos a seguir</p>
-        </div>
-        </div>
-        
-        <div class="details-info">
-            <p class="infoText">Tomar una mancuerna con un peso adecuado
-Enderezar espalda y hombros. No debe arquear la espalda ni mover los hombros durante el ejercicio
-Con las palmas hacia arriba, mueva su brazo para levantar el peso de la mancuerna. El codo solo debe flexionarse, y no desplazarse vertical u horizontalmente
-Posteriormente baje el brazo y repita el ejercicio</p>
-        </div>
-
-        <div>
-            <v-divider :thickness="1" class="border-opacity-50"></v-divider>
-            <div class="details-div">
-            <p class="mySubheaderText2">Series</p>
-        </div>
-        </div>
-
-        <div class="details-info">
-            <p class="infoText">2</p>
-        </div>
-
-        <div>
-            <v-divider :thickness="1" class="border-opacity-50"></v-divider>
-            <div class="details-div">
-            <p class="mySubheaderText2">Duración</p>
-        </div>
-        </div>
-
-        <div class="details-info">
-            <p class="infoText">50 segundos</p>
-        </div>
-
     </div>
 </template>
 
-<script setup>
+<script >
 import MyEditDelete from '../components/MyEditDelete.vue';
+import { fetchSingle } from '@/api/api.js'
+import { deleteSingle } from '@/api/api.js'
+import { editExercise } from '@/api/api.js'
+import router from '@/router/router.js'
 
+export default {
+data: () => ({
+  form: {},
+  id: null,
+  name: "Ejercicio",
+  description: "Descripción del Ejercicio",
+  reqRules: [],
+  }),
+  created() {
+    this.id = this.$route.params.id;
+    this.loadExercise();
+  },
+  methods: {
+  async loadExercise() {
+    try {
+      const exercise = await fetchSingle('exercises', this.id);
+      
+      this.name = exercise.name;
+      this.description = exercise.detail;
+    } catch (error) {
+      console.error('Error fetching exercise:', error);
+    }
+  },
+  },
+};
 
 </script>
 

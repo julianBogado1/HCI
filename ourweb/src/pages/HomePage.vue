@@ -27,16 +27,20 @@
       MySubheaderRutinasExplorar,
     },
     async created() {
-    if(localStorage.AUTHTOKEN){
-        try{
-            let response_r = await fetchMultiple('users/current/routines', 10);
-            if(response_r['totalCount'] === 0) {
-                createInitialRoutines();
-            }
-        }catch(error){
-            console.log(error);
-        }
-    }
+      if(localStorage.AUTHTOKEN){
+          try{
+              let response_r = await fetchMultiple('users/current/routines', 10);
+                if(response_r.status===401){
+                  throw error;
+                }
+                if(response_r['totalCount'] === 0) {
+                  console.log("ESTOY AQUI, TAN ENAMORAAAAAADOOOO DE TIIIII");
+                  createInitialRoutines();
+                }  
+          }catch(error){
+              console.log(error);
+          }
+      }
   },
 }
 
