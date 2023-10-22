@@ -9,6 +9,7 @@ export const createInitialRoutines = async() => {
         detail: "Full body routine with 6 exercises in 2 cycles",
         isPublic: false,
         difficulty: "rookie",
+        duration: 15,
         category: null,
         metadata: null
       };
@@ -17,7 +18,8 @@ export const createInitialRoutines = async() => {
         name: "Routine 2",
         detail: "Full body routine with 6 exercises in 2 cycles",
         isPublic: false,
-        difficulty: "rookie",
+        difficulty: "intermediate",
+        duration: 15,
         category: null,
         metadata: null
       };
@@ -26,7 +28,8 @@ export const createInitialRoutines = async() => {
         name: "Routine 3",
         detail: "Full body routine with 6 exercises in 2 cycles",
         isPublic: false,
-        difficulty: "rookie",
+        difficulty: "advanced",
+        duration: 15,
         category: null,
         metadata: null
       };
@@ -299,7 +302,7 @@ export const createInitialRoutines = async() => {
   }
 
  const setupRoutine = async(routine, cycle1, cycle2, cycle3, exercise1, exercise2, exercise3, exercise4, exercise5, exercise6) => {
-    const response_r = await createRoutine(routine.name, routine.detail, true, "rookie")
+    const response_r = await createRoutine(routine.name, routine.detail, true, routine.difficulty, routine.duration)
 
     await setupCycle(response_r.id, cycle1, exercise1, exercise2, exercise3)
     await setupCycle(response_r.id, cycle2, null, null, null)

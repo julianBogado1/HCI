@@ -114,15 +114,16 @@ export const editExercise = async (id, name, detail) => {
   return await apiFetch(url, options);
 };
 
-export const createRoutine = async (name, detail, isPublic, difficulty) => {
+export const createRoutine = async (name, detail, isPublic, difficulty, duration) => {
   const url = `${apiUrl}/routines`;
   const body = JSON.stringify({
     name: name,
     detail: detail,
-    repetitions: repetitions,
     difficulty: difficulty,
     isPublic: isPublic,
-    metadata: null
+    metadata: {
+      duration: duration
+    }
   });
 
   const options = {

@@ -229,27 +229,29 @@
         },
         {
           name: `Ciclo de enfriamiento`,
-          order: 3,
+          order: 999,
           detail: "Elongaciones y estiramientos",
           type: "cooldown",
           repetitions: 1,
           exercises: [],
         }
         )
-        this.cycles = 3
+        this.cycles = 2
         for (const cycle of this.cards) {
           cycle.showAddExerciseDropdown = false;
         }
       },
       addCycle() {
+        const cooldown = this.cards.pop()
         this.cards.push({
           name: `Ciclo ${this.cycles + 1}`,
           order: this.cycles + 1,
           detail: "Cycle Detail",
           type: "exercise",
-          repetitions: 1,
+          duration: 1,
           exercises: [],
         });
+        this.cards.push(cooldown)
         this.cycles++
       },
       addExercise(card, exercise) {
@@ -272,7 +274,7 @@
       async createRoutine() {
         let response_c
         let response_e
-        let response_r = await createRoutine(this.name, this.description, true, this.getSkillLevel(this.difficulty))
+        let response_r = await createRoutine(this.name, this.description, true, this.getSkillLevel(this.difficulty), this.duration)
         for(const card of this.cards) {
             response_c = await createCycle(response_r.id, card.name, card.detail, card.type, card.order, card.repetitions)
             var i = 1
