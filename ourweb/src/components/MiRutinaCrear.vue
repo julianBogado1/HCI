@@ -410,6 +410,11 @@
       font-size: large;
       color: #000000;
     }
+
+    .desc-text-white{
+      font-size: large;
+      color: white;
+    }
     .ej-list{
       display: flex;
       flex-direction: column;
@@ -424,5 +429,22 @@
       gap: 10px;
     }
 
+    .edit-card{
+        background-color: #938F99;
+        height: 90px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 1%;
+    }
+
+    .edit-elem{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
 
 </style>
