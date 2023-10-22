@@ -28,23 +28,26 @@ export default{
         this.setupData();
     },
     data() {
-    return {
-      username: '',
-      email: '',
-      name: '',
-    };
-  },
-  methods: {
-  async setupData() {
-    let response = await getUser();
-    console.log(response);
-    sessionStorage.AVATARURL = response.avatarUrl; // se guardan los datos de la sesion iniciada en ese momento
-    sessionStorage.FIRSTNAME = response.firstName;
-    sessionStorage.LASTNAME = response.lastName; 
-    this.username = response.username;
-    this.email = response.email;
-    this.name = response.firstName + ' ' + response.lastName;
+        return {
+            username: '',
+            email: '',
+            name: '',
+        };
     },
+    methods: {
+        async setupData() {
+            let response = await getUser();
+            console.log(response);
+            sessionStorage.AVATARURL = response.avatarUrl; // se guardan los datos de la sesion iniciada en ese momento
+            sessionStorage.FIRSTNAME = response.firstName;
+            sessionStorage.LASTNAME = response.lastName; 
+            this.username = response.username;
+            this.email = response.email;
+            this.name = response.firstName + ' ' + response.lastName;
+        },
+    },
+    updated() {
+    this.setupData();
     },
 };
 </script>
