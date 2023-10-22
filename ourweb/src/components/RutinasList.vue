@@ -65,8 +65,6 @@ export default {
     
     .rutina-card{
         background-color: #D9D9D9;
-        width: 800px;
-        height: 90px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -82,7 +80,7 @@ export default {
 
     .dif-card{
         background-color: #BEBEBE;
-        width: 90px;
+        width: 100%;
         height: 90px;
         display: flex;
         flex-direction: column;
