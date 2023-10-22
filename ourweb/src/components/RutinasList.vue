@@ -9,14 +9,17 @@
                 <div class="desc-text">
                     <p>{{ routine.detail }}</p>
                 </div>
+                <router-link :to="'/mi-rutina-view/' + routine.id" class="linkDiv"><p>Click para más info</p></router-link>
             </div>
             <div class="dif-card">
                 <div v-if="routine.difficulty === 'rookie'"><Brazitos1/></div>
                 <div v-if="routine.difficulty === 'intermediate'"><Brazitos2/></div>
                 <div v-if="routine.difficulty === 'expert'"><Brazitos3/></div>
+                <p>{{ routine.duracion }} seg</p>
             </div>
         </div>
         </div>
+        <MyNoRutinesMessage v-if="routines.length === 0" />
     </div>
 </template>
 
@@ -24,8 +27,9 @@
 import { fetchMultiple } from '@/api/api';
 import { fetchFilteredRoutines } from '@/api/api';
 import Brazitos1 from './brazitos/Brazitos1.vue';
-import Brazitos2 from './brazitos/Brazitos2.vue';
-import Brazitos3 from './brazitos/Brazitos3.vue';
+import Brazitos2 from './brazitos/Brazitos1.vue';
+import Brazitos3 from './brazitos/Brazitos1.vue';
+import MyNoRutinesMessage from './messages/MyNoRutinesMessage.vue';
 
 export default {
     components: {
@@ -122,6 +126,7 @@ export default {
         width: 90px;
         height: 90px;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
     }
@@ -135,4 +140,7 @@ export default {
         font-size: large;
         color: #000000;
     }
+    .linkDiv{
+    color: #0D6138;
+}
 </style>

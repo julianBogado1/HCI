@@ -55,7 +55,7 @@
           <div class="space-below">
             <v-divider :thickness="1" class="border-opacity-50"></v-divider>
             <div class="details-div">
-              <v-text-field v-model="cycle.name"></v-text-field>
+              <v-text-field v-model="cycle.name" readonly></v-text-field>
               </div>
               <div class="repeticiones">
                 <p class="myText">Repeticiones:</p>
@@ -160,7 +160,7 @@
           class="text-white"
           @click="addCycle"
           >
-              Añadir Ciclo
+              Añadir Ciclo de
           </v-btn>
         </v-row>
 
@@ -224,7 +224,7 @@
           exercises: [],
         },
         {
-          name: `Ciclo de ejercitación`,
+          name: `Ciclo de Ejercitación 1`,
           order: 2,
           detail: "Para una ejercitación a pleno",
           type: "exercise",
@@ -248,7 +248,7 @@
       addCycle() {
         const cooldown = this.cards.pop()
         this.cards.push({
-          name: `Ciclo ${this.cycles + 1}`,
+          name: `Ciclo de Ejercitación ${this.cycles - 1}`,
           order: this.cycles + 1,
           detail: "Cycle Detail",
           type: "exercise",
@@ -410,6 +410,11 @@
       font-size: large;
       color: #000000;
     }
+
+    .desc-text-white{
+      font-size: large;
+      color: white;
+    }
     .ej-list{
       display: flex;
       flex-direction: column;
@@ -423,4 +428,23 @@
       align-items: center;
       gap: 10px;
     }
+
+    .edit-card{
+        background-color: #938F99;
+        height: 90px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 1%;
+    }
+
+    .edit-elem{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
 </style>
