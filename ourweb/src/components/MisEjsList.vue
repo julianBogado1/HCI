@@ -11,6 +11,12 @@
               <router-link :to="'/mi-ej-view/' + item.id" class="linkDiv"><p>Click para más info</p></router-link>
             </div>
           </div>
+          <div class="detail-card">
+            <div class="edit-card">
+                <p class="desc-text-white">Series</p>
+                <p class="desc-text-white">Duración</p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -65,7 +71,7 @@
     align-items: center; 
     justify-content: space-between;
     height: 90px;
-    padding: 10px;
+    padding-left: 10px;
     background-color: #D9D9D9;
   }
   
@@ -88,7 +94,26 @@
     color: #000000;
   }
 
-  
+  .desc-text-white {
+    font-size: large;
+    color: #FFFFFF;
+  }
+
+  .detail-card{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .edit-card{
+        background-color: #938F99;
+        width: 90px;
+        height: 90px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
 
   .linkDiv{
     color: #0D6138;
