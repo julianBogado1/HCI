@@ -56,7 +56,7 @@
             <v-divider :thickness="1" class="border-opacity-50"></v-divider>
             <div class="details-div">
               <p class="myText">{{ cycle.name }}</p>
-              <v-btn @click="showAddExerciseDropdown = !showAddExerciseDropdown">
+              <v-btn @click="cycle.showAddExerciseDropdown = !cycle.showAddExerciseDropdown">
                 <div class="myDiv">
                   <svg-icon type="mdi" :path="path2"></svg-icon>
                   <div>
@@ -64,23 +64,15 @@
                   </div>
                 </div>
               </v-btn>
-              <v-menu
-                v-model="showAddExerciseDropdown"
-                offset-y
-              >
+              <v-menu v-model="cycle.showAddExerciseDropdown" offset-y>
                 <template v-slot:activator="{ on }">
-                  <v-btn
-                    v-on="on"
-                    v-if="showAddExerciseDropdown"
-                  >
-                    Cerrar
-                  </v-btn>
+                  <v-btn v-on="on" v-if="cycle.showAddExerciseDropdown">Cerrar</v-btn>
                 </template>
                 <v-list>
                   <v-list-item
-                    v-for="(exercise, index) in exercises"
-                    :key="index"
-                    @click="addExercise(selectedCard, exercise)"
+                    v-for="(exercise, eIndex) in exercises"
+                    :key="eIndex"
+                    @click="addExercise(cycle, exercise)"
                   >
                     <v-list-item-title>{{ exercise.name }}</v-list-item-title>
                   </v-list-item>
@@ -98,32 +90,26 @@
                 max="100"
               />
             </div>
-            <div class="ej-list">
-              <div class="card">
-                <div class="info-card">
-                  <div class="name-text">
-                    <p>NombreEj</p>
-                  </div>
-                  <div class="desc-text">
-                    <p>DescripcionEj</p>
-                  </div>
-                </div>
-              </div>
 
-              <div class="card">
-                <div class="info-card">
-                  <div class="name-text">
-                    <p>NombreEj2</p>
-                  </div>
-                  <div class="desc-text">
-                    <p>DescripcionEj2</p>
+            <div v-for="(exercise, eIndex) in cycle.exercises" :key="eIndex">
+              <div class="ej-list">
+                <div class="card">
+                  <div class="info-card">
+                    <div class="name-text">
+                      <p>{{ exercise.name }}</p>
+                    </div>
+                    <div class="desc-text">
+                      <p>{{ exercise.detail }}</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
         </div>
       </div>
+
 
       <v-row justify="center" class="space-below">
       <v-btn
@@ -163,7 +149,7 @@
   import { createCycle } from '@/api/api';
   import { createRoutine } from '@/api/api';
   import { addExerciseToCycle } from '@/api/api';
-import MyEjEjemplo1 from './MyEjEjemplo1.vue';
+  import MyEjEjemplo1 from './MyEjEjemplo1.vue';
   
   export default {
     components: {
@@ -177,11 +163,9 @@ import MyEjEjemplo1 from './MyEjEjemplo1.vue';
             exercises: [],
             cards: [],
             showAddExerciseDropdown: null,
-            selectedCard: null,
         };
     },
     created() {
-<<<<<<< HEAD
       this.populateExercises();
       this.initialize()
     },
@@ -216,10 +200,13 @@ import MyEjEjemplo1 from './MyEjEjemplo1.vue';
           exercises: [],
         }
         )
+        for (const cycle of this.cards) {
+          cycle.showAddExerciseDropdown = false;
+        }
       },
       addCycle() {
         this.cards.push({
-          name: `New Cycle ${this.cards.length + 1}`,
+          name: `Ciclo ${this.cards.length + 1}`,
           order: this.cards.length + 1,
           detail: "Cycle Detail",
           type: "exercise",
@@ -235,6 +222,7 @@ import MyEjEjemplo1 from './MyEjEjemplo1.vue';
             duration: 10,
             repetitions: 1,
         });
+        console.log(card.exercises)
       },
       removeExercise(card, index) {
         if (card.exercises.length > 0) {
@@ -255,72 +243,24 @@ import MyEjEjemplo1 from './MyEjEjemplo1.vue';
                 console.log(ex.id)
                 response_e = await addExerciseToCycle(response_c.id, ex.id, i, ex.duration, ex.repetitions)
                 i++
-=======
-        this.populateExercises();
-    },
-    methods: {
-        async populateExercises() {
-            const response = await fetchMultiple('exercises', 50);
-            this.exercises = response['content'];
-        },
-        addCycle() {
-            this.cards.push({
-                name: `New Cycle ${this.cards.length + 1}`,
-                order: this.cards.length + 1,
-                detail: "Cycle Detail",
-                type: "exercise",
-                repetitions: 1,
-                exercises: [],
-            });
-        },
-        addExercise(card, exercise) {
-            card.exercises.push({
-                id: exercise.id,
-                name: exercise.name,
-                detail: exercise.detail,
-                duration: 10,
-                repetitions: 1,
-            });
-        },
-        removeExercise(card, index) {
-            if (card.exercises.length > 0) {
-                card.exercises.pop();
-            }
-            else {
-                this.cards.splice(index, 1);
-            }
-        },
-        async createRoutine() {
-            let response_c;
-            let response_e;
-            let response_r = await createRoutine(this.name, this.description, true, getSkillLevel(this.difficulty));
-            for (const card of this.cards) {
-                response_c = await createCycle(response_r.id, card.name, card.detail, card.type, card.order, card.repetitions);
-                var i = 1;
-                for (const ex of card.exercises) {
-                    console.log(ex);
-                    console.log(ex.id);
-                    response_e = await addExerciseToCycle(response_c.id, ex.id, i, ex.duration, ex.repetitions);
-                    i++;
-                }
-            }
-        },
-        isExercisesEmpty(card) {
-            return card.exercises.length === 0;
-        },
-        getSkillLevel(skill) {
-            switch (skill) {
-                case 1:
-                    return "rookie";
-                case 2:
-                    return "intermediate";
-                case 3:
-                    return "expert";
-                default:
-                    return "intermediate";
->>>>>>> 4db8da3c05fde18fe001d7ba966e3e091d69d6bd
             }
         }
+      },
+      isExercisesEmpty(card) {
+        return card.exercises.length === 0;
+      },
+      getSkillLevel(skill) {
+        switch (skill) {
+          case 1:
+            return "rookie";
+          case 2:
+            return "intermediate";
+          case 3:
+            return "expert";
+          default:
+            return "intermediate";
+        }
+      }
     },
     components: { MyEjEjemplo1 }
 };
@@ -399,36 +339,35 @@ import MyEjEjemplo1 from './MyEjEjemplo1.vue';
     }
 
     .card {
-    display: flex;
-    align-items: center; 
-    justify-content: space-between;
-    padding-left: 10px;
-    background-color: #D9D9D9;
-  }
-  .info-card {
-    height: 100%;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    overflow: hidden;
-  }
-  
-  .name-text {
-    font-size: x-large;
-    color: #000000;
-    font-weight: 500;
-  }
-  
-  .desc-text {
-    font-size: large;
-    color: #000000;
-  }
-
-  .ej-list{
-    display: flex;
-    flex-direction: column;
-    margin-top: 1%;
-    gap: 10px;
-  }
+      display: flex;
+      align-items: center; 
+      justify-content: space-between;
+      padding-left: 10px;
+      background-color: #D9D9D9;
+    }
+    .info-card {
+      height: 100%;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+    
+    .name-text {
+      font-size: x-large;
+      color: #000000;
+      font-weight: 500;
+    }
+    
+    .desc-text {
+      font-size: large;
+      color: #000000;
+    }
+    .ej-list{
+      display: flex;
+      flex-direction: column;
+      margin-top: 1%;
+      gap: 10px;
+    }
 </style>
