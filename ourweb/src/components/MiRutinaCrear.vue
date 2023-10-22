@@ -55,26 +55,21 @@
           <div class="space-below">
             <v-divider :thickness="1" class="border-opacity-50"></v-divider>
             <div class="details-div">
-              <p class="myText">{{ cycle.name }}</p>
-<<<<<<< HEAD
+              <v-text-field v-model="cycle.name"></v-text-field>
+              </div>
+              <div class="repeticiones">
+                <p class="myText">Repeticiones:</p>
+                <input
+                  class="myInputBox"
+                  type="number"
+                  id="numericInput"
+                  v-model="cycle.repetitions"
+                  min="0"
+                  max="100"
+                />
+              </div>
+              <div class="details-buttons">
               <v-btn @click="cycle.showAddExerciseDropdown = !cycle.showAddExerciseDropdown">
-=======
-              
-            </div>
-            <div class="repeticiones">
-              <p class="myText">Repeticiones:</p>
-              <input
-                class="myInputBox"
-                type="number"
-                id="numericInput"
-                v-model="cycle.repetitions"
-                min="0"
-                max="100"
-              />
-            </div>
-            <div class="details-buttons">
-              <v-btn @click="showAddExerciseDropdown = !showAddExerciseDropdown">
->>>>>>> 77b22e0cd0a03ebc380c03605c16b6ba1abdc58a
                 <div class="myDiv">
                   <svg-icon type="mdi" :path="path2"></svg-icon>
                   <div>
@@ -82,22 +77,15 @@
                   </div>
                 </div>
               </v-btn>
-<<<<<<< HEAD
-              <v-menu v-model="cycle.showAddExerciseDropdown" offset-y>
-=======
-              <v-btn>
+              <v-btn @click="removeExercise(cycle, index)">
                 <div class="myDiv">
                   <svg-icon type="mdi" :path="path2"></svg-icon>
                   <div>
-                    <p>Eliminar Ultimo Ejercicio</p>
+                    <p>{{ cycle.exercises === 0 ? 'Eliminar Ciclo' : 'Eliminar Último Ejercicio' }}</p>
                   </div>
                 </div>
               </v-btn>
-              <v-menu
-                v-model="showAddExerciseDropdown"
-                offset-y
-              >
->>>>>>> 77b22e0cd0a03ebc380c03605c16b6ba1abdc58a
+              <v-menu v-model="cycle.showAddExerciseDropdown" offset-y>
                 <template v-slot:activator="{ on }">
                   <v-btn v-on="on" v-if="cycle.showAddExerciseDropdown">Cerrar</v-btn>
                 </template>
@@ -112,55 +100,6 @@
                 </v-list>
               </v-menu>
             </div>
-<<<<<<< HEAD
-            <div class="repeticiones">
-              <p class="myText">Repeticiones:</p>
-              <input
-                class="myInputBox"
-                type="number"
-                id="numericInput"
-                v-model="cycle.repetitions"
-                min="0"
-                max="100"
-              />
-            </div>
-=======
-            <div class="ej-list">
-              <div class="card">
-                <div class="info-card">
-                  <div class="name-text">
-                    <p>NombreEj</p>
-                  </div>
-                  <div class="desc-text">
-                    <p>DescripcionEj</p>
-                  </div>
-                </div>
-                <div class="edit-card">
-                  <div class="edit-elem">
-                  <p class="desc-text-white">Series:</p>
-                    <input
-                      class="myInputBox desc-text-white"
-                      type="number"
-                      id="numericInput"
-                      v-model="cycle.duration" 
-                      min="0"
-                      max="100"
-                    />
-                  </div>
-                  <div class="edit-elem ">
-                  <p class="desc-text-white">Duración (en seg):</p>
-                    <input
-                      class="myInputBox  desc-text-white"
-                      type="number"
-                      id="numericInput"
-                      v-model="cycle.duration" 
-                      min="0"
-                      max="100"
-                    />
-                  </div>
-                </div>
-              </div>
->>>>>>> 77b22e0cd0a03ebc380c03605c16b6ba1abdc58a
 
             <div v-for="(exercise, eIndex) in cycle.exercises" :key="eIndex">
               <div class="ej-list">
@@ -173,33 +112,32 @@
                       <p>{{ exercise.detail }}</p>
                     </div>
                   </div>
-                </div>
-                <div class="edit-card">
-                  <div class="edit-elem">
-                  <p class="desc-text-white">Series:</p>
-                    <input
-                      class="myInputBox desc-text-white"
-                      type="number"
-                      id="numericInput"
-                      v-model="cycle.duration" 
-                      min="0"
-                      max="100"
-                    />
-                  </div>
-                  <div class="edit-elem ">
-                  <p class="desc-text-white">Duración (en seg):</p>
-                    <input
-                      class="myInputBox  desc-text-white"
-                      type="number"
-                      id="numericInput"
-                      v-model="cycle.duration" 
-                      min="0"
-                      max="100"
-                    />
+                  <div class="edit-card">
+                    <div class="edit-elem">
+                    <p class="desc-text-white">Series:</p>
+                      <input
+                        class="myInputBox desc-text-white"
+                        type="number"
+                        id="numericInput"
+                        v-model="exercise.repetitions" 
+                        min="0"
+                        max="100"
+                      />
+                    </div>
+                    <div class="edit-elem ">
+                    <p class="desc-text-white">Duración (en seg):</p>
+                      <input
+                        class="myInputBox  desc-text-white"
+                        type="number"
+                        id="numericInput"
+                        v-model="exercise.duration" 
+                        min="0"
+                        max="100"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-              
             </div>
           </div>
 
@@ -232,7 +170,7 @@
           rounded="xl"
           color="#73C7A4"
           class="text-white"
-          @click="onSubmit"
+          @click="createRoutine"
           >
               Crear Rutina
           </v-btn>
@@ -246,6 +184,7 @@
   import { createRoutine } from '@/api/api';
   import { addExerciseToCycle } from '@/api/api';
   import MyEjEjemplo1 from './MyEjEjemplo1.vue';
+  import router from '@/router/router';
   
   export default {
     components: {
@@ -259,6 +198,7 @@
             exercises: [],
             cards: [],
             showAddExerciseDropdown: null,
+            cycles: 0,
         };
     },
     created() {
@@ -273,7 +213,7 @@
       async initialize() {
         this.cards.push({
           name: `Ciclo de Calentamiento`,
-          order: this.cards.length + 1,
+          order: 1,
           detail: "Un ciclo para empezar a ejercitar",
           type: "warmup",
           repetitions: 3,
@@ -281,7 +221,7 @@
         },
         {
           name: `Ciclo de ejercitación`,
-          order: this.cards.length + 1,
+          order: 2,
           detail: "Para una ejercitación a pleno",
           type: "exercise",
           repetitions: 3,
@@ -289,26 +229,28 @@
         },
         {
           name: `Ciclo de enfriamiento`,
-          order: this.cards.length + 1,
+          order: 3,
           detail: "Elongaciones y estiramientos",
           type: "cooldown",
           repetitions: 1,
           exercises: [],
         }
         )
+        this.cycles = 3
         for (const cycle of this.cards) {
           cycle.showAddExerciseDropdown = false;
         }
       },
       addCycle() {
         this.cards.push({
-          name: `Ciclo ${this.cards.length + 1}`,
-          order: this.cards.length + 1,
+          name: `Ciclo ${this.cycles + 1}`,
+          order: this.cycles + 1,
           detail: "Cycle Detail",
           type: "exercise",
           repetitions: 1,
           exercises: [],
         });
+        this.cycles++
       },
       addExercise(card, exercise) {
         card.exercises.push({
@@ -330,7 +272,7 @@
       async createRoutine() {
         let response_c
         let response_e
-        let response_r = await createRoutine(this.name, this.description, true, getSkillLevel(this.difficulty))
+        let response_r = await createRoutine(this.name, this.description, true, this.getSkillLevel(this.difficulty))
         for(const card of this.cards) {
             response_c = await createCycle(response_r.id, card.name, card.detail, card.type, card.order, card.repetitions)
             var i = 1
@@ -341,6 +283,7 @@
                 i++
             }
         }
+        router.push("/")
       },
       isExercisesEmpty(card) {
         return card.exercises.length === 0;
@@ -392,6 +335,7 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        align-items: flex-start;
     }
     .myDiv{
         display: flex;
@@ -435,7 +379,6 @@
     }
 
     .card {
-<<<<<<< HEAD
       display: flex;
       align-items: center; 
       justify-content: space-between;
@@ -467,70 +410,11 @@
       margin-top: 1%;
       gap: 10px;
     }
-=======
-    display: flex;
-    align-items: center; 
-    justify-content: space-between;
-    padding-left: 10px;
-    height: 90px;
-    background-color: #D9D9D9;
-  }
-  .info-card {
-    height: 100%;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    overflow: hidden;
-  }
-  
-  .name-text {
-    font-size: x-large;
-    color: #000000;
-    font-weight: 500;
-  }
-  
-  .desc-text {
-    font-size: large;
-    color: #000000;
-  }
-
-  .ej-list{
-    display: flex;
-    flex-direction: column;
-    margin-top: 1%;
-    gap: 10px;
-  }
-
-  .desc-text-white{
-    font-size: large;
-    color: white;
-  }
-
-  .edit-card{
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-    background-color: #938F99;
-    align-items: center;
-    padding: 1%;
-    gap: 15px;
-  }
-
-  .edit-elem{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .details-buttons{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 10px;
-  }
-
->>>>>>> 77b22e0cd0a03ebc380c03605c16b6ba1abdc58a
+    .details-buttons{
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 10px;
+    }
 </style>
