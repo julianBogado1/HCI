@@ -31,75 +31,78 @@
 
       <div class="space-below">
         <v-select
+            v-model="difficulty"
             label="Dificultad"
             :items="['1','2','3']"
             variant="outlined"
             ></v-select>
       </div>
 
-      <div class="duracion space-below">
-            <p class="myText">Duración (en segundos):</p>
-            <input class="myInputBox"
+      <div v-for="(cycle, index) in cards" :key="index">
+
+        <div class="duracion space-below">
+          <p class="myText">Duración (en segundos):</p>
+          <input
+            class="myInputBox"
             type="number"
             id="numericInput"
-            v-model="numberValue"
-            min="0" 
-            max="100" 
-            >
+            v-model="cycle.duration" 
+            min="0"
+            max="100"
+          />
         </div>
-
-      <div>
-      <div class="space-below">
+        <div>
+          <div class="space-below">
             <v-divider :thickness="1" class="border-opacity-50"></v-divider>
             <div class="details-div">
-            <p class="myText">Ciclo de Entrada en Calor</p>
-            <router-link to="/" class="create">
-            <div class="myDiv">
-                <svg-icon type="mdi" :path="path2"></svg-icon>
-                <div >
+              <p class="myText">{{ cycle.name }}</p>
+              <v-btn @click="showAddExerciseDropdown = !showAddExerciseDropdown">
+                <div class="myDiv">
+                  <svg-icon type="mdi" :path="path2"></svg-icon>
+                  <div>
                     <p>Añadir Ejercicio</p>
+                  </div>
                 </div>
+              </v-btn>
+              <v-menu
+                v-model="showAddExerciseDropdown"
+                offset-y
+              >
+                <template v-slot:activator="{ on }">
+                  <v-btn
+                    v-on="on"
+                    v-if="showAddExerciseDropdown"
+                  >
+                    Cerrar
+                  </v-btn>
+                </template>
+                <v-list>
+                  <v-list-item
+                    v-for="(exercise, index) in exercises"
+                    :key="index"
+                    @click="addExercise(selectedCard, exercise)"
+                  >
+                    <v-list-item-title>{{ exercise.name }}</v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
             </div>
-           </router-link>
-        </div>
-        <div class="repeticiones">
-            <p class="myText">Repeticiones:</p>
-            <input class="myInputBox"
-            type="number"
-            id="numericInput"
-            v-model="numberValue"
-            min="0" 
-            max="100" 
-            >
+            <div class="repeticiones">
+              <p class="myText">Repeticiones:</p>
+              <input
+                class="myInputBox"
+                type="number"
+                id="numericInput"
+                v-model="cycle.repetitions"
+                min="0"
+                max="100"
+              />
+            </div>
+          </div>
         </div>
       </div>
 
       <span></span>
-
-      <div class="space-below">
-            <v-divider :thickness="1" class="border-opacity-50"></v-divider>
-            <div class="details-div">
-            <p class="myText">Ciclo de Ejercitación 1</p>
-            <router-link to="/" class="create">
-            <div class="myDiv">
-                <svg-icon type="mdi" :path="path2"></svg-icon>
-                <div >
-                    <p>Añadir Ejercicio</p>
-                </div>
-            </div>
-           </router-link>
-        </div>
-        <div class="repeticiones">
-            <p class="myText">Repeticiones:</p>
-            <input class="myInputBox"
-            type="number"
-            id="numericInput"
-            v-model="numberValue"
-            min="0" 
-            max="100" 
-            >
-        </div>
-      </div>
 
       <v-row justify="center" class="space-below">
       <v-btn
@@ -110,37 +113,11 @@
           rounded="xl"
           color="#73C7A4"
           class="text-white"
+          @click="addCycle"
           >
               añadir Ciclo
           </v-btn>
         </v-row>
-
-      <div class="space-below">
-            <v-divider :thickness="1" class="border-opacity-50"></v-divider>
-            <div class="details-div">
-            <p class="myText">Ciclo de Enfriamiento</p>
-            <router-link to="/" class="create">
-            <div class="myDiv">
-                <svg-icon type="mdi" :path="path2"></svg-icon>
-                <div >
-                    <p>Añadir Ejercicio</p>
-                </div>
-            </div>
-           </router-link>
-        </div>
-        <div class="repeticiones">
-            <p class="myText">Repeticiones:</p>
-            <input class="myInputBox"
-            type="number"
-            id="numericInput"
-            v-model="numberValue"
-            min="0" 
-            max="100" 
-            >
-        </div>
-      </div>
-      
-      </div>
 
       <v-row justify="end">
           <v-btn
@@ -161,43 +138,89 @@
 </template>
 
 <script>
-  import { createExercise } from '@/api/api.js'
-  import router from '@/router/router.js'
-  import SvgIcon from '@jamescoyle/vue-icon';
-import { mdiPlus} from '@mdi/js';
-
-
+  import { fetchMultiple } from '@/api/api';
+  import { createCycle } from '@/api/api';
+  import { createRoutine } from '@/api/api';
+  import { addExerciseToCycle } from '@/api/api';
+  
   export default {
-    components: {
-        SvgIcon
+    data() {
+      return {
+        name: "",
+        description: "",
+        difficulty: 2,
+        exercises: [],
+        cards: [],
+        showAddExerciseDropdown: null,
+        selectedCard: null,
+      };
     },
-  data: () => ({
-    name: '',
-    description: '',
-    steps: '',
-    form: null,
-    loading: false,
-    reqRules: [], 
-    path2: mdiPlus,
-  }),
-  methods: {
-    async onSubmit() {
-      try {
-        // Fetch exercises and create the new exercise
-        const response = await createExercise(this.name, this.description, this.steps);
-
-        // Reset input fields
-        this.name = '';
-        this.description = '';
-        this.steps = '';
-        router.push("/mis-ejs")
-      } catch (error) {
-        // Handle errors here
-        console.error('Error:', error);
+    created() {
+      this.populateExercises();
+    },
+    methods: {
+      async populateExercises() {
+        const response = await fetchMultiple('exercises', 50);
+        this.exercises = response['content'];
+      },
+      addCycle() {
+        this.cards.push({
+          name: `New Cycle ${this.cards.length + 1}`,
+          order: this.cards.length + 1,
+          detail: "Cycle Detail",
+          type: "exercise",
+          repetitions: 1,
+          exercises: [],
+        });
+      },
+      addExercise(card, exercise) {
+        card.exercises.push({
+            id: exercise.id,
+            name: exercise.name,
+            detail: exercise.detail,
+            duration: 10,
+            repetitions: 1,
+        });
+      },
+      removeExercise(card, index) {
+        if (card.exercises.length > 0) {
+          card.exercises.pop();
+        } else {
+          this.cards.splice(index, 1);
+        }
+      },
+      async createRoutine() {
+        let response_c
+        let response_e
+        let response_r = await createRoutine(this.name, this.description, true, getSkillLevel(this.difficulty))
+        for(const card of this.cards) {
+            response_c = await createCycle(response_r.id, card.name, card.detail, card.type, card.order, card.repetitions)
+            var i = 1
+            for(const ex of card.exercises) {
+                console.log(ex)
+                console.log(ex.id)
+                response_e = await addExerciseToCycle(response_c.id, ex.id, i, ex.duration, ex.repetitions)
+                i++
+            }
+        }
+      },
+      isExercisesEmpty(card) {
+        return card.exercises.length === 0;
+      },
+      getSkillLevel(skill) {
+        switch (skill) {
+          case 1:
+            return "rookie";
+          case 2:
+            return "intermediate";
+          case 3:
+            return "expert";
+          default:
+            return "intermediate";
+        }
       }
     },
-  },
-};
+  };
 </script>
 
 <style scoped>

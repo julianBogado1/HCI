@@ -53,6 +53,7 @@
 
 <script>
 import {editUser} from '@/api/api.js';
+import router from '@/router/router';
 
 export default {
   data: () => ({
@@ -91,6 +92,7 @@ export default {
       this.errorMessage = '';
       let response = await editAvatarUrl(this.avatarUrl_edit);
       console.log(response);
+      router.push("/profile")
     },
     required (v) {
       return !!v || 'Field is required'
