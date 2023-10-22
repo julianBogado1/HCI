@@ -80,8 +80,8 @@ export default {
 
     .dif-card{
         background-color: #BEBEBE;
-        width: 100%;
-        height: 90px;
+        height: 100%;
+        width: 90px;
         display: flex;
         flex-direction: column;
         align-items: center;
