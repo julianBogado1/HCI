@@ -13,32 +13,43 @@
                 <span>Repetitions: {{ card.repetitions }}</span>
               </div>
               <div class="exercise-cards">
-                <MyExercisesBody
-                  v-for="exercise in card.exercises"
-                  :key="exercise.id"
-                  :name="exercise.name"
-                  :detail="exercise.detail"
-                  :duration="exercise.duration"
-                  :repetitions="exercise.repetitions"
-                />
+                <div v-for="exercise in card.exercises">
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                      <h2>{{ exercise.name }}</h2>
+                      <p>{{ exercises.detail }}</p>
+                    </div>
+                    <div class="exercise-details">
+                        <span class="duration">Duration: 
+                            <input v-model="exercise.duration" type="number" min="0" step="1" />
+                            seconds
+                          </span>
+                          <span class="repetitions">Repetitions: 
+                            <input v-model="exercise.repetitions" type="number" min="0" step="1" />
+                          </span>
+                    </div>
+                </div>
+                </div>
               </div>
               <div class="button-container">
                 <div class="add-exercise-button">
-                  <button class="add-button" @click="showAddExerciseDropdown = card.id">Add Exercise</button>
-                  <div class="dropdown" :style="{ top: showAddExerciseDropdown === card.id ? '100%' : '0' }" v-show="showAddExerciseDropdown === card.id">
-                    <ul>
-                      <li v-for="exercise in exercises" :key="exercise.id">
-                        <button @click="addExercise(card, exercise)">{{ exercise.name }}</button>
-                      </li>
-                    </ul>
-                    <button @click="showAddExerciseDropdown = null">Cancel</button>
-                  </div>
+                    <button class="add-button" @click="showAddExerciseDropdown = showAddExerciseDropdown === card.id ? null : card.id">Add Exercise</button>
+                    <div class="dropdown" :style="{ top: showAddExerciseDropdown === card.id ? '100%' : '0' }" v-show="showAddExerciseDropdown === card.id" @mouseover="showAddExerciseDropdown = card.id" @mouseout="showAddExerciseDropdown = null">
+                      <ul>
+                        <li v-for="exercise in exercises" :key="exercise.id">
+                          <button @click="addExercise(card, exercise)">{{ exercise.name }}</button>
+                        </li>
+                      </ul>
+                    </div>
                 </div>
-                <button class="remove-button" @click="removeExercise(card, index)">Remove Exercise</button>
+                <button class="remove-button" @click="removeExercise(card, index)">
+                    {{ isExercisesEmpty(card) ? 'Delete Cycle' : 'Remove Exercise' }}
+                  </button>
               </div>
             </div>
             <div class="cycle-buttons">
               <button class="add-cycle-button" @click="addCycle">Add Cycle</button>
+              <button class="add-cycle-button" @click="createRoutine">Create Routine</button>
             </div>
           </div>
         </div>
@@ -52,6 +63,9 @@
   import MyFooter from '../components/MyFooter.vue'
   import MyExercisesBody from '@/components/MyExercisesBody.vue';
   import { fetchMultiple } from '@/api/api';
+  import { createCycle } from '@/api/api';
+  import { createRoutine } from '@/api/api';
+  import { addExerciseToCycle } from '@/api/api';
   
   export default {
     components: {
@@ -68,23 +82,31 @@
       };
     },
     created() {
-        this.populateExercises()
+      this.populateExercises();
     },
     methods: {
       async populateExercises() {
-        const response = await fetchMultiple('exercises', 50)
-        this.exercises = response['content']
+        const response = await fetchMultiple('exercises', 50);
+        this.exercises = response['content'];
       },
       addCycle() {
         this.cards.push({
-          name: "New Cycle",
+          name: `New Cycle ${this.cards.length + 1}`,
+          order: this.cards.length + 1,
           detail: "Cycle Detail",
-          repetitions: 15,
+          type: "exercise",
+          repetitions: 1,
           exercises: [],
         });
       },
       addExercise(card, exercise) {
-        card.exercises.push(exercise);
+        card.exercises.push({
+            id: exercise.id,
+            name: exercise.name,
+            detail: exercise.detail,
+            duration: 10,
+            repetitions: 1,
+        });
       },
       removeExercise(card, index) {
         if (card.exercises.length > 0) {
@@ -93,8 +115,26 @@
           this.cards.splice(index, 1);
         }
       },
-      toggleAddExerciseDropdown(card) {
-        this.selectedCard = card.id; 
+      async createRoutine() {
+        let response_c
+        let response_e
+        let response_r = await createRoutine("RUTINAAA", "AYUDAME LOCO", true, "rookie")
+        for(const card of this.cards) {
+            response_c = await createCycle(response_r.id, card.name, card.detail, card.type, card.order, card.repetitions)
+            var i = 1
+            console.log("HOLALALLAA")
+            console.log(card)
+            console.log(card.exercises)
+            for(const ex of card.exercises) {
+                console.log(ex)
+                console.log(ex.id)
+                response_e = await addExerciseToCycle(response_c.id, ex.id, i, ex.duration, ex.repetitions)
+                i++
+            }
+        }
+      },
+      isExercisesEmpty(card) {
+        return card.exercises.length === 0;
       },
     },
   };
@@ -148,10 +188,39 @@
     margin: 8px;
     padding: 16px;
   }
+
+  .exercise-card {
+    margin: 10px;
+    padding: 16px;
+    max-height: 200px;
+    overflow: hidden;
+  }
   
   .exercise-details {
     margin-top: 10px;
+    max-height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
+
+  .exercise-header {
+    margin-bottom: 10px;
+    max-height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .duration {
+    color: #007bff;
+    margin-right: 10px;
+  }
+  
+  .repetitions {
+    color: #dc3545;
+  }
+
 
   .button-container {
     display: flex;
