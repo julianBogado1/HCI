@@ -3,7 +3,7 @@
         <div class="myrow">
             <div class="miCuenta">
                 <h2 class="mySubheaderText">Mi Cuenta</h2>
-                <div >
+                <div class="avatar-container">
                     <img class="avatar-image" v-if="avatar" :src="avatar" alt="User Avatar">
                     <MyPlaceholderAvatar v-else/>
                   </div>
@@ -100,7 +100,8 @@ export default {
         display: flex;
         margin: 1%;
         justify-content: center;
-        max-width: 100px;
+        height: 200px;
+        width: 200px;
     }
     .mySubheaderText{
         color: #000000;
@@ -150,4 +151,10 @@ export default {
         margin: 1%;
         gap: 10px;
     }
+    .avatar-container{
+        display: flex;
+        flex-direction: column;
+        margin: 1%;
+        justify-content: center;
+      }
 </style>
