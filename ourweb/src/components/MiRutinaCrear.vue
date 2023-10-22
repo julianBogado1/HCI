@@ -69,7 +69,10 @@
                 />
               </div>
               <div class="details-buttons">
-              <v-btn @click="cycle.showAddExerciseDropdown = !cycle.showAddExerciseDropdown">
+              <v-btn
+              variant="outlined"
+              color="#5DA587"
+               @click="cycle.showAddExerciseDropdown = !cycle.showAddExerciseDropdown">
                 <div class="myDiv">
                   <svg-icon type="mdi" :path="path2"></svg-icon>
                   <div>
@@ -77,7 +80,10 @@
                   </div>
                 </div>
               </v-btn>
-              <v-btn @click="removeExercise(cycle, index)">
+              <v-btn 
+              variant="outlined"
+              color="#5DA587"
+              @click="removeExercise(cycle, index)">
                 <div class="myDiv">
                   <svg-icon type="mdi" :path="path2"></svg-icon>
                   <div>
@@ -86,9 +92,7 @@
                 </div>
               </v-btn>
               <v-menu v-model="cycle.showAddExerciseDropdown" offset-y>
-                <template v-slot:activator="{ on }">
-                  <v-btn v-on="on" v-if="cycle.showAddExerciseDropdown">Cerrar</v-btn>
-                </template>
+                
                 <v-list>
                   <v-list-item
                     v-for="(exercise, eIndex) in exercises"
@@ -156,7 +160,7 @@
           class="text-white"
           @click="addCycle"
           >
-              añadir Ciclo
+              Añadir Ciclo
           </v-btn>
         </v-row>
 
