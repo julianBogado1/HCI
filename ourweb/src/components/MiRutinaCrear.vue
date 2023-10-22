@@ -56,11 +56,33 @@
             <v-divider :thickness="1" class="border-opacity-50"></v-divider>
             <div class="details-div">
               <p class="myText">{{ cycle.name }}</p>
+              
+            </div>
+            <div class="repeticiones">
+              <p class="myText">Repeticiones:</p>
+              <input
+                class="myInputBox"
+                type="number"
+                id="numericInput"
+                v-model="cycle.repetitions"
+                min="0"
+                max="100"
+              />
+            </div>
+            <div class="details-buttons">
               <v-btn @click="showAddExerciseDropdown = !showAddExerciseDropdown">
                 <div class="myDiv">
                   <svg-icon type="mdi" :path="path2"></svg-icon>
                   <div>
                     <p>Añadir Ejercicio</p>
+                  </div>
+                </div>
+              </v-btn>
+              <v-btn>
+                <div class="myDiv">
+                  <svg-icon type="mdi" :path="path2"></svg-icon>
+                  <div>
+                    <p>Eliminar Ultimo Ejercicio</p>
                   </div>
                 </div>
               </v-btn>
@@ -86,17 +108,6 @@
                   </v-list-item>
                 </v-list>
               </v-menu>
-            </div>
-            <div class="repeticiones">
-              <p class="myText">Repeticiones:</p>
-              <input
-                class="myInputBox"
-                type="number"
-                id="numericInput"
-                v-model="cycle.repetitions"
-                min="0"
-                max="100"
-              />
             </div>
             <div class="ej-list">
               <div class="card">
@@ -327,8 +338,8 @@ import MyEjEjemplo1 from './MyEjEjemplo1.vue';
 
     .details-div{
         display: flex;
+        flex-direction: row;
         justify-content: space-between;
-        align-items: flex-start;
     }
     .myDiv{
         display: flex;
@@ -426,6 +437,14 @@ import MyEjEjemplo1 from './MyEjEjemplo1.vue';
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  .details-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
   }
 
 </style>
