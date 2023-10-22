@@ -5,13 +5,39 @@
         </div>
         <div>
             <p class="field-text">Dificultad</p>
-            <MyBrazoCheck/>
+            <div class="brazo-select">
+                <Brazitos1/>
+                <v-checkbox @change="handleCheckboxChange('toggle-rookie')" hide-details/>
+            </div>
+            <div class="brazo-select">
+                <Brazitos2/>
+                <v-checkbox @change="handleCheckboxChange('toggle-intermediate')" hide-details/>
+            </div>
+            <div class="brazo-select">
+                <Brazitos3/>
+                <v-checkbox  @change="handleCheckboxChange('toggle-expert')" hide-details/>
+            </div>
         </div>
     </div>
 </template>
 
-<script setup>
-    import MyBrazoCheck from './brazitos/MyBrazoCheck.vue';
+<script>
+    import Brazitos1 from '@/components/brazitos/Brazitos1.vue';
+    import Brazitos2 from '@/components/brazitos/Brazitos2.vue';
+    import Brazitos3 from '@/components/brazitos/Brazitos3.vue';
+
+    export default {
+        components: {
+        Brazitos1,
+        Brazitos2,
+        Brazitos3,
+    },
+    methods: {
+    handleCheckboxChange(signal) {
+        this.$emit(signal);
+    }
+    }
+    }
 </script>
 
 <style scoped>
@@ -35,5 +61,11 @@
 
     .title-text{
         margin-bottom: 1%;
+    }
+
+    .brazo-select{
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 </style>

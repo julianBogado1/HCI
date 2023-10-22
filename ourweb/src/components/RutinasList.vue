@@ -22,9 +22,10 @@
 
 <script>
 import { fetchMultiple } from '@/api/api';
+import { fetchFilteredRoutines } from '@/api/api';
 import Brazitos1 from './brazitos/Brazitos1.vue';
-import Brazitos2 from './brazitos/Brazitos1.vue';
-import Brazitos3 from './brazitos/Brazitos1.vue';
+import Brazitos2 from './brazitos/Brazitos2.vue';
+import Brazitos3 from './brazitos/Brazitos3.vue';
 
 export default {
     components: {
@@ -34,6 +35,9 @@ export default {
     },
     data: () => ({
         routines: [],
+        filterRookie: false,
+        filterIntermediate: false,
+        filterExpert: false
     }),
     created() {
         this.loadRoutines()
@@ -41,11 +45,48 @@ export default {
     methods: {
         async loadRoutines() {
             try {
-                const response = await fetchMultiple('users/current/routines', 100);
-                this.routines = response['content'];
+                this.routines = [];
+                let response;
+
+                if (!this.filterRookie && !this.filterIntermediate && !this.filterExpert) {
+                    response = await fetchMultiple('users/current/routines', 100);
+                    this.routines = response['content'];
+                } else {
+                    if (this.filterRookie) {
+                        response = await fetchFilteredRoutines(100, 'rookie');
+                        this.routines = this.routines.concat(response['content']);
+                    }
+                    if (this.filterIntermediate) {
+                        response = await fetchFilteredRoutines(100, 'intermediate');
+                        this.routines = this.routines.concat(response['content']);
+                    }
+                    if (this.filterExpert) {
+                        response = await fetchFilteredRoutines(100, 'expert');
+                        this.routines = this.routines.concat(response['content']);
+                    }
+                }
+                
             } catch(error) {
                 console.error('Error fetching exercise:', error)
             }
+        },
+        filter(message) {
+            switch (message) {
+                case 'rookie':
+                    this.filterRookie = !this.filterRookie;
+                    break;
+                case 'intermediate':
+                    this.filterIntermediate = !this.filterIntermediate;
+                    break;
+                case 'expert':
+                    this.filterExpert = !this.filterExpert;
+                    break;
+                default:
+            }
+            console.log(this.filterRookie)
+            console.log(this.filterIntermediate)
+            console.log(this.filterExpert)
+            this.loadRoutines()
         }
     }
 }
