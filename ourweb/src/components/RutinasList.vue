@@ -114,7 +114,7 @@ export default {
     }
 
     .info-card{
-        height: 90px;
+        height: 100%;
         padding: 10px;
         display: flex;
         flex-direction: column;
