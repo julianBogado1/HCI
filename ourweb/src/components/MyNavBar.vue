@@ -15,7 +15,7 @@
 export default {
     data() {
         return {
-            hasAuthToken: localStorage.AUTHTOKEN,
+            auth: localStorage.AUTHTOKEN,
         };
     },
 };
