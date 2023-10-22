@@ -64,17 +64,16 @@
     display: flex;
     align-items: center; 
     justify-content: space-between;
-    height: 90px;
     padding-left: 10px;
     background-color: #D9D9D9;
   }
-  
   .info-card {
-    height: 90px;
+    height: 100%;
     padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: hidden;
   }
   
   .name-text {
