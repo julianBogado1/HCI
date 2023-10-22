@@ -77,6 +77,11 @@ const router = createRouter({
         component: () => import("@/pages/MyRutinaView.vue"),
       },
       {
+        path: '/mi-rutina-create',
+        name: 'mi-rutina-create',
+        component: () => import("@/pages/MiRutinaCrearPage.vue"),
+      },
+      {
         path: '/confirm-email',
         name: 'confirm-email',
         component: () => import("@/pages/MyConfirmPage.vue"),
