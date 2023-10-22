@@ -27,27 +27,6 @@
           maxLength="150"
         ></v-text-field>
 
-        <v-text-field
-          v-model="Series"
-          class="space-below"
-          :readonly="loading"
-          clearable
-          label="Series"
-          placeholder=""
-          variant="outlined"
-          maxLength="150"
-        ></v-text-field>
-
-        <v-text-field
-          v-model="Duracion"
-          class="space-below"
-          :readonly="loading"
-          clearable
-          label="Duración"
-          placeholder=""
-          variant="outlined"
-          maxLength="150"
-        ></v-text-field>
       </v-form>
       
 
