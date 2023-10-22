@@ -9,14 +9,14 @@
         <div></div>
 
         <div class="content">
-            <MisRutinasList/>
+            <RutinasList/>
         </div>
     </div>
 </template>
 
 <script setup>
-    import MisRutinasList from '@/MisRutinasList.vue';
 import MyFiltro from './MyFiltro.vue';
+import RutinasList from './RutinasList.vue';
 </script>
 
 <style scoped>
