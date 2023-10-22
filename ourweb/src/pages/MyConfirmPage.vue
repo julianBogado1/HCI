@@ -76,6 +76,7 @@ export default {
     loading: false,
     errorMessage: '',
     successMessage: '',
+    confirmation_code: '',
   }),
   methods: {
     async verifyUserWrapper () {

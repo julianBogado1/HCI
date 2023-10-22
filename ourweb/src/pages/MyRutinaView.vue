@@ -21,7 +21,7 @@ import MySubheaderRutina from '@/components/subheaders/MySubheaderRutina.vue';
   <style scoped>
       .subheader{
           position: sticky;
-          top: 110px;
+          top: 104px;
           z-index: 999;
   
           background-color: #FFFFFF;

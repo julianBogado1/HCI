@@ -262,8 +262,8 @@ export const addUser = async (username, password, email)=>{
   let user = {
     "username": username,   //UNIQUE
     "password": password,
-    "firstName": "John",
-    "lastName": "Doe",
+    "firstName": "",
+    "lastName": "",
     "gender": "male",
     "birthdate": 284007600000,
     "email": email,   //UNIQUE
@@ -296,9 +296,13 @@ export const addUser = async (username, password, email)=>{
 export const editUser = async (name, lastname, avatarUrl)=>{
   const url = `${apiUrl}/users/current`;
   const body = JSON.stringify({
-    "firstname": name,
-    "lastname": lastname,
-    "avatarUrl": avatarUrl
+    "firstName": name,
+    "lastName": lastname,
+    "gender": "male",
+    "birthdate": 284007600000,
+    "phone": "98295822",
+    "avatarUrl": avatarUrl,
+    "metadata": null
   });
 
   const options = {
@@ -306,7 +310,21 @@ export const editUser = async (name, lastname, avatarUrl)=>{
     method: 'PUT',
     body,
   };
-  return await apiFetchEmptyBody(url, options);
+
+  try{
+    let response = await apiFetchEmptyBody(url, options);
+    console.log(response);
+    if(!response.ok){throw new Error(`Request failed with status: ${response.status}`);}
+    else if(response.ok){
+        console.log(`Edited user: \n new Name: ${name}\n new LastName: ${lastname} \n new avatarUrl: ${avatarUrl}`);
+        sessionStorage.AVATARURL = avatarUrl;
+        sessionStorage.FIRSTNAME = name;
+        sessionStorage.LASTNAME = lastname;
+        return response;
+    }
+  }catch(error){
+    console.log(error);
+  }
 }
 
 export const getUser = async ()=>{

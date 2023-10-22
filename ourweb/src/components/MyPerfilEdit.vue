@@ -10,15 +10,13 @@
                         <svg-icon type="mdi" :path="path" size="120" v-else/>
                     </div>
                 </div>
-                
                   <div class="avatar-elem">
                     <v-row justify="end">
                     <v-text-field
                     v-model="avatarUrl_edit"
                     class="space-below"
                     :readonly="loading"
-                    label="Inserte Url de la imagen"
-                    placeholder="Enter your password"
+                    label="Inserte Url"
                     variant="outlined"
                     ></v-text-field>
                 </v-row>
@@ -41,7 +39,8 @@
                     class="space-below"
                     :readonly="loading"
                     :rules="reqRules"
-                    label="Nombre"
+                    :label="nombrepreexistente"
+                    placeholder="Nombre"
                     variant="outlined"
                     clearable
                     ></v-text-field>
@@ -52,17 +51,17 @@
                     :readonly="loading"
                     :rules="reqRules"
                     clearable
-                    label="Apellido"
-                    placeholder="Enter your password"
+                    :label="apellidopreexistente"
+                    placeholder="Apellido"
                     variant="outlined"
                     ></v-text-field>
 
-                    <div class="button-with-mssg">
-                <div class="message space-below">
-                    <div v-if="errorMessage" class="text-error">
-                    {{ errorMessage }}
+                <div class="button-with-mssg">
+                    <div class="message space-below">
+                        <div v-if="errorMessage" class="text-error">
+                        {{ errorMessage }}
+                        </div>
                     </div>
-                </div>
                 </div>
                 
                 <v-row justify="end">
@@ -87,20 +86,24 @@
 </template>
 
 <script>
- import SvgIcon from '@jamescoyle/vue-icon';
-  import { mdiAccountCircle } from '@mdi/js';
- import {editUser} from '@/api/api.js';
+import SvgIcon from '@jamescoyle/vue-icon';
+import { mdiAccountCircle } from '@mdi/js';
+import {editUser} from '@/api/api.js';
+
 export default {
     name: "my-component",
     components: {
       SvgIcon
     },
-  data: () => ({
+    data: () => ({
     form: false,
-    nombre_edit: '',
-    apellido_edit: '',  //valores default --> si no se llama a la funcion con parametros, quedan vacios
+    nombrepreexistente: 'Nombre',
+    apellidopreexistente: 'Apellido',
+    errorMessage: '',
+    nombre_edit: sessionStorage.FIRSTNAME,
+    apellido_edit: sessionStorage.LASTNAME,  //valores default --> si no se llama a la funcion con parametros, quedan vacios
     avatarUrl_edit: '',
-    avatar: localStorage.AVATARURL, 
+    avatar: sessionStorage.AVATARURL, 
     loading: false,
     path: mdiAccountCircle,
     reqRules:[
@@ -114,29 +117,29 @@ export default {
 
   methods: {
     async onSubmit () {
+        this.errorMessage = '';
       if (!this.form) return
-      console.log("EMPIEZA AWAIT MAGICO");
       this.loading = true
       try{
-        let response = await editUser(this.nombre_edit, this.apellido_edit, this.avatarUrl_edit);
-        console.log(response);
-        if(!response.ok){throw new Error(`Request failed with status: ${response.status}`);}
-        else if(response.ok){
-            console.log(`Edited user: \n new Name: ${this.nombre_edit}\n new LastName: ${this.apellido_edit} \n new avatarUrl: ${this.avatarUrl_edit}`);
-            localStorage.AVATARURL = this.avatarUrl_edit;
+        if(!this.nombre_edit){
+            this.nombre_edit=sessionStorage.FIRSTNAME;  //se asignan estos valores para no pasar campos vacios a la api
         }
+        if(!this.apellido_edit){
+            this.apellido_edit=sessionStorage.LASTNAME;
+        }
+        if(!this.avatarUrl_edit){
+            this.avatarUrl_edit = sessionStorage.AVATARURL;
+        }
+        let response = await editUser(this.nombre_edit, this.apellido_edit, this.avatarUrl_edit);
         this.loading = false
+        this.errorMessage = '';
       }catch(error){
+        this.errorMessage = 'Ha ocurrido un error al registrar los cambios'
         console.log(error);
         this.loading = false
       }
       setTimeout(() => (this.loading = false), 2000)
       this.errorMessage = '';
-      let response = await editAvatarUrl(this.avatarUrl_edit);
-      console.log(response);
-    },
-    required (v) {
-      return !!v || 'Field is required'
     },
   },
 
