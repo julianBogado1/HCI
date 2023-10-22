@@ -157,11 +157,39 @@
     },
     created() {
       this.populateExercises();
+      this.initialize()
     },
     methods: {
       async populateExercises() {
         const response = await fetchMultiple('exercises', 50);
         this.exercises = response['content'];
+      },
+      async initialize() {
+        this.cards.push({
+          name: `Ciclo de Calentamiento`,
+          order: this.cards.length + 1,
+          detail: "Un ciclo para empezar a ejercitar",
+          type: "warmup",
+          repetitions: 3,
+          exercises: [],
+        },
+        {
+          name: `Ciclo de ejercitación`,
+          order: this.cards.length + 1,
+          detail: "Para una ejercitación a pleno",
+          type: "exercise",
+          repetitions: 3,
+          exercises: [],
+        },
+        {
+          name: `Ciclo de enfriamiento`,
+          order: this.cards.length + 1,
+          detail: "Elongaciones y estiramientos",
+          type: "cooldown",
+          repetitions: 1,
+          exercises: [],
+        }
+        )
       },
       addCycle() {
         this.cards.push({
