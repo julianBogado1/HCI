@@ -67,7 +67,6 @@
           <text class="mytext text-left">Olvidé mi contraseña</text> 
         </div>    
       </v-row>
-
       </v-form>
     </v-card>
 </template>
@@ -110,10 +109,6 @@ import router from '@/router/router.js'
           console.log(token.token);
           localStorage.AUTHTOKEN = token.token;
           this.errorMessage='';
-          let response_r = await fetchMultiple('users/current/routines', 10)
-          if(response_r['totalCount'] === 0) {
-            createInitialRoutines();
-          }
           router.push("/")
         }else{
           console.log(response);

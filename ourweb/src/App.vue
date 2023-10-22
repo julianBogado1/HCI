@@ -1,7 +1,7 @@
 <template>
   <v-app>
   <div id="app">
-      <NavigationBar />
+      
       <router-view v-slot="{ Component }">
           <transition name="slide" mode="out-in">
               <component :is="Component" :key="$route.path" />
@@ -12,4 +12,5 @@
 </template>
 
 <script setup>
+
 </script>

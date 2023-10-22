@@ -17,7 +17,6 @@
 <script setup>
     import MyFiltro from './MyFiltro.vue';
 import RutinasList from './RutinasList.vue';
-    import MyNoRutinesMessage from './messages/MyNoRutinesMessage.vue';
 </script>
 
 <style scoped>

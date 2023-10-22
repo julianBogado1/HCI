@@ -31,9 +31,6 @@ export default{
       name: '',
     };
   },
-  created() {
-    this.setupData();
-  },
   methods: {
   async setupData() {
     let response = await getUser();

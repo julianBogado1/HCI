@@ -11,11 +11,41 @@
   </div>
 </template>
 
-<script setup>
+<script>
   import MyHeader from '../components/MyHeader.vue'
   import MyFooter from '../components/MyFooter.vue'
   import MyBody from '../components/MyBody.vue'
   import MySubheaderRutinasExplorar from '../components/subheaders/MySubheaderRutinasExplorar.vue';
+  import { fetchMultiple } from '@/api/api.js';
+  import { createInitialRoutines } from '@/api/initUser.js'
+
+  export default {
+    components: {
+      MyHeader,
+      MyFooter,
+      MyBody,
+      MySubheaderRutinasExplorar,
+    },
+    async created() {
+      if(localStorage.AUTHTOKEN){
+          try{
+              let response_r = await fetchMultiple('users/current/routines', 10);
+                if(response_r.status===401){
+                  throw error;
+                }
+                if(response_r['totalCount'] === 0) {
+                  console.log("ESTOY AQUI, TAN ENAMORAAAAAADOOOO DE TIIIII");
+                  createInitialRoutines();
+                }  
+          }catch(error){
+              console.log(error);
+          }
+      }
+  },
+}
+
+
+  
 </script>
 
 <style scoped>
