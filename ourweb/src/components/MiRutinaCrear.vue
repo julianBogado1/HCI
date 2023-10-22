@@ -98,11 +98,32 @@
                 max="100"
               />
             </div>
+            <div class="ej-list">
+              <div class="card">
+                <div class="info-card">
+                  <div class="name-text">
+                    <p>NombreEj</p>
+                  </div>
+                  <div class="desc-text">
+                    <p>DescripcionEj</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="info-card">
+                  <div class="name-text">
+                    <p>NombreEj2</p>
+                  </div>
+                  <div class="desc-text">
+                    <p>DescripcionEj2</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-
-      <span></span>
 
       <v-row justify="center" class="space-below">
       <v-btn
@@ -142,20 +163,25 @@
   import { createCycle } from '@/api/api';
   import { createRoutine } from '@/api/api';
   import { addExerciseToCycle } from '@/api/api';
+import MyEjEjemplo1 from './MyEjEjemplo1.vue';
   
   export default {
+    components: {
+      MyEjEjemplo1,
+    },
     data() {
-      return {
-        name: "",
-        description: "",
-        difficulty: 2,
-        exercises: [],
-        cards: [],
-        showAddExerciseDropdown: null,
-        selectedCard: null,
-      };
+        return {
+            name: "",
+            description: "",
+            difficulty: 2,
+            exercises: [],
+            cards: [],
+            showAddExerciseDropdown: null,
+            selectedCard: null,
+        };
     },
     created() {
+<<<<<<< HEAD
       this.populateExercises();
       this.initialize()
     },
@@ -229,26 +255,75 @@
                 console.log(ex.id)
                 response_e = await addExerciseToCycle(response_c.id, ex.id, i, ex.duration, ex.repetitions)
                 i++
+=======
+        this.populateExercises();
+    },
+    methods: {
+        async populateExercises() {
+            const response = await fetchMultiple('exercises', 50);
+            this.exercises = response['content'];
+        },
+        addCycle() {
+            this.cards.push({
+                name: `New Cycle ${this.cards.length + 1}`,
+                order: this.cards.length + 1,
+                detail: "Cycle Detail",
+                type: "exercise",
+                repetitions: 1,
+                exercises: [],
+            });
+        },
+        addExercise(card, exercise) {
+            card.exercises.push({
+                id: exercise.id,
+                name: exercise.name,
+                detail: exercise.detail,
+                duration: 10,
+                repetitions: 1,
+            });
+        },
+        removeExercise(card, index) {
+            if (card.exercises.length > 0) {
+                card.exercises.pop();
+            }
+            else {
+                this.cards.splice(index, 1);
+            }
+        },
+        async createRoutine() {
+            let response_c;
+            let response_e;
+            let response_r = await createRoutine(this.name, this.description, true, getSkillLevel(this.difficulty));
+            for (const card of this.cards) {
+                response_c = await createCycle(response_r.id, card.name, card.detail, card.type, card.order, card.repetitions);
+                var i = 1;
+                for (const ex of card.exercises) {
+                    console.log(ex);
+                    console.log(ex.id);
+                    response_e = await addExerciseToCycle(response_c.id, ex.id, i, ex.duration, ex.repetitions);
+                    i++;
+                }
+            }
+        },
+        isExercisesEmpty(card) {
+            return card.exercises.length === 0;
+        },
+        getSkillLevel(skill) {
+            switch (skill) {
+                case 1:
+                    return "rookie";
+                case 2:
+                    return "intermediate";
+                case 3:
+                    return "expert";
+                default:
+                    return "intermediate";
+>>>>>>> 4db8da3c05fde18fe001d7ba966e3e091d69d6bd
             }
         }
-      },
-      isExercisesEmpty(card) {
-        return card.exercises.length === 0;
-      },
-      getSkillLevel(skill) {
-        switch (skill) {
-          case 1:
-            return "rookie";
-          case 2:
-            return "intermediate";
-          case 3:
-            return "expert";
-          default:
-            return "intermediate";
-        }
-      }
     },
-  };
+    components: { MyEjEjemplo1 }
+};
 </script>
 
 <style scoped>
@@ -322,4 +397,38 @@
         padding: 1%;
         gap: 10px;
     }
+
+    .card {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+    padding-left: 10px;
+    background-color: #D9D9D9;
+  }
+  .info-card {
+    height: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+  
+  .name-text {
+    font-size: x-large;
+    color: #000000;
+    font-weight: 500;
+  }
+  
+  .desc-text {
+    font-size: large;
+    color: #000000;
+  }
+
+  .ej-list{
+    display: flex;
+    flex-direction: column;
+    margin-top: 1%;
+    gap: 10px;
+  }
 </style>
