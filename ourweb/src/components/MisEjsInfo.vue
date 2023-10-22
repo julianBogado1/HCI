@@ -3,13 +3,9 @@
         <div class="mySubheaderDivInfo">
             <h3 class="mySubheaderText">{{ name }}</h3>
             <div class="content">
-                <div>
-                    <v-btn @click="editExercise" class="icon-button">
-                      <svg-icon type="mdi" :path="path1"></svg-icon>
-                    </v-btn>
-                    <v-btn @click="deleteExercise" class="icon-button">
-                      <svg-icon type="mdi" :path="path2"></svg-icon>
-                    </v-btn>
+                <div class="iconButtons">
+                    <svg-icon @click="editExercise" class="icon-button" type="mdi" :path="path1"></svg-icon>
+                    <svg-icon @click="deleteExercise" class="icon-button" type="mdi" :path="path2"></svg-icon>
                   </div>
             </div>
         </div>
@@ -81,11 +77,12 @@ data: () => ({
         color: #000000;
         font-weight: 400;
         font-size: x-large;
+        margin-left: 1%;
     }
 
     .mySubheaderText2{
         color: #49454F;
-        margin-right: 50px;
+        margin-left: 1%;
         font-weight: 300;
         font-size: large;
     }
@@ -124,5 +121,11 @@ data: () => ({
         display: flex;
         align-items: center;
         justify-content: center;
+      }
+
+      .iconButtons{
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
       }
 </style>
