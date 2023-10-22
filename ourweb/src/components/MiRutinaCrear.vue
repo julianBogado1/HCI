@@ -108,6 +108,30 @@
                     <p>DescripcionEj</p>
                   </div>
                 </div>
+                <div class="edit-card">
+                  <div class="edit-elem">
+                  <p class="desc-text-white">Series:</p>
+                    <input
+                      class="myInputBox desc-text-white"
+                      type="number"
+                      id="numericInput"
+                      v-model="cycle.duration" 
+                      min="0"
+                      max="100"
+                    />
+                  </div>
+                  <div class="edit-elem ">
+                  <p class="desc-text-white">Duración (en seg):</p>
+                    <input
+                      class="myInputBox  desc-text-white"
+                      type="number"
+                      id="numericInput"
+                      v-model="cycle.duration" 
+                      min="0"
+                      max="100"
+                    />
+                  </div>
+                </div>
               </div>
 
               <div class="card">
@@ -119,7 +143,32 @@
                     <p>DescripcionEj2</p>
                   </div>
                 </div>
+                <div class="edit-card">
+                  <div class="edit-elem">
+                  <p class="desc-text-white">Series:</p>
+                    <input
+                      class="myInputBox desc-text-white"
+                      type="number"
+                      id="numericInput"
+                      v-model="cycle.duration" 
+                      min="0"
+                      max="100"
+                    />
+                  </div>
+                  <div class="edit-elem ">
+                  <p class="desc-text-white">Duración (en seg):</p>
+                    <input
+                      class="myInputBox  desc-text-white"
+                      type="number"
+                      id="numericInput"
+                      v-model="cycle.duration" 
+                      min="0"
+                      max="100"
+                    />
+                  </div>
+                </div>
               </div>
+              
             </div>
           </div>
         </div>
@@ -327,6 +376,7 @@ import MyEjEjemplo1 from './MyEjEjemplo1.vue';
     align-items: center; 
     justify-content: space-between;
     padding-left: 10px;
+    height: 90px;
     background-color: #D9D9D9;
   }
   .info-card {
@@ -355,4 +405,27 @@ import MyEjEjemplo1 from './MyEjEjemplo1.vue';
     margin-top: 1%;
     gap: 10px;
   }
+
+  .desc-text-white{
+    font-size: large;
+    color: white;
+  }
+
+  .edit-card{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    background-color: #938F99;
+    align-items: center;
+    padding: 1%;
+    gap: 15px;
+  }
+
+  .edit-elem{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
 </style>
