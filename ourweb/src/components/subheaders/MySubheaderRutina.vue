@@ -9,7 +9,7 @@
             <div class="myDiv">
                 <svg-icon type="mdi" :path="path2"></svg-icon>
                 <div >
-                    <p>Crear nuevo</p>
+                    <p>Crear nueva</p>
                 </div>
             </div>
            </router-link>
