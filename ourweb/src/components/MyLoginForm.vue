@@ -112,6 +112,7 @@ import router from '@/router/router.js'
           if(response_r['totalCount'] === 0) {
             createInitialRoutines();
           }
+          router.push("/")
         }else{
           console.log(response);
           if(response.status===401){
@@ -120,7 +121,7 @@ import router from '@/router/router.js'
           else{throw new Error(`Request failed with status: ${response.status}`);};
         }        
         this.loading = false;
-        router.push("/")
+        
       }
       catch(error){
         this.errorMessage='Ha ocurrido un error al iniciar sesión.'
