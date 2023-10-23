@@ -310,8 +310,8 @@ export const addUser = async (username, password, email)=>{
 export const editUser = async (name, lastname, avatarUrl)=>{
   const url = `${apiUrl}/users/current`;
   const body = JSON.stringify({
-    "firstname": name,
-    "lastname": lastname,
+    "firstName": name,
+    "lastName": lastname,
     "avatarUrl": avatarUrl
   });
 

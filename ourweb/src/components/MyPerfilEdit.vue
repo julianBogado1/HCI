@@ -73,6 +73,7 @@
                     rounded="xl"
                     color="#73C7A4"
                     class="text-white"
+                    @click="onSubmit"
                     >
                         Guardar Cambios
                     </v-btn>
