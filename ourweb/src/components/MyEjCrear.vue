@@ -73,12 +73,9 @@
       let response
       try {
         response = await createExercise(this.name, this.description, this.steps);
-
-        if(response.ok) {
-          this.name = '';
-          this.description = '';
-          router.push("/mis-ejs")
-        }
+        this.name = '';
+        this.description = '';
+        router.push("/mis-ejs")
       } catch (error) {
         this.errorMessage = 'Ha ocurrido un problema al crear la rutina. Verifica que no haya otra rutina con el mismo nombre.'
       }
