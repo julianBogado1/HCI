@@ -9,7 +9,7 @@
                 <div class="desc-text">
                     <p>{{ routine.detail }}</p>
                 </div>
-                <router-link :to="'/mi-rutina-view/' + routine.id" class="linkDiv"><p>Click para más info</p></router-link>
+                <router-link :to="'/rutina-view/' + routine.id" class="linkDiv"><p>Click para más info</p></router-link>
             </div>
             <div class="dif-card">
                 <div v-if="routine.difficulty === 'rookie'"><Brazitos1/></div>
