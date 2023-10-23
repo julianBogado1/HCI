@@ -129,7 +129,7 @@ methods: {
         }
       }
     } catch (error) {
-      console.error('Error fetching exercise:', error);
+      router.push("/")
     }
   },
   async getExercises(cycle_id) {

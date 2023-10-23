@@ -2,7 +2,7 @@
     <div class="mess-cont">
         <div class="mess">
             <p class="mess-text">Oops! no se encontraron rutinas, puede crear una</p>
-            <p class="mess-text link-text">aquí</p>
+            <router-link to="/mi-rutina-create"><p class="mess-text link-text">aquí</p></router-link>
         </div>
     </div>
 </template>

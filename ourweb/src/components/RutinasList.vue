@@ -25,7 +25,7 @@
 
 <script>
 import { fetchMultiple } from '@/api/api';
-import { fetchFilteredRoutines } from '@/api/api';
+import { fetchCurrentUserFilteredRoutines } from '@/api/api';
 import Brazitos1 from './brazitos/Brazitos1.vue';
 import Brazitos2 from './brazitos/Brazitos2.vue';
 import Brazitos3 from './brazitos/Brazitos3.vue';
@@ -36,6 +36,7 @@ export default {
         Brazitos1,
         Brazitos2,
         Brazitos3,
+        MyNoRutinesMessage,
     },
     data: () => ({
         routines: [],
@@ -61,11 +62,11 @@ export default {
                         this.routines = this.routines.concat(response['content']);
                     }
                     if (this.filterIntermediate) {
-                        response = await fetchFilteredRoutines(100, 'intermediate');
+                        response = await fetchCurrentUserFilteredRoutines(100, 'intermediate');
                         this.routines = this.routines.concat(response['content']);
                     }
                     if (this.filterExpert) {
-                        response = await fetchFilteredRoutines(100, 'expert');
+                        response = await fetchCurrentUserFilteredRoutines(100, 'expert');
                         this.routines = this.routines.concat(response['content']);
                     }
                 }

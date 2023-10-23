@@ -12,7 +12,7 @@
           label="Nombre"
           variant="outlined"
           clearable
-          maxLength="50"
+          maxLength="99"
         ></v-text-field>
 
         <v-text-field
@@ -24,8 +24,14 @@
           label="Descripción"
           placeholder=""
           variant="outlined"
-          maxLength="150"
+          maxLength="199"
         ></v-text-field>
+
+        <div class="message space-below">
+          <div v-if="errorMessage" class="text-error">
+          {{ errorMessage }}
+        </div>
+      </div>
 
       </v-form>
       
@@ -33,6 +39,7 @@
       <v-row justify="end">
           <v-btn
           :loading="loading"
+          :disabled="!isFormValid"
           size="large"
           type="submit"
           variant="elevated"
@@ -56,28 +63,29 @@
   data: () => ({
     name: '',
     description: '',
-    steps: '',
+    errorMessage: '',
     form: null,
     loading: false,
     reqRules: [], 
   }),
   methods: {
     async onSubmit() {
+      let response
       try {
-        // Fetch exercises and create the new exercise
-        const response = await createExercise(this.name, this.description, this.steps);
-
-        // Reset input fields
+        response = await createExercise(this.name, this.description, this.steps);
         this.name = '';
         this.description = '';
-        this.steps = '';
         router.push("/mis-ejs")
       } catch (error) {
-        // Handle errors here
-        console.error('Error:', error);
+        this.errorMessage = 'Ha ocurrido un problema al crear la rutina. Verifica que no haya otra rutina con el mismo nombre.'
       }
     },
   },
+  computed: {
+    isFormValid() {
+      return this.name && this.description
+    }
+  }
 };
 </script>
 
@@ -99,5 +107,19 @@
 
     .space-below{
     margin-bottom: 20px;
+  }
+
+  .text-error {
+    color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .message{/*reservamos espacio para el mensaje */
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 </style>
