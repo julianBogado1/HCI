@@ -18,11 +18,25 @@ const router = createRouter({
         path: '/login',
         name: 'login',
         component: () => import("@/pages/LoginPage.vue"),
+        beforeEnter: (to, from, next) => {
+          if (localStorage.AUTHTOKEN) {
+            next();
+          } else {
+            next('/');
+          }
+        },
       },
       {
         path: '/register',
         name: 'register',
         component: () => import("@/pages/RegisterPage.vue"),
+        beforeEnter: (to, from, next) => {
+          if (localStorage.AUTHTOKEN) {
+            next();
+          } else {
+            next('/');
+          }
+        },
       },
       {
         path: '/mi-rutina-edit',
