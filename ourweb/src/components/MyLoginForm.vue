@@ -73,8 +73,6 @@
 
 <script>
 import { loginUser } from '@/api/api.js'
-import { fetchMultiple } from '@/api/api.js'
-import { createInitialRoutines } from '@/api/initUser.js'
 import router from '@/router/router.js'
 
   export default {
