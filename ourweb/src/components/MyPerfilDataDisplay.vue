@@ -25,6 +25,7 @@
 import {getUser} from '@/api/api.js';
 export default{
     async created(){
+        console.log("DENTRO DE CREATED");
         this.setupData();
     },
     data() {
@@ -36,6 +37,7 @@ export default{
     },
     methods: {
         async setupData() {
+            console.log("DENTRO DE SETUPDATA");
             let response = await getUser();
             console.log(response);
             sessionStorage.AVATARURL = response.avatarUrl; // se guardan los datos de la sesion iniciada en ese momento
