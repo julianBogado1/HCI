@@ -74,7 +74,7 @@
               <v-btn
               variant="outlined"
               color="#5DA587"
-               @click="cycle.showAddExerciseDropdown = !cycle.showAddExerciseDropdown">
+               @click="addExerciseAndClearSelection(cycle)">
                 <div class="myDiv">
                   <svg-icon type="mdi" :path="path2"></svg-icon>
                   <div>
@@ -93,17 +93,12 @@
                   </div>
                 </div>
               </v-btn>
-              <v-menu v-model="cycle.showAddExerciseDropdown" offset-y >
-                <v-list class="dropdown">
-                  <v-list-item
-                    v-for="(exercise, eIndex) in exercises"
-                    :key="eIndex"
-                    @click="addExercise(cycle, exercise)"
-                  >
-                    <v-list-item-title>{{ exercise.name }}</v-list-item-title>
-                  </v-list-item>
-                </v-list>
-              </v-menu>
+              <v-select
+                v-model="cycle.selectedExercise"
+                :items="exercises.map(exercise => exercise.name)"
+                label="Añadir Ejercicio"
+                @input="addExerciseAndClearSelection(cycle)"
+              ></v-select>
             </div>
             
             <div class="space-below" v-for="(exercise, eIndex) in cycle.exercises" :key="eIndex">
@@ -276,15 +271,24 @@
         this.cards.push(cooldown)
         this.cycles++
       },
-      addExercise(card, exercise) {
-        card.exercises.push({
-            id: exercise.id,
-            name: exercise.name,
-            detail: exercise.detail,
-            duration: 10,
-            repetitions: 1,
-        });
-        console.log(card.exercises)
+      addExercise(card, selectedExercise) {
+          if (selectedExercise) {
+            card.exercises.push({
+              id: selectedExercise.id,
+              name: selectedExercise.name,
+              detail: selectedExercise.detail,
+              duration: 10,
+              repetitions: 1,
+            });
+            card.selectedExercise = null;
+            console.log(card.exercises);
+          }
+      },
+      addExerciseAndClearSelection(cycle) {
+        if (cycle.selectedExercise) {
+          this.addExercise(cycle, cycle.selectedExercise);
+          cycle.selectedExercise = null;
+        }
       },
       removeExercise(card, index) {
         if (card.exercises.length > 0) {
