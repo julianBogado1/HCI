@@ -51,12 +51,21 @@
                     <router-link to="/register" class="mytext linkDiv">Volver a la página principal</router-link>
                     </div>
                     <v-divider
+                    class="mx-3"
+                    vertical
+                ></v-divider>
+                    <div class="center-text">
+                        <router-link to="/confirm-email" class="mytext linkDiv" @click="resendEmail"
+                        >Reenviar email de verificación</router-link>
+                        </div>
+                    <v-divider
                         class="mx-3"
                         vertical
                     ></v-divider>
                     <div class="izq-text">
                     <router-link to="/login" class=" mytext linkDiv">Ingresar</router-link> 
                     </div>  
+                    
                 </v-row>
             </v-card>
         </div>
@@ -68,7 +77,7 @@
 <script>
 import { mdiContentSaveCogOutline } from '@mdi/js';
 import MyFooter from '../components/MyFooter'
-import { verifyUser } from '@/api/api.js';
+import { resendVerificationEmail, verifyUser } from '@/api/api.js';
 import router from '@/router/router';
 
 export default {
@@ -102,7 +111,19 @@ export default {
             this.loading=false;
         }
         setTimeout(() => (this.loading = false), 2000);
+    },
+    async resendEmail(){
+        console.log("resent verification email");
+        try{
+            const resend_response = await resendVerificationEmail(localStorage.lastRegisteredEmail);
+            if(!resend_response.ok){
+                throw new Error(resend_response);
+            }
+        }  
+        catch(error){
+            console.log(error);
         }
+    }
     },
 };
 
@@ -124,6 +145,14 @@ export default {
   justify-content: left;
 }
 
+.center-text{
+    flex: 1; /*mismo espacio*/
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    justify-content:center;
+  }
 .der-text{
   flex: 1; /*mismo espacio*/
   display: flex;
@@ -135,7 +164,12 @@ export default {
 .linkDiv{
     text-decoration: none;
 }
-
+.divisor-izq{
+   margin-right: 5px;
+}
+.divisor-der{
+    margin-left: 10px;
+}
 .mytext{
 color: #73C7A4;
 }

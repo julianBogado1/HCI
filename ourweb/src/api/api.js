@@ -277,8 +277,8 @@ export const addUser = async (username, password, email)=>{
   let user = {
     "username": username,   //UNIQUE
     "password": password,
-    "firstName": "John",
-    "lastName": "Doe",
+    "firstName": "nombre",
+    "lastName": "apellido",
     "gender": "male",
     "birthdate": 284007600000,
     "email": email,   //UNIQUE
@@ -376,6 +376,19 @@ export const logOut = async (verified_token)=>{
       'Content-Type': 'application/json',
     },
     method: 'POST',
+  };
+  return await apiFetchEmptyBody(url, options);
+}
+
+export const resendVerificationEmail = async (email)=>{
+  const url = `${apiUrl}/users/resend_verification`;
+  const body = JSON.stringify({
+    "email": email,
+  });
+  const options = {
+    ...requestOptionsNoHeader,
+    method: 'POST',
+    body,
   };
   return await apiFetchEmptyBody(url, options);
 }
