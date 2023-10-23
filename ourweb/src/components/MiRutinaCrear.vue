@@ -309,11 +309,11 @@
       },
       getSkillLevel(skill) {
         switch (skill) {
-          case 1:
+          case 'Principiante':
             return "rookie";
-          case 2:
+          case 'Intermedio':
             return "intermediate";
-          case 3:
+          case 'Avanzado':
             return "expert";
           default:
             return "intermediate";

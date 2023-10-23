@@ -87,9 +87,6 @@ export default {
                     break;
                 default:
             }
-            console.log(this.filterRookie)
-            console.log(this.filterIntermediate)
-            console.log(this.filterExpert)
             this.loadRoutines()
         }
     }

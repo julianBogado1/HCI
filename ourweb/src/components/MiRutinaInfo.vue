@@ -79,11 +79,50 @@
     </div>
 </template>
 
-<script setup>
-import MyEditDelete from '../components/MyEditDelete.vue';
-import MyEjEjemplo1 from './MyEjEjemplo1.vue';
+<script>
+import Brazitos1 from './brazitos/Brazitos1.vue';
 import Brazitos2 from './brazitos/Brazitos2.vue';
+import Brazitos3 from './brazitos/Brazitos3.vue';
 
+export default {
+  components: {
+    Brazitos1,
+    Brazitos2,
+    Brazitos3,
+  },
+data: () => ({
+  form: {},
+  id: null,
+  name: "Ejercicio",
+  description: "Descripción del Ejercicio",
+  reqRules: [],
+  path1: mdiPencilOutline,
+  path2: mdiTrashCanOutline,
+  }),
+  created() {
+    this.id = this.$route.params.id;
+    this.loadExercise();
+  },
+  methods: {
+  async loadExercise() {
+    try {
+      const exercise = await fetchSingle('exercises', this.id);
+      
+      this.name = exercise.name;
+      this.description = exercise.detail;
+    } catch (error) {
+      console.error('Error fetching exercise:', error);
+    }
+  },
+  async editExercise() {
+    router.push(`/mi-ej-edit/${this.id}`)
+  },
+  async deleteExercise() {
+    await deleteSingle('exercises', this.id)
+    router.push("/mis-ejs")
+  }
+  },
+};
 
 </script>
 
