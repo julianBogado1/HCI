@@ -10,11 +10,6 @@ const router = createRouter({
         component: HomePage
       },
       {
-        path: '/ejs',
-        name: 'ejs',
-        component: () => import("@/pages/HomeEjsPage.vue"),
-      },
-      {
         path: '/login',
         name: 'login',
         component: () => import("@/pages/LoginPage.vue"),
