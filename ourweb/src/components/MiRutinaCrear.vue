@@ -38,7 +38,7 @@
             ></v-select>
       </div>
 
-      <div class="space-below">
+      <div class="duracion space-below">
         <p class="myText">Duración (en minutos):</p>
         <input
             class="myInputBox"
@@ -52,17 +52,7 @@
 
       <div v-for="(cycle, index) in cards" :key="index">
 
-        <div class="duracion space-below">
-          <p class="myText">Duración (en segundos):</p>
-          <input
-            class="myInputBox"
-            type="number"
-            id="numericInput"
-            v-model="cycle.duration" 
-            min="0"
-            max="100"
-          />
-        </div>
+        
         <div>
           <div class="space-below">
             <v-divider :thickness="1" class="border-opacity-50"></v-divider>
@@ -80,7 +70,7 @@
                   max="100"
                 />
               </div>
-              <div class="details-buttons">
+              <div class="details-buttons space-below">
               <v-btn
               variant="outlined"
               color="#5DA587"
@@ -116,8 +106,8 @@
                 </v-list>
               </v-menu>
             </div>
-
-            <div v-for="(exercise, eIndex) in cycle.exercises" :key="eIndex">
+            
+            <div class="space-below" v-for="(exercise, eIndex) in cycle.exercises" :key="eIndex">
               <div class="ej-list">
                 <div class="card">
                   <div class="info-card">
@@ -155,6 +145,19 @@
                 </div>
               </div>
             </div>
+
+            <div class="duracion space-below">
+              <p class="myText">Duración del ciclo (en segundos):</p>
+              <input
+                class="myInputBox"
+                type="number"
+                id="numericInput"
+                v-model="cycle.duration" 
+                min="0"
+                max="100"
+              />
+            </div>
+
           </div>
 
         </div>
@@ -172,7 +175,7 @@
           class="text-white"
           @click="addCycle"
           >
-              Añadir Ciclo de
+              Añadir Ciclo de Entrenamiento
           </v-btn>
         </v-row>
 
@@ -249,7 +252,7 @@
           exercises: [],
         },
         {
-          name: `Ciclo de enfriamiento`,
+          name: `Ciclo de Enfriamiento`,
           order: 99,
           detail: "Elongaciones y estiramientos",
           type: "cooldown",
