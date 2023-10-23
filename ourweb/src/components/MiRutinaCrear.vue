@@ -59,7 +59,7 @@
             <div class="details-div">
               <v-text-field v-model="cycle.name" readonly></v-text-field>
               </div>
-              <div class="repeticiones">
+              <div class="repeticiones space-below">
                 <p class="myText">Repeticiones:</p>
                 <input
                   class="myInputBox"
@@ -70,19 +70,36 @@
                   max="100"
                 />
               </div>
+
+              <div>
+              <v-select
+                v-model="cycle.selectedExercise"
+                :items="exercises.map(exercise => exercise.name)"
+                label="Elegir Ejercicio"
+                @input="addExerciseAndClearSelection(cycle)"
+                variant="outlined"
+                class="selectEj"
+              ></v-select>
+            </div>
+              
+            
+
               <div class="details-buttons space-below">
-              <v-btn
-              variant="outlined"
-              color="#5DA587"
-               @click="addExerciseAndClearSelection(cycle)">
-                <div class="myDiv">
-                  <svg-icon type="mdi" :path="path2"></svg-icon>
-                  <div>
-                    <p>Añadir Ejercicio</p>
-                  </div>
-                </div>
-              </v-btn>
+                <v-btn
+                class="custom-button"
+                  variant="outlined"
+                  color="#5DA587"
+                  @click="addExerciseAndClearSelection(cycle)">
+                    <div class="myDiv">
+                      <svg-icon type="mdi" :path="path2"></svg-icon>
+                      <div>
+                        <p>Añadir Ejercicio</p>
+                      </div>
+                    </div>
+                  </v-btn>
+
               <v-btn 
+              class="custom-button"
               variant="outlined"
               color="#5DA587"
               @click="removeExercise(cycle, index)">
@@ -93,12 +110,7 @@
                   </div>
                 </div>
               </v-btn>
-              <v-select
-                v-model="cycle.selectedExercise"
-                :items="exercises.map(exercise => exercise.name)"
-                label="Añadir Ejercicio"
-                @input="addExerciseAndClearSelection(cycle)"
-              ></v-select>
+              
             </div>
             
             <div class="space-below" v-for="(exercise, eIndex) in cycle.exercises" :key="eIndex">
@@ -476,10 +488,11 @@
       justify-content: center;
     }
 
-    .dropdown{
-      position: fixed;
-      top: 50px;
-      left: 50px;
+    .selectEj{
+      color: #5DA587;
     }
 
+    .custom-button{
+      flex-grow: 1;
+    }
 </style>
