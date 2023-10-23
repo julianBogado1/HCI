@@ -15,7 +15,7 @@
                 <div v-if="routine.difficulty === 'rookie'"><Brazitos1/></div>
                 <div v-if="routine.difficulty === 'intermediate'"><Brazitos2/></div>
                 <div v-if="routine.difficulty === 'expert'"><Brazitos3/></div>
-                <p>{{ routine.duracion }} seg</p>
+                <div v-if="routine.metadata != null"><div v-if="routine.metadata.duration"><p>{{ routine.metadata.duration }} min</p></div></div>
             </div>
         </div>
         </div>
