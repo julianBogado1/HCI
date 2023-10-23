@@ -19,7 +19,7 @@ const router = createRouter({
         name: 'login',
         component: () => import("@/pages/LoginPage.vue"),
         beforeEnter: (to, from, next) => {
-          if (localStorage.AUTHTOKEN) {
+          if (!localStorage.AUTHTOKEN) {
             next();
           } else {
             next('/');
@@ -31,7 +31,7 @@ const router = createRouter({
         name: 'register',
         component: () => import("@/pages/RegisterPage.vue"),
         beforeEnter: (to, from, next) => {
-          if (localStorage.AUTHTOKEN) {
+          if (!localStorage.AUTHTOKEN) {
             next();
           } else {
             next('/');
