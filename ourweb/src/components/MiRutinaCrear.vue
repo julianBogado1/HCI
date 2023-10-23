@@ -266,7 +266,7 @@
       addCycle() {
         const cooldown = this.cards.pop()
         this.cards.push({
-          name: `Ciclo de Ejercitación ${this.cycles - 1}`,
+          name: `Ciclo de Ejercitación ${this.cycles}`,
           order: this.cycles + 1,
           detail: "Cycle Detail",
           type: "exercise",
