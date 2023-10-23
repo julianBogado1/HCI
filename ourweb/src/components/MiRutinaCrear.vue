@@ -210,6 +210,7 @@
   import { addExerciseToCycle } from '@/api/api';
   import MyEjEjemplo1 from './MyEjEjemplo1.vue';
   import router from '@/router/router';
+import { mdiCreditCard } from '@mdi/js';
   
   export default {
     components: {
@@ -220,7 +221,7 @@
             name: "",
             loading: false,
             description: "",
-            difficulty: 2,
+            difficulty: 'Intermedio',
             duration: 0,
             exercises: [],
             cards: [],
@@ -314,14 +315,14 @@
         this.loading=true;
         let response_c
         let response_e
-        let response_r = await createRoutine(this.name, this.description, true, this.getSkillLevel(this.difficulty), this.duration)
+        let response_r = await createRoutine(this.name, this.description, true, this.getSkillLevel(this.difficulty), Math.min(Math.max(this.duration, 1), 999))
         for(const card of this.cards) {
-            response_c = await createCycle(response_r.id, card.name, card.detail, card.type, card.order, card.repetitions)
+            response_c = await createCycle(response_r.id, card.name, card.detail, card.type, card.order, Math.min(Math.max(card.repetitions, 1), 999))
             var i = 1
             for(const ex of card.exercises) {
                 console.log(ex)
                 console.log(ex.id)
-                response_e = await addExerciseToCycle(response_c.id, ex.id, i, ex.duration, ex.repetitions)
+                response_e = await addExerciseToCycle(response_c.id, ex.id, i, Math.min(Math.max(ex.duration, 1), 999), Math.min(Math.max(ex.repetitions, 1), 999))
                 i++
             }
         }
@@ -347,7 +348,9 @@
     components: { MyEjEjemplo1 },
     computed: {
     isFormValid() {
-      return this.name && this.description && this.difficulty && this.duration && this.cards.every(card => card.duration && card.repetitions);
+      return this.name && this.description && this.difficulty && this.duration
+       && this.cards.every(card => card.duration && card.repetitions && card.duration >= 1 && card.duration <= 999 && card.repetitions >= 1 && card.repetitions <= 999)
+        && this.cards.every(card => !card.exercises || card.exercises.every(exercise => exercise.duration && exercise.repetitions && exercise.duration >= 1 && exercise.duration <= 999 && exercise.repetitions >= 1 && exercise.repetitions <= 999));
     },
   },
 };
