@@ -57,7 +57,7 @@ export default {
                     this.routines = response['content'];
                 } else {
                     if (this.filterRookie) {
-                        response = await fetchFilteredRoutines(100, 'rookie');
+                        response = await fetchCurrentUserFilteredRoutines(100, 'rookie');
                         this.routines = this.routines.concat(response['content']);
                     }
                     if (this.filterIntermediate) {

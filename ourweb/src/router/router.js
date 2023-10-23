@@ -28,6 +28,13 @@ const router = createRouter({
         path: '/mi-rutina-edit',
         name: 'mi-rutina-edit',
         component: () => import("@/pages/MiRutinaEditPage.vue"),
+        beforeEnter: (to, from, next) => {
+          if (localStorage.AUTHTOKEN) {
+            next();
+          } else {
+            next('/login');
+          }
+        },
       },
       {
         path: '/profile',
@@ -45,36 +52,85 @@ const router = createRouter({
         path: '/profile-edit',
         name: 'profile-edit',
         component: () => import("@/pages/PerfilEditPage.vue"),
+        beforeEnter: (to, from, next) => {
+          if (localStorage.AUTHTOKEN) {
+            next();
+          } else {
+            next('/login');
+          }
+        },
       },
       {
         path: '/mis-ejs',
         name: 'mis-ejs',
         component: () => import("@/pages/MisEjsPage.vue"),
+        beforeEnter: (to, from, next) => {
+          if (localStorage.AUTHTOKEN) {
+            next();
+          } else {
+            next('/login');
+          }
+        },
       },
       {
         path: '/mis-rutinas',
         name: 'mis-rutinas',
         component: () => import("@/pages/MisRutinasPage.vue"),
+        beforeEnter: (to, from, next) => {
+          if (localStorage.AUTHTOKEN) {
+            next();
+          } else {
+            next('/login');
+          }
+        },
       },
       {
         path: '/mi-ej-edit/:id',
         name: 'mi-ej-edit',
         component: () => import("@/pages/MyEjEditPage.vue"),
+        beforeEnter: (to, from, next) => {
+          if (localStorage.AUTHTOKEN) {
+            next();
+          } else {
+            next('/login');
+          }
+        },
       },
       {
         path: '/mi-ej-create',
         name: 'mi-ej-create',
         component: () => import("@/pages/MyEjCrearPage.vue"),
+        beforeEnter: (to, from, next) => {
+          if (localStorage.AUTHTOKEN) {
+            next();
+          } else {
+            next('/login');
+          }
+        },
       },
       {
         path: '/mi-ej-view/:id',
         name: 'mi-ej-view',
         component: () => import("@/pages/MyEjView.vue"),
+        beforeEnter: (to, from, next) => {
+          if (localStorage.AUTHTOKEN) {
+            next();
+          } else {
+            next('/login');
+          }
+        },
       },
       {
         path: '/mi-rutina-view/:id',
         name: 'mi-rutina-view',
         component: () => import("@/pages/MyRutinaView.vue"),
+        beforeEnter: (to, from, next) => {
+          if (localStorage.AUTHTOKEN) {
+            next();
+          } else {
+            next('/login');
+          }
+        },
       },
       {
         path: '/rutina-view/:id',
@@ -85,6 +141,13 @@ const router = createRouter({
         path: '/mi-rutina-create',
         name: 'mi-rutina-create',
         component: () => import("@/pages/MiRutinaCrearPage.vue"),
+        beforeEnter: (to, from, next) => {
+          if (localStorage.AUTHTOKEN) {
+            next();
+          } else {
+            next('/login');
+          }
+        },
       },
       {
         path: '/confirm-email',
@@ -98,13 +161,5 @@ const router = createRouter({
     ]
 })
 
-
-//TODO activarlo cuando ya tengamos usuarios
-/*router.beforeEach((to, from) => {
-  if (to.matched.some(route => route.meta.requiresAuth) &&
-      !store.user)
-      return { name: "login", query: { redirect: to.fullPath } }
-})
-*/
 
 export default router

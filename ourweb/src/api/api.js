@@ -51,6 +51,13 @@ export const fetchMultiple = async (type, size) => {
 };
 
 export const fetchFilteredRoutines = async (size, filter) => {
+  const url = `${apiUrl}/routines?size=${size}&difficulty=${filter}`
+  const options = { ...requestOptions };
+
+  return await apiFetch(url, options);
+}
+
+export const fetchCurrentUserFilteredRoutines = async (size, filter) => {
   const url = `${apiUrl}/users/current/routines?size=${size}&difficulty=${filter}`
   const options = { ...requestOptions };
 
