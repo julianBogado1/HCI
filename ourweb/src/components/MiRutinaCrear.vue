@@ -208,14 +208,9 @@
   import { createCycle } from '@/api/api';
   import { createRoutine } from '@/api/api';
   import { addExerciseToCycle } from '@/api/api';
-  import MyEjEjemplo1 from './MyEjEjemplo1.vue';
   import router from '@/router/router';
-import { mdiCreditCard } from '@mdi/js';
   
   export default {
-    components: {
-      MyEjEjemplo1,
-    },
     data() {
         return {
             name: "",
@@ -345,7 +340,6 @@ import { mdiCreditCard } from '@mdi/js';
         }
       }
     },
-    components: { MyEjEjemplo1 },
     computed: {
     isFormValid() {
       return this.name && this.description && this.difficulty && this.duration
