@@ -80,7 +80,7 @@
           router.push("/mis-ejs")
         }
       } catch (error) {
-        this.errorMessage = 'Ocurrió un error al crear la rutina, asegurate de que una rutina con el mismo nombre no existe'
+        this.errorMessage = 'Ha ocurrido un problema al crear la rutina. Verifica que no haya otra rutina con el mismo nombre.'
       }
     },
   },

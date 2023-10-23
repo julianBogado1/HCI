@@ -132,7 +132,7 @@ methods: {
         }
       }
     } catch (error) {
-      console.error('Error fetching exercise:', error);
+      router.push("/mis-rutinas")
     }
   },
   async getExercises(cycle_id) {

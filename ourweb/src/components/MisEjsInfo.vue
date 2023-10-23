@@ -57,7 +57,7 @@ data: () => ({
       this.name = exercise.name;
       this.description = exercise.detail;
     } catch (error) {
-      console.error('Error fetching exercise:', error);
+      router.push("/mis-ejs")
     }
   },
   async editExercise() {

@@ -31,6 +31,7 @@
 
       <v-row justify="end">
           <v-btn
+          :disabled="!isFormValid"
           size="large"
           type="submit"
           variant="elevated"
@@ -54,12 +55,12 @@ import router from '@/router/router.js'
 
 export default {
 data: () => ({
-  form: {}, // Your form data
+  form: {},
   id: null,
-  name: null, // Text for the name field
+  name: null,
   description: null,
   loading: false,
-  reqRules: [], // Your validation rules
+  reqRules: [],
   }),
   created() {
     this.id = this.$route.params.id;
@@ -73,22 +74,24 @@ data: () => ({
       this.name = exercise.name;
       this.description = exercise.detail;
     } catch (error) {
-      // Handle any errors that may occur during the fetch
-      console.error('Error fetching exercise:', error);
+      router.push("/mis-ejs")
     }
   },
   async onSubmit() {
-    console.log("se apreto")
     try {
       const response = await editExercise(this.id, this.name, this.description)
       router.push("/mis-ejs")
     }
     catch (error) {
-        // Handle errors here
         console.error('Error:', error);
       }
     },
   },
+  computed: {
+    isFormValid() {
+      return this.name && this.description
+    }
+  }
 };
 
 </script>
