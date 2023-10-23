@@ -51,7 +51,7 @@
 import router from '@/router/router';
 import MyPerfilDataDisplay from '../components/MyPerfilDataDisplay.vue'
 import MyPlaceholderAvatar from '../components/MyPlaceholderAvatar.vue'
-import { logOut } from '@/api/api.js';
+import { getUserVerified, logOut } from '@/api/api.js';
 import { getUser } from '@/api/api.js';
 
 export default {
@@ -70,7 +70,8 @@ export default {
     async logOutUser(){
         this.loading=true;
         try{
-            let response = await logOut();
+            console.log("auth"+localStorage.AUTHTOKEN)
+            let response = await logOut(localStorage.AUTHTOKEN);
             if(!response.ok){
                 console.log(response);   
             }
@@ -90,7 +91,8 @@ export default {
     async loadAvatar() {
       // Load the avatar image (you may use an API call or any other method)
       try {
-        const response = await getUser(); // Replace with your actual method
+        const response = await getUserVerified(localStorage.AUTHTOKEN); // Replace with your actual method
+        console.log(response);
         this.avatar = response.avatarUrl; // Update the avatar URL
       } catch (error) {
         console.error(error);
@@ -101,7 +103,7 @@ export default {
   },
   created(){
     this.loadAvatar();
-  }
+  },
 };
 
 </script>

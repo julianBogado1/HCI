@@ -89,7 +89,7 @@
 <script>
 import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiAccountCircle } from '@mdi/js';
-import {editUser} from '@/api/api.js';
+import {editUserVerified} from '@/api/api.js';
 import router from '@/router/router.js'
 
 export default {
@@ -132,7 +132,7 @@ export default {
         if(!this.avatarUrl_edit){
             this.avatarUrl_edit = sessionStorage.AVATARURL;
         }
-        let response = await editUser(this.nombre_edit, this.apellido_edit, this.avatarUrl_edit);
+        let response = await editUserVerified(this.nombre_edit, this.apellido_edit, this.avatarUrl_edit, localStorage.AUTHTOKEN);
         this.avatar = sessionStorage.AVATARURL;
         this.loading = false
         this.errorMessage = '';

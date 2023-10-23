@@ -1,5 +1,6 @@
 const apiUrl = 'http://localhost:8080/api';
 const authToken = localStorage.AUTHTOKEN;
+console.log(authToken);
 
 const requestOptions = {
   headers: {
@@ -276,8 +277,8 @@ export const addUser = async (username, password, email)=>{
   let user = {
     "username": username,   //UNIQUE
     "password": password,
-    "firstName": "John",
-    "lastName": "Doe",
+    "firstName": "nombre",
+    "lastName": "apellido",
     "gender": "male",
     "birthdate": 284007600000,
     "email": email,   //UNIQUE
@@ -323,7 +324,29 @@ export const editUser = async (name, lastname, avatarUrl)=>{
   return await apiFetchEmptyBody(url, options);
 }
 
+
+export const editUserVerified = async (name, lastname, avatarUrl, verified_token)=>{
+
+  const url = `${apiUrl}/users/current`;
+  const body = JSON.stringify({
+    "firstName": name,
+    "lastName": lastname,
+    "avatarUrl": avatarUrl
+  });
+
+  const options = {
+    headers: {
+      Authorization: `Bearer ${verified_token}`,
+      'Content-Type': 'application/json',
+    },
+    method: 'PUT',
+    body,
+  };
+  return await apiFetchEmptyBody(url, options);
+}
+
 export const getUser = async ()=>{
+  const authToken = localStorage.AUTHTOKEN;
   const url = `${apiUrl}/users/current`;
   const options = {
     ...requestOptions,
@@ -332,11 +355,40 @@ export const getUser = async ()=>{
   return await apiFetch(url, options);
 }
 
-export const logOut = async ()=>{
+export const getUserVerified = async (verified_token)=>{
+  const url = `${apiUrl}/users/current`;
+  const options = {
+    headers: {
+      Authorization: `Bearer ${verified_token}`,
+      'Content-Type': 'application/json',
+    },
+    method: 'GET',
+  };
+  return await apiFetch(url, options);
+}
+
+
+export const logOut = async (verified_token)=>{
   const url = `${apiUrl}/users/logout`;
   const options = {
-    ...requestOptions,
+    headers: {
+      Authorization: `Bearer ${verified_token}`,
+      'Content-Type': 'application/json',
+    },
     method: 'POST',
+  };
+  return await apiFetchEmptyBody(url, options);
+}
+
+export const resendVerificationEmail = async (email)=>{
+  const url = `${apiUrl}/users/resend_verification`;
+  const body = JSON.stringify({
+    "email": email,
+  });
+  const options = {
+    ...requestOptionsNoHeader,
+    method: 'POST',
+    body,
   };
   return await apiFetchEmptyBody(url, options);
 }
