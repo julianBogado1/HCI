@@ -90,6 +90,7 @@
 import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiAccountCircle } from '@mdi/js';
 import {editUser} from '@/api/api.js';
+import router from '@/router/router.js'
 
 export default {
     name: "my-component",
@@ -135,6 +136,7 @@ export default {
         this.avatar = sessionStorage.AVATARURL;
         this.loading = false
         this.errorMessage = '';
+        router.push("/profile")
       }catch(error){
         this.errorMessage = 'Ha ocurrido un error al registrar los cambios'
         console.log(error);
@@ -144,9 +146,6 @@ export default {
       this.errorMessage = '';
     },
   },
-    updated() {
-    this.onSubmit();
-    },
 }
 </script>
 <style scoped>
