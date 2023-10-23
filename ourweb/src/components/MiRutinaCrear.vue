@@ -284,16 +284,17 @@
         this.cycles++
       },
       addExercise(card, selectedExercise) {
+        
           if (selectedExercise) {
+            const exercise = this.exercises.find(exercise => exercise.name === selectedExercise)
             card.exercises.push({
-              id: selectedExercise.id,
-              name: selectedExercise.name,
-              detail: selectedExercise.detail,
+              id: exercise.id,
+              name: exercise.name,
+              detail: exercise.detail,
               duration: 10,
               repetitions: 1,
             });
             card.selectedExercise = null;
-            console.log(card.exercises);
           }
       },
       addExerciseAndClearSelection(cycle) {
@@ -488,7 +489,7 @@
       justify-content: center;
     }
 
-    .selectEj{
+    .selectEj {
       color: #5DA587;
     }
 
