@@ -32,7 +32,7 @@
         <div>
             <v-divider :thickness="1" class="border-opacity-50"></v-divider>
             <div class="details-div">
-            <p class="mySubheaderText2">{{ this.difficulty }}</p>
+            <p class="mySubheaderText2">Dificultad</p>
         </div>
         </div>
         
@@ -64,11 +64,11 @@
                 </div>
                 <div class="edit-card">
                   <div class="edit-elem">
-                    <p class="desc-text-white">Series:</p>
+                    <p class="desc-text-white">Series</p>
                     <p class="desc-text-white"> {{ exercise.repetitions }} </p>
                   </div>
                   <div class="edit-elem">
-                    <p class="desc-text-white">Duración (en seg):</p>
+                    <p class="desc-text-white">Duración (en seg)</p>
                     <p class="desc-text-white"> {{ exercise.duration }}</p>
                   </div>
                 </div>
