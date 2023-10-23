@@ -179,6 +179,7 @@
       <v-row justify="end">
           <v-btn
           :loading="loading"
+          :disabled="!isFormValid"
           size="large"
           type="submit"
           variant="elevated"
@@ -209,6 +210,7 @@
     data() {
         return {
             name: "",
+            loading: false,
             description: "",
             difficulty: 2,
             duration: 0,
@@ -224,8 +226,10 @@
     },
     methods: {
       async populateExercises() {
+        this.loading=true;
         const response = await fetchMultiple('exercises', 50);
         this.exercises = response['content'];
+        this.loading=false;
       },
       async initialize() {
         this.cards.push({
@@ -289,6 +293,7 @@
         }
       },
       async createRoutine() {
+        this.loading=true;
         let response_c
         let response_e
         let response_r = await createRoutine(this.name, this.description, true, this.getSkillLevel(this.difficulty), this.duration)
@@ -302,6 +307,7 @@
                 i++
             }
         }
+        this.loading=false;
         router.push("/")
       },
       isExercisesEmpty(card) {
@@ -320,7 +326,12 @@
         }
       }
     },
-    components: { MyEjEjemplo1 }
+    components: { MyEjEjemplo1 },
+    computed: {
+    isFormValid() {
+      return this.name && this.description && this.difficulty && this.duration && this.cards.every(card => card.duration && card.repetitions);
+    },
+  },
 };
 </script>
 
