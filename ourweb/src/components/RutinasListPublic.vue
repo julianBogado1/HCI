@@ -53,7 +53,7 @@ export default {
                 let response;
 
                 if (!this.filterRookie && !this.filterIntermediate && !this.filterExpert) {
-                    response = await fetchMultiple('users/current/routines', 100);
+                    response = await fetchMultiple('routines', 100);
                     this.routines = response['content'];
                 } else {
                     if (this.filterRookie) {

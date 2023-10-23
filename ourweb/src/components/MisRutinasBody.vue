@@ -24,7 +24,7 @@ export default {
     },
     methods: {
       handleUpdateRutinaList(signal) {
-      this.$refs.rutinaList.filter(signal);
+      this.$refs.rutinaList.filterToggle(signal);
     }
   }
 }

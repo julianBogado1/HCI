@@ -122,6 +122,7 @@ export const editExercise = async (id, name, detail) => {
 };
 
 export const createRoutine = async (name, detail, isPublic, difficulty, duration) => {
+  console.log(isPublic)
   const url = `${apiUrl}/routines`;
   const body = JSON.stringify({
     name: name,
