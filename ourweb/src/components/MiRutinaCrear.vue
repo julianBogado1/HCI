@@ -93,9 +93,8 @@
                   </div>
                 </div>
               </v-btn>
-              <v-menu v-model="cycle.showAddExerciseDropdown" offset-y>
-                
-                <v-list>
+              <v-menu v-model="cycle.showAddExerciseDropdown" offset-y >
+                <v-list class="dropdown">
                   <v-list-item
                     v-for="(exercise, eIndex) in exercises"
                     :key="eIndex"
@@ -471,6 +470,12 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+    }
+
+    .dropdown{
+      position: fixed;
+      top: 50px;
+      left: 50px;
     }
 
 </style>
