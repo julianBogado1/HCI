@@ -106,7 +106,7 @@
                 <div class="myDiv">
                   <svg-icon type="mdi" :path="path2"></svg-icon>
                   <div>
-                    <p>{{ cycle.exercises === 0 ? 'Eliminar Ciclo' : 'Eliminar Último Ejercicio' }}</p>
+                    <p>{{ cycle.exercises.length === 0 ? 'Eliminar Ciclo' : 'Eliminar Ejercicio' }}</p>
                   </div>
                 </div>
               </v-btn>
@@ -153,7 +153,7 @@
             </div>
 
             <div class="duracion space-below">
-              <p class="myText">Duración del ciclo (en segundos):</p>
+              <p class="myText">Duración del ciclo (en minutos):</p>
               <input
                 class="myInputBox"
                 type="number"

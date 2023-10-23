@@ -5,7 +5,9 @@
             <v-btn v-if="auth" to="/mis-rutinas" class="darkgreen text-white" size="small" rounded="0" elevation="0">Mis  Rutinas</v-btn>
             <v-btn v-if="auth" to="/mis-ejs" class="darkgreen text-white" size="small" rounded="0" elevation="0">Mis Ejercicios</v-btn>
        </div>
-        <v-btn to="/profile" class="darkgreen text-white" size="small" rounded="0" elevation="0">Mi Cuenta</v-btn>
+        <v-btn to="/profile" class="darkgreen text-white" size="small" rounded="0" elevation="0">
+            <span v-if="auth">Mi Cuenta</span>
+            <span v-else>Ingresar</span></v-btn>
       </div>
     
 </template>
