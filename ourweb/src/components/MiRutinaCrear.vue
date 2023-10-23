@@ -166,7 +166,6 @@
 
       <v-row justify="center" class="space-below">
       <v-btn
-          :loading="loading"
           size="large"
           variant="elevated"
           density="compact"

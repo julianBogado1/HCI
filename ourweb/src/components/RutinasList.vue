@@ -27,8 +27,8 @@
 import { fetchMultiple } from '@/api/api';
 import { fetchFilteredRoutines } from '@/api/api';
 import Brazitos1 from './brazitos/Brazitos1.vue';
-import Brazitos2 from './brazitos/Brazitos1.vue';
-import Brazitos3 from './brazitos/Brazitos1.vue';
+import Brazitos2 from './brazitos/Brazitos2.vue';
+import Brazitos3 from './brazitos/Brazitos3.vue';
 import MyNoRutinesMessage from './messages/MyNoRutinesMessage.vue';
 
 export default {
@@ -103,7 +103,7 @@ export default {
     
     .rutina-card{
         background-color: #D9D9D9;
-        height: 90px;
+        height: 100px;
         display: flex;
         align-items: center;
         justify-content: space-between;
