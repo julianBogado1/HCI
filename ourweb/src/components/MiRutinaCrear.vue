@@ -33,9 +33,21 @@
         <v-select
             v-model="difficulty"
             label="Dificultad"
-            :items="['1','2','3']"
+            :items="['Principiante','Intermedio','Avanzado']"
             variant="outlined"
             ></v-select>
+      </div>
+
+      <div class="space-below">
+        <p class="myText">Duración (en minutos):</p>
+        <input
+            class="myInputBox"
+            type="number"
+            id="numericInput"
+            v-model="duration" 
+            min="0"
+            max="100"
+          />
       </div>
 
       <div v-for="(cycle, index) in cards" :key="index">
@@ -199,6 +211,7 @@
             name: "",
             description: "",
             difficulty: 2,
+            duration: 0,
             exercises: [],
             cards: [],
             showAddExerciseDropdown: null,
@@ -233,7 +246,7 @@
         },
         {
           name: `Ciclo de enfriamiento`,
-          order: 999,
+          order: 99,
           detail: "Elongaciones y estiramientos",
           type: "cooldown",
           repetitions: 1,

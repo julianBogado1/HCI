@@ -50,6 +50,13 @@ export const fetchMultiple = async (type, size) => {
   return await apiFetch(url, options);
 };
 
+export const fetchFilteredRoutines = async (size, filter) => {
+  const url = `${apiUrl}/users/current/routines?size=${size}&difficulty=${filter}`
+  const options = { ...requestOptions };
+
+  return await apiFetch(url, options);
+}
+
 export const deleteSingle = async(type, id) => {
   const url = `${apiUrl}/${type}/${id}`;
   const options = { 

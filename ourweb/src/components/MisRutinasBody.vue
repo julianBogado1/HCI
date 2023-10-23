@@ -1,7 +1,6 @@
 <template>
-    <!--Left card-->
         <div class="wrapper">
-            <MyFiltro/>
+            <MyFiltro @toggle-rookie="handleUpdateRutinaList('rookie')" @toggle-intermediate="handleUpdateRutinaList('intermediate')" @toggle-expert="handleUpdateRutinaList('expert')"/>
         </div>
     <div class="grid-container">
         
@@ -9,14 +8,26 @@
         <div></div>
 
         <div class="content">
-            <RutinasList/>
+            <RutinasList ref="rutinaList"/>
         </div>
     </div>
 </template>
 
-<script setup>
+<script>
 import MyFiltro from './MyFiltro.vue';
 import RutinasList from './RutinasList.vue';
+
+export default {
+    components: {
+        MyFiltro,
+        RutinasList,
+    },
+    methods: {
+      handleUpdateRutinaList(signal) {
+      this.$refs.rutinaList.filter(signal);
+    }
+  }
+}
 </script>
 
 <style scoped>
