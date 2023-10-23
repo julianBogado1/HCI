@@ -22,12 +22,9 @@
 </template>
 
 <script>
-import {getUser} from '@/api/api.js';
+import {getUser, getUserVerified} from '@/api/api.js';
 export default{
-    async created(){
-        console.log("DENTRO DE CREATED");
-        this.setupData();
-    },
+    
     data() {
         return {
             username: '',
@@ -37,16 +34,23 @@ export default{
     },
     methods: {
         async setupData() {
-            console.log("DENTRO DE SETUPDATA");
-            let response = await getUser();
-            console.log(response);
-            sessionStorage.AVATARURL = response.avatarUrl; // se guardan los datos de la sesion iniciada en ese momento
-            sessionStorage.FIRSTNAME = response.firstName;
-            sessionStorage.LASTNAME = response.lastName; 
-            this.username = response.username;
-            this.email = response.email;
-            this.name = response.firstName + ' ' + response.lastName;
+            try{
+                let response = await getUserVerified(localStorage.AUTHTOKEN);                
+                console.log(response);
+                sessionStorage.AVATARURL = response.avatarUrl; // se guardan los datos de la sesion iniciada en ese momento
+                sessionStorage.FIRSTNAME = response.firstName;
+                sessionStorage.LASTNAME = response.lastName; 
+                this.username = response.username;
+                this.email = response.email;
+                this.name = response.firstName + ' ' + response.lastName;
+            }
+            catch(error){
+                console.log(error);
+            }
         },
+    },
+    async created(){
+        this.setupData();
     },
     updated() {
     this.setupData();

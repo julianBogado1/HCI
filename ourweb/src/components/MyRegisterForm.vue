@@ -177,8 +177,10 @@ methods: {
               this.errorMessage = 'El nombre de usuario ya se encuentra registrado';
           }
         }
+        else{
+        router.push("/confirm-email");
+        }
         this.loading=false;
-        router.push("/confirm-email")
       }
       setTimeout(() => (this.loading = false), 2000)
 
