@@ -64,10 +64,12 @@
                 </div>
                 <div class="edit-card">
                   <div class="edit-elem">
-                    <p class="desc-text-white">Series: {{ exercise.repetitions }} </p>
+                    <p class="desc-text-white">Series:</p>
+                    <p class="desc-text-white"> {{ exercise.repetitions }} </p>
                   </div>
                   <div class="edit-elem">
-                    <p class="desc-text-white">Static Duración (en seg): {{ exercise.duration }}</p>
+                    <p class="desc-text-white">Duración (en seg):</p>
+                    <p class="desc-text-white"> {{ exercise.duration }}</p>
                   </div>
                 </div>
               </div>
