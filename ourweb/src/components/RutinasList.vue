@@ -103,6 +103,7 @@ export default {
     
     .rutina-card{
         background-color: #D9D9D9;
+        height: 90px;
         display: flex;
         align-items: center;
         justify-content: space-between;
