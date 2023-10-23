@@ -56,16 +56,9 @@
       <br/>
 
       <v-row class="myrow">
-        <div class="der-text text-right">
+        <div >
           <router-link to="/register" class="mytext text-right linkDiv">Registrarse</router-link>
         </div>
-        <v-divider
-              class="mx-3"
-              vertical
-        ></v-divider>
-        <div class="izq-text text-left">
-          <text class="mytext text-left">Olvidé mi contraseña</text> 
-        </div>    
       </v-row>
       </v-form>
     </v-card>
