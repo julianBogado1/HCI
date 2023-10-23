@@ -36,6 +36,7 @@ export default {
         Brazitos1,
         Brazitos2,
         Brazitos3,
+        MyNoRutinesMessage,
     },
     data: () => ({
         routines: [],
