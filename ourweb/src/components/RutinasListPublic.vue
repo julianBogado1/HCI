@@ -1,5 +1,6 @@
 <template>
     <div class="lista">
+        <MyRegistrarseMessage v-if="!auth" />
         <div v-for="routine in this.routines">
         <div class="rutina-card dflex w-100">
             <div class="info-card">
@@ -28,12 +29,14 @@ import { fetchFilteredRoutines } from '@/api/api';
 import Brazitos1 from './brazitos/Brazitos1.vue';
 import Brazitos2 from './brazitos/Brazitos2.vue';
 import Brazitos3 from './brazitos/Brazitos3.vue';
+import MyRegistrarseMessage from '@/components/messages/MyRegistrarseMessage'
 
 export default {
     components: {
         Brazitos1,
         Brazitos2,
         Brazitos3,
+        MyRegistrarseMessage,
     },
     data: () => ({
         routines: [],
@@ -87,7 +90,12 @@ export default {
             }
             this.loadRoutines()
         }
-    }
+    },
+    computed: {
+    auth() {
+      return localStorage.AUTHTOKEN
+    },
+  },
 }
 
 </script>

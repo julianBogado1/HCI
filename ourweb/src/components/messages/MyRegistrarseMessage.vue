@@ -1,8 +1,8 @@
 <template>
     <div class="mess-cont">
         <div class="mess">
-            <p class="mess-text">¿Quiere empezar a crear sus propios entrenamientos?</p>
-            <p class="mess-text link-text">Registrese aquí</p>
+            <p class="mess-text">¿Quiere crear sus propios entrenamientos?</p>
+            <router-link to="/register"><p class="mess-text link-text"> Registrese aquí</p></router-link>
         </div>
     </div>
 </template>
